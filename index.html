@@ -407,15 +407,18 @@
                 <h1 id="scipipe">SciPipe</h1>
 <p><a href="https://travis-ci.org/scipipe/scipipe"><img alt="Build Status" src="https://travis-ci.org/scipipe/scipipe.svg?branch=master" /></a>
 <a href="https://gratipay.com/samuell"><img alt="GratiPay amount" src="http://img.shields.io/gratipay/samuell.svg" /></a></p>
-<p>SciPipe is an experimental library for writing <a href="https://en.wikipedia.org/wiki/Scientific_workflow_system">scientific Workflows</a> in vanilla <a href="http://golang.org">Go(lang)</a>.
-The architecture of SciPipe is based on an <a href="https://en.wikipedia.org/wiki/Flow-based_programming">flow-based programming</a> like pattern in pure Go as presented in
+<p>SciPipe is a library for writing <a href="https://en.wikipedia.org/wiki/Scientific_workflow_system">scientific
+Workflows</a> in the
+<a href="http://golang.org">Go programming language</a>. The architecture of SciPipe is based on an
+<a href="https://en.wikipedia.org/wiki/Flow-based_programming">flow-based programming</a>
+like pattern in pure Go presented in
 <a href="http://blog.gopheracademy.com/composable-pipelines-pattern">this</a> and
 <a href="https://blog.gopheracademy.com/advent-2015/composable-pipelines-improvements/">this</a>
-Gopher Academy blog posts, and implemented in the
-<a href="http://flowbase.org/">FlowBase</a> Flow-Based programming inspired micro
-framework, which SciPipe will be refactored to use, shortly.</p>
+Gopher Academy blog posts.</p>
+<p>See the <a href="#benefits">Benefits section</a> below for more information about what is
+the key features of SciPipe compared to other similar tools.</p>
 <p><strong>UPDATE Nov 4, 2016:</strong> See <a href="http://dx.doi.org/10.13140/RG.2.2.34414.61760">a poster on SciPipe</a>, presented at the <a href="./essenceofescience.se/event/swedish-e-science-academy-2016-2/">e-Science Academy in Lund, on Oct 12-13 2016</a>.</p>
-<p><strong>UPDATE June 23, 2016:</strong> See also <a href="http://www.slideshare.net/SamuelLampa/scipipe-a-lightweight-workflow-library-inspired-by-flowbased-programming">slides from a recent presentation of SciPipe for use in a Bioinformatics setting</a>.</p>
+<p><strong>UPDATE June 23, 2016:</strong> See <a href="http://www.slideshare.net/SamuelLampa/scipipe-a-lightweight-workflow-library-inspired-by-flowbased-programming">slides from a recent presentation of SciPipe for use in a Bioinformatics setting</a>.</p>
 <h2 id="an-example-workflow">An example workflow</h2>
 <p>Let's look at a simple toy example of a workflow, to get a feel for what
 writing workflows with SciPipe looks like:</p>
