@@ -215,6 +215,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#project-links" title="Project links" class="md-nav__link">
+    Project links
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#an-example-workflow" title="An example workflow" class="md-nav__link">
     An example workflow
   </a>
@@ -251,6 +258,13 @@
         <li class="md-nav__item">
   <a href="#connection-to-flow-based-programming" title="Connection to flow-based programming" class="md-nav__link">
     Connection to flow-based programming
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publications-mentioning-scipipe" title="Publications mentioning SciPipe" class="md-nav__link">
+    Publications mentioning SciPipe
   </a>
   
 </li>
@@ -335,6 +349,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#project-links" title="Project links" class="md-nav__link">
+    Project links
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#an-example-workflow" title="An example workflow" class="md-nav__link">
     An example workflow
   </a>
@@ -376,6 +397,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#publications-mentioning-scipipe" title="Publications mentioning SciPipe" class="md-nav__link">
+    Publications mentioning SciPipe
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#related-tools" title="Related tools" class="md-nav__link">
     Related tools
   </a>
@@ -405,20 +433,18 @@
                 
                 
                 <h1 id="scipipe">SciPipe</h1>
-<p><a href="https://travis-ci.org/scipipe/scipipe"><img alt="Build Status" src="https://travis-ci.org/scipipe/scipipe.svg?branch=master" /></a>
-<a href="https://gratipay.com/samuell"><img alt="GratiPay amount" src="http://img.shields.io/gratipay/samuell.svg" /></a></p>
+<p><a href="https://travis-ci.org/scipipe/scipipe"><img alt="Build Status" src="https://travis-ci.org/scipipe/scipipe.svg?branch=master" /></a></p>
 <p>SciPipe is a library for writing <a href="https://en.wikipedia.org/wiki/Scientific_workflow_system">scientific
 Workflows</a> in the
-<a href="http://golang.org">Go programming language</a>. The architecture of SciPipe is based on an
-<a href="https://en.wikipedia.org/wiki/Flow-based_programming">flow-based programming</a>
-like pattern in pure Go presented in
-<a href="http://blog.gopheracademy.com/composable-pipelines-pattern">this</a> and
-<a href="https://blog.gopheracademy.com/advent-2015/composable-pipelines-improvements/">this</a>
-Gopher Academy blog posts.</p>
-<p>See the <a href="#benefits">Benefits section</a> below for more information about what is
+<a href="http://golang.org">Go programming language</a>.
+See the <a href="#benefits">Benefits section</a> below for more information about what is
 the key features of SciPipe compared to other similar tools.</p>
-<p><strong>UPDATE Nov 4, 2016:</strong> See <a href="http://dx.doi.org/10.13140/RG.2.2.34414.61760">a poster on SciPipe</a>, presented at the <a href="./essenceofescience.se/event/swedish-e-science-academy-2016-2/">e-Science Academy in Lund, on Oct 12-13 2016</a>.</p>
-<p><strong>UPDATE June 23, 2016:</strong> See <a href="http://www.slideshare.net/SamuelLampa/scipipe-a-lightweight-workflow-library-inspired-by-flowbased-programming">slides from a recent presentation of SciPipe for use in a Bioinformatics setting</a>.</p>
+<h2 id="project-links">Project links</h2>
+<ul>
+<li>For source code, see the <a href="http://github.com/scipipe/scipipe">github repository</a></li>
+<li>For reporting issues, please use the <a href="https://github.com/scipipe/scipipe/issues">issue tracker</a></li>
+<li>For general questions, see the <a href="https://groups.google.com/forum/#!forum/scipipe">mailing list</a></li>
+</ul>
 <h2 id="an-example-workflow">An example workflow</h2>
 <p>Let's look at a simple toy example of a workflow, to get a feel for what
 writing workflows with SciPipe looks like:</p>
@@ -444,7 +470,7 @@ writing workflows with SciPipe looks like:</p>
 
     <span class="c1">// Add to a pipeline runner and run</span>
     <span class="nx">pipeline</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
-    <span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">fooToBar</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
+    <span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">foowriter</span><span class="p">,</span> <span class="nx">fooToBar</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
     <span class="nx">pipeline</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 <span class="p">}</span>
 </pre></div>
@@ -499,6 +525,17 @@ in Go's channels) to make writing workflows as easy as possible.</p>
 on the fly based on a shell command pattern, where  inputs, outputs and parameters are defined in-line
 in the shell command with a syntax of <code>{i:INPORT_NAME}</code> for inports, and <code>{o:OUTPORT_NAME}</code> for outports
 and <code>{p:PARAM_NAME}</code> for parameters.</p>
+<h2 id="publications-mentioning-scipipe">Publications mentioning SciPipe</h2>
+<ul>
+<li>See <a href="http://dx.doi.org/10.13140/RG.2.2.34414.61760">a poster on SciPipe</a>, presented at the <a href="./essenceofescience.se/event/swedish-e-science-academy-2016-2/">e-Science Academy in Lund, on Oct 12-13 2016</a>.</li>
+<li>See <a href="http://www.slideshare.net/SamuelLampa/scipipe-a-lightweight-workflow-library-inspired-by-flowbased-programming">slides from a recent presentation of SciPipe for use in a Bioinformatics setting</a>.</li>
+<li>The architecture of SciPipe is based on an <a href="https://en.wikipedia.org/wiki/Flow-based_programming">flow-based
+  programming</a> like
+  pattern in pure Go presented in
+  <a href="http://blog.gopheracademy.com/composable-pipelines-pattern">this</a> and
+  <a href="https://blog.gopheracademy.com/advent-2015/composable-pipelines-improvements/">this</a>
+  blog posts on Gopher Academy.</li>
+</ul>
 <h2 id="related-tools">Related tools</h2>
 <p>Find below a few tools that are more or less similar to SciPipe that are worth worth checking out before
 deciding on what tool fits you best (in approximate order of similarity to SciPipe):</p>
