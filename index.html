@@ -1,0 +1,779 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="./assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.6.1">
+    
+    
+      
+        <title>SciPipe Docs</title>
+      
+    
+    
+      <script src="./assets/javascripts/modernizr-56ade86843.js"></script>
+    
+    
+      <link rel="stylesheet" href="./assets/stylesheets/application-4d0d3f2fbf.css">
+      
+        <link rel="stylesheet" href="./assets/stylesheets/application-f78e5cb881.palette.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="./custom.css">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body data-md-color-primary="blue-grey" data-md-color-accent="cyan">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="." title="SciPipe Docs" class="md-logo md-header-nav__button">
+            <img src="./images/scipipe_logo_square_white.svg" width="24" height="24">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+            
+            Home
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <div class="md-header-nav__source">
+          
+            
+
+
+  
+
+
+  <a href="https://github.com/scipipe/scipipe" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scipipe/scipipe
+    </div>
+  </a>
+
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-logo md-nav__button">
+        <img src="./images/scipipe_logo_square_white.svg">
+      </i>
+    
+    SciPipe Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/scipipe/scipipe" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scipipe/scipipe
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Home
+      </label>
+    
+    <a href="." title="Home" class="md-nav__link md-nav__link--active">
+      Home
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#an-example-workflow" title="An example workflow" class="md-nav__link">
+    An example workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits" title="Benefits" class="md-nav__link">
+    Benefits
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations" title="Known limitations" class="md-nav__link">
+    Known limitations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connection-to-flow-based-programming" title="Connection to flow-based programming" class="md-nav__link">
+    Connection to flow-based programming
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-install" title="Getting started: Install" class="md-nav__link">
+    Getting started: Install
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-workflows-with-scipipe" title="Writing workflows with SciPipe" class="md-nav__link">
+    Writing workflows with SciPipe
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initializing-processes" title="Initializing processes" class="md-nav__link">
+    Initializing processes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-processes-into-a-network" title="Connecting processes into a network" class="md-nav__link">
+    Connecting processes into a network
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatting-output-file-paths" title="Formatting output file paths" class="md-nav__link">
+    Formatting output file paths
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatting-output-file-paths-a-nicer-way" title="Formatting output file paths: A nicer way" class="md-nav__link">
+    Formatting output file paths: A nicer way
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-the-pipeline" title="Running the pipeline" class="md-nav__link">
+    Running the pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-tools" title="Related tools" class="md-nav__link">
+    Related tools
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acknowledgements" title="Acknowledgements" class="md-nav__link">
+    Acknowledgements
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="examples/" title="Examples" class="md-nav__link">
+      Examples
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#an-example-workflow" title="An example workflow" class="md-nav__link">
+    An example workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits" title="Benefits" class="md-nav__link">
+    Benefits
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations" title="Known limitations" class="md-nav__link">
+    Known limitations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connection-to-flow-based-programming" title="Connection to flow-based programming" class="md-nav__link">
+    Connection to flow-based programming
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-install" title="Getting started: Install" class="md-nav__link">
+    Getting started: Install
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-workflows-with-scipipe" title="Writing workflows with SciPipe" class="md-nav__link">
+    Writing workflows with SciPipe
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initializing-processes" title="Initializing processes" class="md-nav__link">
+    Initializing processes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-processes-into-a-network" title="Connecting processes into a network" class="md-nav__link">
+    Connecting processes into a network
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatting-output-file-paths" title="Formatting output file paths" class="md-nav__link">
+    Formatting output file paths
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatting-output-file-paths-a-nicer-way" title="Formatting output file paths: A nicer way" class="md-nav__link">
+    Formatting output file paths: A nicer way
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-the-pipeline" title="Running the pipeline" class="md-nav__link">
+    Running the pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-tools" title="Related tools" class="md-nav__link">
+    Related tools
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acknowledgements" title="Acknowledgements" class="md-nav__link">
+    Acknowledgements
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="scipipe">SciPipe</h1>
+<p><a href="https://travis-ci.org/scipipe/scipipe"><img alt="Build Status" src="https://travis-ci.org/scipipe/scipipe.svg?branch=master" /></a>
+<a href="https://gratipay.com/samuell"><img alt="GratiPay amount" src="http://img.shields.io/gratipay/samuell.svg" /></a></p>
+<p>SciPipe is an experimental library for writing <a href="https://en.wikipedia.org/wiki/Scientific_workflow_system">scientific Workflows</a> in vanilla <a href="http://golang.org">Go(lang)</a>.
+The architecture of SciPipe is based on an <a href="https://en.wikipedia.org/wiki/Flow-based_programming">flow-based programming</a> like pattern in pure Go as presented in
+<a href="http://blog.gopheracademy.com/composable-pipelines-pattern">this</a> and
+<a href="https://blog.gopheracademy.com/advent-2015/composable-pipelines-improvements/">this</a>
+Gopher Academy blog posts, and implemented in the
+<a href="http://flowbase.org/">FlowBase</a> Flow-Based programming inspired micro
+framework, which SciPipe will be refactored to use, shortly.</p>
+<p><strong>UPDATE Nov 4, 2016:</strong> See <a href="http://dx.doi.org/10.13140/RG.2.2.34414.61760">a poster on SciPipe</a>, presented at the <a href="./essenceofescience.se/event/swedish-e-science-academy-2016-2/">e-Science Academy in Lund, on Oct 12-13 2016</a>.</p>
+<p><strong>UPDATE June 23, 2016:</strong> See also <a href="http://www.slideshare.net/SamuelLampa/scipipe-a-lightweight-workflow-library-inspired-by-flowbased-programming">slides from a recent presentation of SciPipe for use in a Bioinformatics setting</a>.</p>
+<h2 id="an-example-workflow">An example workflow</h2>
+<p>Before going into details, let's look at a toy-example workflow, to get a feel
+for what writing workflows with SciPipe looks like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="nx">sp</span> <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Initialize processes</span>
+    <span class="nx">foo</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foowriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;foo&#39; &gt; {o:foo}&quot;</span><span class="p">)</span>
+    <span class="nx">f2b</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foo2bar&quot;</span><span class="p">,</span> <span class="s">&quot;sed &#39;s/foo/bar/g&#39; {i:foo} &gt; {o:bar}&quot;</span><span class="p">)</span>
+    <span class="nx">snk</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span> <span class="c1">// Will just receive file targets, doing nothing</span>
+
+    <span class="c1">// Add output file path formatters for the components created above</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
+    <span class="nx">f2b</span><span class="p">.</span><span class="nx">SetPathExtend</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;.bar&quot;</span><span class="p">)</span>
+
+    <span class="c1">// Connect network</span>
+    <span class="nx">f2b</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">])</span>
+    <span class="nx">snk</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">f2b</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">])</span>
+
+    <span class="c1">// Add to a pipeline runner and run</span>
+    <span class="nx">pl</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
+    <span class="nx">pl</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">f2b</span><span class="p">,</span> <span class="nx">snk</span><span class="p">)</span>
+    <span class="nx">pl</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>... and to see how we would run this code, let's assume we put this code in a
+file <code>myfirstworkflow.go</code> and run it. Then it can look like this:</p>
+<div class="codehilite"><pre><span></span><span class="o">[</span>samuel test<span class="o">]</span>$ go run myfirstworkflow.go
+AUDIT   <span class="m">2016</span>/06/09 <span class="m">17</span>:17:41 Task:foowriter    Executing command: <span class="nb">echo</span> <span class="s1">&#39;foo&#39;</span> &gt; foo.txt.tmp
+AUDIT   <span class="m">2016</span>/06/09 <span class="m">17</span>:17:41 Task:foo2bar      Executing command: sed <span class="s1">&#39;s/foo/bar/g&#39;</span> foo.txt &gt; foo.txt.bar.tmp
+</pre></div>
+
+
+<p>As you see, it displays all the shell commands it has executed based on the defined workflow.</p>
+<h2 id="benefits">Benefits</h2>
+<p>Some benefits of SciPipe that are not always available in other scientific workflow systems:</p>
+<ul>
+<li><strong>Easy-to-grasp behaviour:</strong> Data flowing through a network.</li>
+<li><strong>Parallel:</strong> Apart from the inherent pipeline parallelism, SciPipe processes also spawn multiple parallel tasks when the same process has multiple inputs.</li>
+<li><strong>Concurrent:</strong> Each process runs in an own light-weight thread, and is not blocked by
+  operations in other processes, except when waiting for inputs from upstream processes.</li>
+<li><strong>Inherently simple:</strong> Uses Go's concurrency primitives (go-routines and channels)
+  to create an "implicit" scheduler, which means very little additional infrastructure code.
+  This means that the code is easy to modify and extend.</li>
+<li><strong>Resource efficient:</strong> You can choose to stream selected outputs via Unix FIFO files, to avoid temporary storage.</li>
+<li><strong>Flexible:</strong> Processes that wrap command-line programs and scripts can be combined with
+  processes coded directly in Golang.</li>
+<li><strong>Custom file naming:</strong> SciPipe gives you full control over how file names are produced,
+  making it easy to understand and find your way among the output files of your computations.</li>
+<li><strong>Highly Debuggable(!):</strong> Since everything in SciPipe is plain Go(lang), you can easily use the <a href="http://golang.org/doc/gdb">gdb debugger</a> (preferrably
+  with the <a href="https://www.youtube.com/watch?v=OKLR6rrsBmI">cgdb interface</a> for easier use) to step through your program at any detail, as well as all
+  the other excellent debugging tooling for Go (See eg <a href="https://github.com/derekparker/delve">delve</a> and <a href="https://github.com/mailgun/godebug">godebug</a>),
+  or just use <code>println()</code> statements at any place in your code. In addition, you can easily
+  turn on very detailed debug output from SciPipe's execution itself, by just turning on debug-level
+  logging with <code>scipipe.InitLogDebug()</code> in your <code>main()</code> method.</li>
+<li><strong>Efficient:</strong> Workflows are compiled into static compiled code, that runs fast.</li>
+<li><strong>Portable:</strong> Workflows can be distributed as go code to be run with the <code>go run</code> command
+  or compiled into stand-alone binaries for basically any unix-like operating system.</li>
+<li><strong>Notebookeable:</strong> Works well in <a href="http://jupyter.org">Jupyter notebooks</a>, using the <a href="https://github.com/gopherds/gophernotes">gophernotes kernel</a> (Thx <a href="https://twitter.com/dwhitena">@dwhitena</a> for creating this!)</li>
+</ul>
+<h2 id="known-limitations">Known limitations</h2>
+<ul>
+<li>There are still a number of missing good-to-have features, for workflow design. See the <a href="https://github.com/scipipe/scipipe/issues">issues</a> tracker for details.</li>
+<li>There is not yet support for the <a href="http://common-workflow-language.github.io">Common Workflow Language</a>, but that is also something that we plan to support in the future.</li>
+</ul>
+<h2 id="connection-to-flow-based-programming">Connection to flow-based programming</h2>
+<p>From Flow-based programming, SciPipe uses the ideas of separate network (workflow dependency graph)
+definition, named in- and out-ports, sub-networks/sub-workflows and bounded buffers (already available
+in Go's channels) to make writing workflows as easy as possible.</p>
+<p>In addition to that it adds convenience factory methods such as <code>scipipe.NewFromShell()</code> which creates ad hoc processes
+on the fly based on a shell command pattern, where  inputs, outputs and parameters are defined in-line
+in the shell command with a syntax of <code>{i:INPORT_NAME}</code> for inports, and <code>{o:OUTPORT_NAME}</code> for outports
+and <code>{p:PARAM_NAME}</code> for parameters.</p>
+<h2 id="getting-started-install">Getting started: Install</h2>
+<ol>
+<li>Install Go by following instructions on <a href="https://golang.org/doc/install">this page</a>.</li>
+<li>I typically install to a custom location (<code>~/go</code> for the go tools, and <code>~/code/go</code> for my own go-projects).</li>
+<li>If you want to install (which means, untar the go tarball) to <code>~/go</code> just like me, you should put the following in your <code>~/.bashrc</code> file:</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="c1"># Go stuff</span>
+<span class="nb">export</span> <span class="nv">GOROOT</span><span class="o">=</span>~/go
+<span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span>~/code/go
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$GOROOT</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$GOPATH</span>/bin:<span class="nv">$PATH</span>
+</pre></div>
+
+
+<ol>
+<li>Then, install scipipe:</li>
+</ol>
+<div class="codehilite"><pre><span></span>go get github.com/scipipe/scipipe/...
+</pre></div>
+
+
+<p><strong>N.B:</strong> Don't miss the <code>...</code>, or you won't get the <code>scipipe</code> helper tool.</p>
+<ol>
+<li>Now, you should be able to write code like in the example below, in files ending with <code>.go</code>.</li>
+<li>The easiest way to get started is to let the scipipe tool generate a starting point for you:</li>
+</ol>
+<div class="codehilite"><pre><span></span>scipipe new myfirstworkflow.go
+</pre></div>
+
+
+<p>... which you can then edit to your liking.</p>
+<ol>
+<li>To run a <code>.go</code> file, use <code>go run</code>:</li>
+</ol>
+<div class="codehilite"><pre><span></span>go run myfirstworkflow.go
+</pre></div>
+
+
+<h2 id="writing-workflows-with-scipipe">Writing workflows with SciPipe</h2>
+<p>Let's now go through the code example further above on the page, and look closer into how SciPipe works.</p>
+<h3 id="initializing-processes">Initializing processes</h3>
+<div class="codehilite"><pre><span></span><span class="nx">foo</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foowriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;foo&#39; &gt; {o:out}&quot;</span><span class="p">)</span>
+<span class="nx">f2b</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foo2bar&quot;</span><span class="p">,</span> <span class="s">&quot;sed &#39;s/foo/bar/g&#39; {i:foo} &gt; {o:bar}&quot;</span><span class="p">)</span>
+<span class="nx">snk</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span> <span class="c1">// Will just receive file targets, doing nothing</span>
+</pre></div>
+
+
+<p>For these inports and outports, channels for sending and receiving FileTargets are automatically
+created and put in a hashmap added as a struct field of the process, named <code>In</code> and <code>Out</code> repectively,
+Eash channel is added to the hashmap with its inport/outport name as key in the hashmap,
+so that the channel can be retrieved from the hashmap using the in/outport name.</p>
+<h3 id="connecting-processes-into-a-network">Connecting processes into a network</h3>
+<p>Connecting outports of one process to the inport of another process is then
+done with the <code>Connect</code> method available on each port object. Sink objects have
+a <code>Connect</code> method too:</p>
+<div class="codehilite"><pre><span></span><span class="nx">f2b</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">])</span>
+<span class="nx">snk</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">f2b</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">])</span>
+</pre></div>
+
+
+<p>(Note that the sink has just one inport, as a static struct field).</p>
+<h3 id="formatting-output-file-paths">Formatting output file paths</h3>
+<p>The only thing remaining after this, is to provide some way for the program to figure out a
+suitable file name for each of the files propagating through this little "network" of processes.
+This is done by adding a closure (function) to another special hashmap, again keyed by
+the names of the outports of the processes. So, to define the output filenames of the two processes
+above, we would add:</p>
+<div class="codehilite"><pre><span></span><span class="nx">foo</span><span class="p">.</span><span class="nx">PathFormatters</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="c1">// Just statically create a file named foo.txt</span>
+    <span class="k">return</span> <span class="s">&quot;foo.txt&quot;</span>
+<span class="p">}</span>
+<span class="nx">f2b</span><span class="p">.</span><span class="nx">PathFormatters</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="c1">// Here, we instead re-use the file name of the process we depend</span>
+    <span class="c1">// on (which we get on the &#39;foo&#39; inport), and just</span>
+    <span class="c1">// pad &#39;.bar&#39; at the end:</span>
+    <span class="k">return</span> <span class="nx">f2b</span><span class="p">.</span><span class="nx">GetInPath</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.bar&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="formatting-output-file-paths-a-nicer-way">Formatting output file paths: A nicer way</h3>
+<p>Now, the above way of defining path formats is a bit verbose, isn't it?
+Luckily, there's a shorter way, by using convenience methods for doing the same
+thing. So, the above two path formats can also be defined like so, with the exact same result:</p>
+<div class="codehilite"><pre><span></span><span class="c1">// Create a static file name for the out-port &#39;foo&#39;:</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
+
+<span class="c1">// For out-port &#39;bar&#39;, extend the file names of files on in-port &#39;foo&#39;, with</span>
+<span class="c1">// the suffix &#39;.bar&#39;:</span>
+<span class="nx">f2b</span><span class="p">.</span><span class="nx">SetPathExtend</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;.bar&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="running-the-pipeline">Running the pipeline</h3>
+<p>So, the final part probably explains itself, but the pipeline runner component
+is a very simple one that will start each component except the last one in a
+separate go-routine, while the last process will be run in the main go-routine,
+so as to block until the pipeline has finished.</p>
+<div class="codehilite"><pre><span></span><span class="nx">pl</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
+<span class="nx">pl</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">f2b</span><span class="p">,</span> <span class="nx">snk</span><span class="p">)</span>
+<span class="nx">pl</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+</pre></div>
+
+
+<h3 id="summary">Summary</h3>
+<p>So with this, we have done everything needed to set up a file-based batch workflow system.</p>
+<p>In summary, what we did, was to:</p>
+<ul>
+<li>Specify process dependencies by wiring outputs of the upstream processes to inports in downstream processes.</li>
+<li>For each outport, provide a function that will compute a suitable file name for the new file.</li>
+</ul>
+<p>For more examples, see the <a href="https://github.com/scipipe/scipipe/tree/master/examples">examples folder</a>.</p>
+<h2 id="related-tools">Related tools</h2>
+<p>Find below a few tools that are more or less similar to SciPipe that are worth worth checking out before
+deciding on what tool fits you best (in approximate order of similarity to SciPipe):</p>
+<ul>
+<li><a href="http://nextflow.io">NextFlow</a></li>
+<li><a href="https://github.com/spotify/luigi">Luigi</a>/<a href="https://github.com/samuell/sciluigi">SciLuigi</a></li>
+<li><a href="https://code.google.com/p/bpipe/">BPipe</a></li>
+<li><a href="https://bitbucket.org/johanneskoester/snakemake">SnakeMake</a></li>
+<li><a href="https://github.com/joergen7/cuneiform">Cuneiform</a></li>
+</ul>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<ul>
+<li>This library is heavily influenced/inspired by (and might make use of on in the future),
+  the <a href="https://github.com/trustmaster/goflow">GoFlow</a> library by <a href="https://github.com/trustmaster/goflow">Vladimir Sibirov</a>.</li>
+<li>It is also heavily influenced by the <a href="http://www.jpaulmorrison.com/fbp">Flow-based programming</a> by <a href="http://www.jpaulmorrison.com/fbp">John Paul Morrison</a>.</li>
+<li>This work is financed by faculty grants and other financing for Jarl Wikberg's <a href="http://www.farmbio.uu.se/forskning/researchgroups/pb/">Pharmaceutical Bioinformatics group</a> of Dept. of
+  Pharmaceutical Biosciences at Uppsala University, and to a smaller part also by <a href="http://vr.se">Swedish Research Council</a> through the Swedish <a href="http://bils.se">Bioinformatics Infastructure for Life Sciences in Sweden</a>.</li>
+<li>Supervisor for the project is <a href="http://www.farmbio.uu.se/research/researchgroups/pb/olaspjuth">Ola Spjuth</a>.</li>
+<li>Big thanks to <a href="http://twitter.com/egonelbre">Egon Elbre</a> for very helpful input on the design of the internals of the pipeline, and processes, which simplified the implementation a lot.</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="examples/" title="Examples" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Examples
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://github.com/scipipe" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/scipipe" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://www.linkedin.com/in/samuellampa/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./assets/javascripts/application-6b599127bc.js"></script>
+      <script>app.initialize({url:{base:"."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

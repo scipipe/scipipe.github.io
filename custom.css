@@ -1,0 +1,17 @@
+/* Code highlighting customizations */
+.md-logo img {
+    width: 64px;
+    height: 64px;
+    margin-top: -19px;
+}
+.codehilite .kn,
+.codehilite .kd {
+    color: #069;
+}
+.codehilite .nx {
+    color: black;
+}
+.codehilite .s,
+.codehilite .s1 {
+    color: #c00;
+}
