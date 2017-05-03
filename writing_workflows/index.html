@@ -405,22 +405,22 @@ discuss the SciPipe syntax further below:</p>
 
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Initialize processes</span>
-    <span class="nx">foo</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foowriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;foo&#39; &gt; {o:foo}&quot;</span><span class="p">)</span>
-    <span class="nx">f2b</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foo2bar&quot;</span><span class="p">,</span> <span class="s">&quot;sed &#39;s/foo/bar/g&#39; {i:foo} &gt; {o:bar}&quot;</span><span class="p">)</span>
-    <span class="nx">snk</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span> <span class="c1">// Will just receive file targets, doing nothing</span>
+    <span class="nx">fooWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foowriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;foo&#39; &gt; {o:foo}&quot;</span><span class="p">)</span>
+    <span class="nx">fooToBar</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foo2bar&quot;</span><span class="p">,</span> <span class="s">&quot;sed &#39;s/foo/bar/g&#39; {i:foo} &gt; {o:bar}&quot;</span><span class="p">)</span>
+    <span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span> <span class="c1">// Will just receive file targets, doing nothing</span>
 
     <span class="c1">// Add output file path formatters for the components created above</span>
-    <span class="nx">foo</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
-    <span class="nx">f2b</span><span class="p">.</span><span class="nx">SetPathExtend</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;.bar&quot;</span><span class="p">)</span>
+    <span class="nx">fooWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
+    <span class="nx">fooToBar</span><span class="p">.</span><span class="nx">SetPathExtend</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;.bar&quot;</span><span class="p">)</span>
 
     <span class="c1">// Connect network</span>
-    <span class="nx">f2b</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">])</span>
-    <span class="nx">snk</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">f2b</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">])</span>
+    <span class="nx">fooToBar</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">fooWriter</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">])</span>
+    <span class="nx">sink</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">fooToBar</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">])</span>
 
     <span class="c1">// Add to a pipeline runner and run</span>
-    <span class="nx">pl</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
-    <span class="nx">pl</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">f2b</span><span class="p">,</span> <span class="nx">snk</span><span class="p">)</span>
-    <span class="nx">pl</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+    <span class="nx">pipeline</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
+    <span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">fooWriter</span><span class="p">,</span> <span class="nx">fooToBar</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
+    <span class="nx">pipeline</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -428,9 +428,9 @@ discuss the SciPipe syntax further below:</p>
 <p>Let us now go through the code example step by step, and describe in more
 detail what we are doing.</p>
 <h2 id="initializing-processes">Initializing processes</h2>
-<div class="codehilite"><pre><span></span><span class="nx">foo</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foowriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;foo&#39; &gt; {o:out}&quot;</span><span class="p">)</span>
-<span class="nx">f2b</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foo2bar&quot;</span><span class="p">,</span> <span class="s">&quot;sed &#39;s/foo/bar/g&#39; {i:foo} &gt; {o:bar}&quot;</span><span class="p">)</span>
-<span class="nx">snk</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span> <span class="c1">// Will just receive file targets, doing nothing</span>
+<div class="codehilite"><pre><span></span><span class="nx">fooWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foowriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;foo&#39; &gt; {o:out}&quot;</span><span class="p">)</span>
+<span class="nx">fooToBar</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foo2bar&quot;</span><span class="p">,</span> <span class="s">&quot;sed &#39;s/foo/bar/g&#39; {i:foo} &gt; {o:bar}&quot;</span><span class="p">)</span>
+<span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span> <span class="c1">// Will just receive file targets, doing nothing</span>
 </pre></div>
 
 
@@ -442,8 +442,8 @@ so that the channel can be retrieved from the hashmap using the in/outport name.
 <p>Connecting outports of one process to the inport of another process is then
 done with the <code>Connect</code> method available on each port object. Sink objects have
 a <code>Connect</code> method too:</p>
-<div class="codehilite"><pre><span></span><span class="nx">f2b</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">])</span>
-<span class="nx">snk</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">f2b</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">])</span>
+<div class="codehilite"><pre><span></span><span class="nx">fooToBar</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">fooWriter</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">])</span>
+<span class="nx">sink</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">fooToBar</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">])</span>
 </pre></div>
 
 
@@ -454,15 +454,15 @@ suitable file name for each of the files propagating through this little "networ
 This is done by adding a closure (function) to another special hashmap, again keyed by
 the names of the outports of the processes. So, to define the output filenames of the two processes
 above, we would add:</p>
-<div class="codehilite"><pre><span></span><span class="nx">foo</span><span class="p">.</span><span class="nx">PathFormatters</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="nx">fooWriter</span><span class="p">.</span><span class="nx">PathFormatters</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
     <span class="c1">// Just statically create a file named foo.txt</span>
     <span class="k">return</span> <span class="s">&quot;foo.txt&quot;</span>
 <span class="p">}</span>
-<span class="nx">f2b</span><span class="p">.</span><span class="nx">PathFormatters</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="nx">fooToBar</span><span class="p">.</span><span class="nx">PathFormatters</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
     <span class="c1">// Here, we instead re-use the file name of the process we depend</span>
     <span class="c1">// on (which we get on the &#39;foo&#39; inport), and just</span>
     <span class="c1">// pad &#39;.bar&#39; at the end:</span>
-    <span class="k">return</span> <span class="nx">f2b</span><span class="p">.</span><span class="nx">GetInPath</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.bar&quot;</span>
+    <span class="k">return</span> <span class="nx">fooToBar</span><span class="p">.</span><span class="nx">GetInPath</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.bar&quot;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -472,11 +472,11 @@ above, we would add:</p>
 Luckily, there's a shorter way, by using convenience methods for doing the same
 thing. So, the above two path formats can also be defined like so, with the exact same result:</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Create a static file name for the out-port &#39;foo&#39;:</span>
-<span class="nx">foo</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
+<span class="nx">fooWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
 
 <span class="c1">// For out-port &#39;bar&#39;, extend the file names of files on in-port &#39;foo&#39;, with</span>
 <span class="c1">// the suffix &#39;.bar&#39;:</span>
-<span class="nx">f2b</span><span class="p">.</span><span class="nx">SetPathExtend</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;.bar&quot;</span><span class="p">)</span>
+<span class="nx">fooToBar</span><span class="p">.</span><span class="nx">SetPathExtend</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;.bar&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -485,9 +485,9 @@ thing. So, the above two path formats can also be defined like so, with the exac
 is a very simple one that will start each component except the last one in a
 separate go-routine, while the last process will be run in the main go-routine,
 so as to block until the pipeline has finished.</p>
-<div class="codehilite"><pre><span></span><span class="nx">pl</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
-<span class="nx">pl</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">f2b</span><span class="p">,</span> <span class="nx">snk</span><span class="p">)</span>
-<span class="nx">pl</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><span class="nx">pipeline</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
+<span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">fooWriter</span><span class="p">,</span> <span class="nx">fooToBar</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
+<span class="nx">pipeline</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 </pre></div>
 
 
