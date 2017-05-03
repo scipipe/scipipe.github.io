@@ -443,9 +443,9 @@ writing workflows with SciPipe looks like:</p>
     <span class="nx">sink</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">fooToBar</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">])</span>
 
     <span class="c1">// Add to a pipeline runner and run</span>
-    <span class="nx">pl</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
-    <span class="nx">pl</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">fooToBar</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
-    <span class="nx">pl</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+    <span class="nx">pipeline</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
+    <span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">fooToBar</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
+    <span class="nx">pipeline</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 <span class="p">}</span>
 </pre></div>
 
