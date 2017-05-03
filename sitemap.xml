@@ -11,6 +11,22 @@
 
     
     <url>
+     <loc>/install/</loc>
+     <lastmod>2017-05-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/writing_workflows/</loc>
+     <lastmod>2017-05-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>/examples/</loc>
      <lastmod>2017-05-03</lastmod>
      <changefreq>daily</changefreq>
