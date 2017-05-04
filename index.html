@@ -434,11 +434,16 @@
                 
                 <h1 id="scipipe">SciPipe</h1>
 <p><a href="https://travis-ci.org/scipipe/scipipe"><img alt="Build Status" src="https://travis-ci.org/scipipe/scipipe.svg?branch=master" /></a></p>
-<p>SciPipe is a library for writing <a href="https://en.wikipedia.org/wiki/Scientific_workflow_system">scientific
-Workflows</a> in the
-<a href="http://golang.org">Go programming language</a>.
-See the <a href="#benefits">Benefits section</a> below for more information about what is
-the key features of SciPipe compared to other similar tools.</p>
+<p><img src="images/fbp_factory.png" style="float: right; margin: 0 .4em;">SciPipe is a library
+for writing <a href="https://en.wikipedia.org/wiki/Scientific_workflow_system">scientific Workflows</a> in the
+<a href="http://golang.org">Go programming language</a>, inspired by the Flow-Based
+Programming paradigm.</p>
+<p>SciPipe shines for complex workflows requiring the full flexibility and
+robustness of a compiled programming language and its established tooling
+ecosystem, and the dynamic scheduling capabilities and agile development
+workflow of the <a href="https://en.wikipedia.org/wiki/Flow-based_programming">Flow-Based Programming paradigm</a>.</p>
+<p>See the <a href="#benefits">Benefits section</a> below for more information about what is
+the key features of SciPipe.</p>
 <h2 id="project-links">Project links</h2>
 <ul>
 <li>For source code, see the <a href="http://github.com/scipipe/scipipe">github repository</a></li>
@@ -490,27 +495,36 @@ AUDIT   <span class="m">2016</span>/06/09 <span class="m">17</span>:17:41 Task:f
 <p>Some benefits of SciPipe that are not always available in other scientific workflow systems:</p>
 <ul>
 <li><strong>Easy-to-grasp behaviour:</strong> Data flowing through a network.</li>
-<li><strong>Parallel:</strong> Apart from the inherent pipeline parallelism, SciPipe processes also spawn multiple parallel tasks when the same process has multiple inputs.</li>
-<li><strong>Concurrent:</strong> Each process runs in an own light-weight thread, and is not blocked by
-  operations in other processes, except when waiting for inputs from upstream processes.</li>
-<li><strong>Inherently simple:</strong> Uses Go's concurrency primitives (go-routines and channels)
-  to create an "implicit" scheduler, which means very little additional infrastructure code.
-  This means that the code is easy to modify and extend.</li>
-<li><strong>Resource efficient:</strong> You can choose to stream selected outputs via Unix FIFO files, to avoid temporary storage.</li>
 <li><strong>Flexible:</strong> Processes that wrap command-line programs and scripts can be combined with
   processes coded directly in Golang.</li>
-<li><strong>Custom file naming:</strong> SciPipe gives you full control over how file names are produced,
-  making it easy to understand and find your way among the output files of your computations.</li>
-<li><strong>Highly Debuggable(!):</strong> Since everything in SciPipe is plain Go(lang), you can easily use the <a href="http://golang.org/doc/gdb">gdb debugger</a> (preferrably
-  with the <a href="https://www.youtube.com/watch?v=OKLR6rrsBmI">cgdb interface</a> for easier use) to step through your program at any detail, as well as all
-  the other excellent debugging tooling for Go (See eg <a href="https://github.com/derekparker/delve">delve</a> and <a href="https://github.com/mailgun/godebug">godebug</a>),
-  or just use <code>println()</code> statements at any place in your code. In addition, you can easily
-  turn on very detailed debug output from SciPipe's execution itself, by just turning on debug-level
-  logging with <code>scipipe.InitLogDebug()</code> in your <code>main()</code> method.</li>
 <li><strong>Efficient:</strong> Workflows are compiled into static compiled code, that runs fast.</li>
 <li><strong>Portable:</strong> Workflows can be distributed as go code to be run with the <code>go run</code> command
   or compiled into stand-alone binaries for basically any unix-like operating system.</li>
-<li><strong>Notebookeable:</strong> Works well in <a href="http://jupyter.org">Jupyter notebooks</a>, using the <a href="https://github.com/gopherds/gophernotes">gophernotes kernel</a> (Thx <a href="https://twitter.com/dwhitena">@dwhitena</a> for creating this!)</li>
+<li><strong>Custom file naming:</strong> SciPipe gives you full control over how file names are produced,
+  making it easy to understand and find your way among the output files of your computations.</li>
+<li><strong>Inherently simple:</strong> SciPipe uses the in-built concurrency primitives in
+  the Go programming language (go-routines and channels) to create an
+  "implicit" scheduler, which means very little additional infrastructure code.
+  This means that the code is easy to modify and extend.</li>
+<li><strong>Supports streaming:</strong> You can choose to stream selected outputs via Unix FIFO files, to avoid temporary storage.</li>
+<li><strong>Parallel:</strong> SciPipe leverages both pipeline parallelism between multiple
+  processes, and task parallelism when there is multiple inputs to a process,
+  to make your computations complete as fast as possible, utilizing all the CPU
+  cores available.</li>
+<li><strong>Notebookeable:</strong> Works well in <a href="http://jupyter.org">Jupyter notebooks</a>,
+  using the <a href="https://github.com/gopherds/gophernotes">gophernotes kernel</a>.</li>
+<li><strong>Concurrent:</strong> Each process runs in an own light-weight thread, and is not blocked by
+  operations in other processes, except when waiting for inputs from upstream processes.</li>
+<li><strong>Easy to debug:</strong> Since everything in SciPipe is just Go code, you can
+  easily use the <a href="http://golang.org/doc/gdb">gdb debugger</a> (with the <a href="https://www.youtube.com/watch?v=OKLR6rrsBmI">cgdb
+  interface</a> for easier use) to
+  step through your program at any detail, as well as all the other excellent
+  debugging tooling for Go (See eg
+  <a href="https://github.com/derekparker/delve">delve</a> and
+  <a href="https://github.com/mailgun/godebug">godebug</a>), or just use <code>println()</code>
+  statements at any place in your code. In addition, you can easily turn on
+  detailed debug output from SciPipe's execution itself, by just turning
+  on debug-level logging with <code>scipipe.InitLogDebug()</code> in your <code>main()</code> method.</li>
 </ul>
 <h2 id="known-limitations">Known limitations</h2>
 <ul>
