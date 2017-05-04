@@ -33,4 +33,44 @@
     </url>
     
 
+    
+    <url>
+     <loc>/known_limitations/</loc>
+     <lastmod>2017-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/flow_based_programming/</loc>
+     <lastmod>2017-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/other_resources/</loc>
+     <lastmod>2017-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/acknowledgements/</loc>
+     <lastmod>2017-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/related_tools/</loc>
+     <lastmod>2017-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
 </urlset>
