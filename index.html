@@ -469,7 +469,7 @@ SciPipe looks like:</p>
 <span class="p">)</span>
 
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Initialize processes</span>
+        <span class="c1">// Initialize processes from shell command patterns</span>
         <span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
         <span class="nx">worldAppender</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;worldAppender&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
         <span class="c1">// Create a sink, that will just receive the final outputs</span>
