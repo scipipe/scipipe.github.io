@@ -15,7 +15,7 @@
     
     
       
-        <title>Installing SciPipe - SciPipe Docs</title>
+        <title>Flow-Based Programming - SciPipe Docs</title>
       
     
     
@@ -79,7 +79,7 @@
             
               
             
-            Installing SciPipe
+            Flow-Based Programming
           
         </span>
       </div>
@@ -198,68 +198,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Installing SciPipe
-      </label>
-    
-    <a href="./" title="Installing SciPipe" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../install/" title="Installing SciPipe" class="md-nav__link">
       Installing SciPipe
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#install-go" title="Install Go" class="md-nav__link">
-    Install Go
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-scipipe" title="Install SciPipe" class="md-nav__link">
-    Install SciPipe
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#initialize-a-new-workflow-file" title="Initialize a new workflow file" class="md-nav__link">
-    Initialize a new workflow file
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-your-workflow" title="Run your workflow" class="md-nav__link">
-    Run your workflow
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -303,11 +246,20 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../flow_based_programming/" title="Flow-Based Programming" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+    <a href="./" title="Flow-Based Programming" class="md-nav__link md-nav__link--active">
       Flow-Based Programming
     </a>
+    
   </li>
 
     
@@ -364,41 +316,6 @@
     
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#install-go" title="Install Go" class="md-nav__link">
-    Install Go
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-scipipe" title="Install SciPipe" class="md-nav__link">
-    Install SciPipe
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#initialize-a-new-workflow-file" title="Initialize a new workflow file" class="md-nav__link">
-    Initialize a new workflow file
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-your-workflow" title="Run your workflow" class="md-nav__link">
-    Run your workflow
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -410,38 +327,10 @@
               
                 
                 
-                <h1 id="install">Install</h1>
-<h2 id="install-go">Install Go</h2>
-<p>First install Go by following instructions on <a href="https://golang.org/doc/install">this page</a>.
-  - I typically install to a custom location (<code>~/go</code> for the go tools, and <code>~/code/go</code> for my own go-projects).
-  - If you want to install (which means, untar the go tarball) to <code>~/go</code> just like me, you should put the following in your <code>~/.bashrc</code> file:</p>
-<div class="codehilite"><pre><span></span><span class="c1"># Go stuff</span>
-<span class="nb">export</span> <span class="nv">GOROOT</span><span class="o">=</span>~/go
-<span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span>~/code/go
-<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$GOROOT</span>/bin:<span class="nv">$PATH</span>
-<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$GOPATH</span>/bin:<span class="nv">$PATH</span>
-</pre></div>
-
-
-<h2 id="install-scipipe">Install SciPipe</h2>
-<p>Install SciPipe by running the following shell command:</p>
-<div class="codehilite"><pre><span></span>go get github.com/scipipe/scipipe/...
-</pre></div>
-
-
-<p><strong>N.B:</strong> Don't miss the <code>...</code>, or you won't get the <code>scipipe</code> helper tool.</p>
-<h2 id="initialize-a-new-workflow-file">Initialize a new workflow file</h2>
-<p>Now, you should be able to write code like in the example below, in files ending with <code>.go</code>.</p>
-<p>The easiest way to get started is to let the scipipe tool generate a starting point for you:</p>
-<div class="codehilite"><pre><span></span>scipipe new myfirstworkflow.go
-</pre></div>
-
-
-<p>... which you can then edit to your liking.</p>
-<h2 id="run-your-workflow">Run your workflow</h2>
-<p>To run a <code>.go</code> file, use <code>go run</code>:</p>
-<div class="codehilite"><pre><span></span>go run myfirstworkflow.go
-</pre></div>
+                <h1 id="connection-to-flow-based-programming">Connection to Flow-Based Programming</h1>
+<p>From Flow-based programming, SciPipe uses the ideas of separate network (workflow dependency graph)
+definition, named in- and out-ports, sub-networks/sub-workflows and bounded buffers (already available
+in Go's channels) to make writing workflows as easy as possible.</p>
                 
                   
                 
@@ -460,7 +349,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="SciPipe Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../known_limitations/" title="Known limitations" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -469,19 +358,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                SciPipe Overview
+                Known limitations
               </span>
             </div>
           </a>
         
         
-          <a href="../writing_workflows/" title="Writing Workflows" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../other_resources/" title="Other resources" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Writing Workflows
+                Other resources
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
