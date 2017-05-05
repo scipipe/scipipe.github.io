@@ -412,15 +412,16 @@
                 
                 <h1 id="scipipe">SciPipe</h1>
 <p><a href="https://travis-ci.org/scipipe/scipipe"><img alt="Build Status" src="https://travis-ci.org/scipipe/scipipe.svg?branch=master" /></a></p>
-<p><strong><small>Project links: [ <a href="http://github.com/scipipe/scipipe">GitHub Repo</a> | <a href="https://github.com/scipipe/scipipe/issues">Issue Tracker</a> | <a href="https://groups.google.com/forum/#!forum/scipipe">Mailing List</a> ]</small></strong></p>
+<p><strong><small>Project links: <a href="http://github.com/scipipe/scipipe">GitHub Repo</a> | <a href="https://github.com/scipipe/scipipe/issues">Issue Tracker</a> | <a href="https://groups.google.com/forum/#!forum/scipipe">Mailing List</a></small></strong></p>
 <p><img src="images/fbp_factory.png" style="float: right; margin: 0 .4em;">
 SciPipe is a library for writing <a href="https://en.wikipedia.org/wiki/Scientific_workflow_system">Scientific
-Workflows</a>, or
-"pipelines", in the <a href="http://golang.org">Go programming language</a>.</p>
+Workflows</a>, sometimes
+also called "pipelines", in the <a href="http://golang.org">Go programming language</a>.</p>
 <p>When you need to run many commandline programs that depend on each other in
-complex ways, SciPipe helps to make running these programs in a flexible,
-robust and reproducible way, even letting you restart an interrupted run
-without over-writing already produced output, among many other things.</p>
+complex ways, SciPipe helps by making the process of running these programs
+flexible, robust and reproducible. SciPipe also lets you restart an interrupted
+run without over-writing already produced output and produces an audit report
+of what was run, among many other things.</p>
 <p>SciPipe is built on the proven principles of <a href="https://en.wikipedia.org/wiki/Flow-based_programming">Flow-Based
 Programming</a> (FBP) to
 achieve maximum flexibility, productivity and agility when designing workflows.
@@ -428,6 +429,9 @@ Similar to other FBP systems, SciPipe workflows can be likened to a network of
 assembly lines in a factory, where items (files) are flowing through a network
 of conveyor belts, stopping at different independently running stations
 (processes) for processing, as depicted in the picture above.</p>
+<p>SciPipe was initially created for problems in bioinformatics and
+cheminformatics, but works equally well for any problem involving pipelines of
+commandline applications.</p>
 <h2 id="benefits">Benefits</h2>
 <p>Some key benefits of SciPipe, that are not always found in similar systems:</p>
 <ul>
