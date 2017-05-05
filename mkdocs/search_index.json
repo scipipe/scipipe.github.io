@@ -116,16 +116,6 @@
             "title": "Examples"
         },
         {
-            "location": "/flow_based_programming/",
-            "text": "Connection to Flow-Based Programming\n\n\nFrom Flow-based programming, SciPipe uses the ideas of separate network (workflow dependency graph)\ndefinition, named in- and out-ports, sub-networks/sub-workflows and bounded buffers (already available\nin Go's channels) to make writing workflows as easy as possible.",
-            "title": "Flow-Based Programming"
-        },
-        {
-            "location": "/flow_based_programming/#connection-to-flow-based-programming",
-            "text": "From Flow-based programming, SciPipe uses the ideas of separate network (workflow dependency graph)\ndefinition, named in- and out-ports, sub-networks/sub-workflows and bounded buffers (already available\nin Go's channels) to make writing workflows as easy as possible.",
-            "title": "Connection to Flow-Based Programming"
-        },
-        {
             "location": "/other_resources/",
             "text": "Publications mentioning SciPipe\n\n\n\n\nSee \na poster on SciPipe\n, presented at the \ne-Science Academy in Lund, on Oct 12-13 2016\n.\n\n\nSee \nslides from a recent presentation of SciPipe for use in a Bioinformatics setting\n.\n\n\nThe architecture of SciPipe is based on an \nflow-based\n  programming\n like\n  pattern in pure Go presented in\n  \nthis\n and\n  \nthis\n\n  blog posts on Gopher Academy.",
             "title": "Other resources"
@@ -137,12 +127,12 @@
         },
         {
             "location": "/acknowledgements/",
-            "text": "Acknowledgements\n\n\n\n\nThis library is heavily influenced/inspired by (and might make use of on in the future),\n  the \nGoFlow\n library by \nVladimir Sibirov\n.\n\n\nIt is also heavily influenced by the \nFlow-based programming\n by \nJohn Paul Morrison\n.\n\n\nThis work is financed by faculty grants and other financing for Jarl Wikberg's \nPharmaceutical Bioinformatics group\n of Dept. of\n  Pharmaceutical Biosciences at Uppsala University, and to a smaller part also by \nSwedish Research Council\n through the Swedish \nBioinformatics Infastructure for Life Sciences in Sweden\n.\n\n\nSupervisor for the project is \nOla Spjuth\n.\n\n\nBig thanks to \nEgon Elbre\n for very helpful input on the design of the internals of the pipeline, and processes, which simplified the implementation a lot.",
+            "text": "Acknowledgements\n\n\n\n\nSciPipe is very heavily dependent on the proven principles form \nFlow-Based\n  Programming (FBP)\n, as invented by \nJohn Paul Morrison\n.\n  From Flow-based programming, SciPipe uses the ideas of separate network\n  (workflow dependency graph) definition, named in- and out-ports,\n  sub-networks/sub-workflows and bounded buffers (already available in Go's\n  channels) to make writing workflows as easy as possible.\n\n\nThis library is has been much influenced/inspired also by the\n  \nGoFlow\n library by \nVladimir Sibirov\n.\n\n\nThanks to \nEgon Elbre\n for helpful input on the\n  design of the internals of the pipeline, and processes, which greatly\n  simplified the implementation.\n\n\nThis work is financed by faculty grants and other financing for the \nPharmaceutical Bioinformatics group\n of \nDept. of\n  Pharmaceutical Biosciences\n at \nUppsala University\n, and by \nSwedish Research Council\n\n  through the Swedish \nNational Bioinformatics Infrastructure Sweden\n.\n\n\nSupervisor for the project is \nOla Spjuth\n.",
             "title": "Acknowledgements"
         },
         {
             "location": "/acknowledgements/#acknowledgements",
-            "text": "This library is heavily influenced/inspired by (and might make use of on in the future),\n  the  GoFlow  library by  Vladimir Sibirov .  It is also heavily influenced by the  Flow-based programming  by  John Paul Morrison .  This work is financed by faculty grants and other financing for Jarl Wikberg's  Pharmaceutical Bioinformatics group  of Dept. of\n  Pharmaceutical Biosciences at Uppsala University, and to a smaller part also by  Swedish Research Council  through the Swedish  Bioinformatics Infastructure for Life Sciences in Sweden .  Supervisor for the project is  Ola Spjuth .  Big thanks to  Egon Elbre  for very helpful input on the design of the internals of the pipeline, and processes, which simplified the implementation a lot.",
+            "text": "SciPipe is very heavily dependent on the proven principles form  Flow-Based\n  Programming (FBP) , as invented by  John Paul Morrison .\n  From Flow-based programming, SciPipe uses the ideas of separate network\n  (workflow dependency graph) definition, named in- and out-ports,\n  sub-networks/sub-workflows and bounded buffers (already available in Go's\n  channels) to make writing workflows as easy as possible.  This library is has been much influenced/inspired also by the\n   GoFlow  library by  Vladimir Sibirov .  Thanks to  Egon Elbre  for helpful input on the\n  design of the internals of the pipeline, and processes, which greatly\n  simplified the implementation.  This work is financed by faculty grants and other financing for the  Pharmaceutical Bioinformatics group  of  Dept. of\n  Pharmaceutical Biosciences  at  Uppsala University , and by  Swedish Research Council \n  through the Swedish  National Bioinformatics Infrastructure Sweden .  Supervisor for the project is  Ola Spjuth .",
             "title": "Acknowledgements"
         },
         {

@@ -236,18 +236,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../flow_based_programming/" title="Flow-Based Programming" class="md-nav__link">
-      Flow-Based Programming
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="../other_resources/" title="Other resources" class="md-nav__link">
       Other resources
     </a>
@@ -317,13 +305,21 @@
                 
                 <h1 id="acknowledgements">Acknowledgements</h1>
 <ul>
-<li>This library is heavily influenced/inspired by (and might make use of on in the future),
-  the <a href="https://github.com/trustmaster/goflow">GoFlow</a> library by <a href="https://github.com/trustmaster/goflow">Vladimir Sibirov</a>.</li>
-<li>It is also heavily influenced by the <a href="http://www.jpaulmorrison.com/fbp">Flow-based programming</a> by <a href="http://www.jpaulmorrison.com/fbp">John Paul Morrison</a>.</li>
-<li>This work is financed by faculty grants and other financing for Jarl Wikberg's <a href="http://www.farmbio.uu.se/forskning/researchgroups/pb/">Pharmaceutical Bioinformatics group</a> of Dept. of
-  Pharmaceutical Biosciences at Uppsala University, and to a smaller part also by <a href="http://vr.se">Swedish Research Council</a> through the Swedish <a href="http://bils.se">Bioinformatics Infastructure for Life Sciences in Sweden</a>.</li>
+<li>SciPipe is very heavily dependent on the proven principles form <a href="http://www.jpaulmorrison.com/fbp">Flow-Based
+  Programming (FBP)</a>, as invented by <a href="http://www.jpaulmorrison.com/fbp">John Paul Morrison</a>.
+  From Flow-based programming, SciPipe uses the ideas of separate network
+  (workflow dependency graph) definition, named in- and out-ports,
+  sub-networks/sub-workflows and bounded buffers (already available in Go's
+  channels) to make writing workflows as easy as possible.</li>
+<li>This library is has been much influenced/inspired also by the
+  <a href="https://github.com/trustmaster/goflow">GoFlow</a> library by <a href="https://github.com/trustmaster/goflow">Vladimir Sibirov</a>.</li>
+<li>Thanks to <a href="http://twitter.com/egonelbre">Egon Elbre</a> for helpful input on the
+  design of the internals of the pipeline, and processes, which greatly
+  simplified the implementation.</li>
+<li>This work is financed by faculty grants and other financing for the <a href="http://pharmb.io">Pharmaceutical Bioinformatics group</a> of <a href="http://www.farmbio.uu.se">Dept. of
+  Pharmaceutical Biosciences</a> at <a href="http://www.uu.se">Uppsala University</a>, and by <a href="http://vr.se">Swedish Research Council</a>
+  through the Swedish <a href="http://nbis.se">National Bioinformatics Infrastructure Sweden</a>.</li>
 <li>Supervisor for the project is <a href="http://www.farmbio.uu.se/research/researchgroups/pb/olaspjuth">Ola Spjuth</a>.</li>
-<li>Big thanks to <a href="http://twitter.com/egonelbre">Egon Elbre</a> for very helpful input on the design of the internals of the pipeline, and processes, which simplified the implementation a lot.</li>
 </ul>
                 
                   
