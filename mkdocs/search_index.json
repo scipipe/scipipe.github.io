@@ -32,22 +32,22 @@
         },
         {
             "location": "/install/",
-            "text": "Install\n\n\nInstall Go\n\n\nFirst install Go by following instructions on \nthis page\n.\n  - I typically install to a custom location (\n~/go\n for the go tools, and \n~/code/go\n for my own go-projects).\n  - If you want to install (which means, untar the go tarball) to \n~/go\n just like me, you should put the following in your \n~/.bashrc\n file:\n\n\n# Go stuff\n\n\nexport\n \nGOROOT\n=\n~/go\n\nexport\n \nGOPATH\n=\n~/code/go\n\nexport\n \nPATH\n=\n$GOROOT\n/bin:\n$PATH\n\n\nexport\n \nPATH\n=\n$GOPATH\n/bin:\n$PATH\n\n\n\n\n\n\nInstall SciPipe\n\n\nInstall SciPipe by running the following shell command:\n\n\ngo get github.com/scipipe/scipipe/...\n\n\n\n\n\nN.B:\n Don't miss the \n...\n, or you won't get the \nscipipe\n helper tool.\n\n\nInitialize a new workflow file\n\n\nNow, you should be able to write code like in the example below, in files ending with \n.go\n.\n\n\nThe easiest way to get started is to let the scipipe tool generate a starting point for you:\n\n\nscipipe new myfirstworkflow.go\n\n\n\n\n\n... which you can then edit to your liking.\n\n\nRun your workflow\n\n\nTo run a \n.go\n file, use \ngo run\n:\n\n\ngo run myfirstworkflow.go",
+            "text": "Installing SciPipe\n\n\nInstalling SciPipe means first installing the Go programming langauge, and then\nusing Go's \ngo get\n command to install the SciPipe library. After this, you will\nbe able to use Go's \ngo run\n command to run SciPipe workflows.\n\n\nInstall Go\n\n\nInstall Go by following the instructions \non this page\n,\nfor your operating system.\n\n\nInstall SciPipe\n\n\nThen install SciPipe by running the following shell command:\n\n\ngo get github.com/scipipe/scipipe/...\n\n\n\n\n\nN.B:\n Don't miss the \n...\n, as otherwise the \nscipipe\n helper tool will not be installed.\n\n\nInitialize a new workflow file\n\n\nNow, you should be able to write code like in the example below, in files ending with \n.go\n.\n\n\nThe easiest way to get started is to let the scipipe tool generate a starting point for you:\n\n\nscipipe new myfirstworkflow.go\n\n\n\n\n\n... which you can then edit to your liking.\n\n\nRun your workflow\n\n\nTo run a \n.go\n file, use \ngo run\n:\n\n\ngo run myfirstworkflow.go",
             "title": "Installing SciPipe"
         },
         {
-            "location": "/install/#install",
-            "text": "",
-            "title": "Install"
+            "location": "/install/#installing-scipipe",
+            "text": "Installing SciPipe means first installing the Go programming langauge, and then\nusing Go's  go get  command to install the SciPipe library. After this, you will\nbe able to use Go's  go run  command to run SciPipe workflows.",
+            "title": "Installing SciPipe"
         },
         {
             "location": "/install/#install-go",
-            "text": "First install Go by following instructions on  this page .\n  - I typically install to a custom location ( ~/go  for the go tools, and  ~/code/go  for my own go-projects).\n  - If you want to install (which means, untar the go tarball) to  ~/go  just like me, you should put the following in your  ~/.bashrc  file:  # Go stuff  export   GOROOT = ~/go export   GOPATH = ~/code/go export   PATH = $GOROOT /bin: $PATH  export   PATH = $GOPATH /bin: $PATH",
+            "text": "Install Go by following the instructions  on this page ,\nfor your operating system.",
             "title": "Install Go"
         },
         {
             "location": "/install/#install-scipipe",
-            "text": "Install SciPipe by running the following shell command:  go get github.com/scipipe/scipipe/...  N.B:  Don't miss the  ... , or you won't get the  scipipe  helper tool.",
+            "text": "Then install SciPipe by running the following shell command:  go get github.com/scipipe/scipipe/...  N.B:  Don't miss the  ... , as otherwise the  scipipe  helper tool will not be installed.",
             "title": "Install SciPipe"
         },
         {
