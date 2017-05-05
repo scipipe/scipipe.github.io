@@ -116,16 +116,6 @@
             "title": "Examples"
         },
         {
-            "location": "/known_limitations/",
-            "text": "Known limitations\n\n\n\n\nThere are still a number of missing good-to-have features, for workflow design. See the \nissues\n tracker for details.\n\n\nThere is not yet support for the \nCommon Workflow Language\n, but that is also something that we plan to support in the future.",
-            "title": "Known limitations"
-        },
-        {
-            "location": "/known_limitations/#known-limitations",
-            "text": "There are still a number of missing good-to-have features, for workflow design. See the  issues  tracker for details.  There is not yet support for the  Common Workflow Language , but that is also something that we plan to support in the future.",
-            "title": "Known limitations"
-        },
-        {
             "location": "/flow_based_programming/",
             "text": "Connection to Flow-Based Programming\n\n\nFrom Flow-based programming, SciPipe uses the ideas of separate network (workflow dependency graph)\ndefinition, named in- and out-ports, sub-networks/sub-workflows and bounded buffers (already available\nin Go's channels) to make writing workflows as easy as possible.",
             "title": "Flow-Based Programming"
