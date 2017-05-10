@@ -482,7 +482,7 @@ full, normal Go programs. These always need to do three things:</p>
 named with the <code>.go</code> extension, and with this content:</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
-<span class="kn">import</span><span class="p">(</span>
+<span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
 <span class="p">)</span>
 
@@ -500,7 +500,7 @@ named with the <code>.go</code> extension, and with this content:</p>
 <h3 id="aliasing-scipipe-for-less-typing">Aliasing scipipe for less typing</h3>
 <p>If you find it tedious to type <code>scipipe</code> over and over in your code you can alias
 it to something shorter, like <code>sp</code>, by doing the import like this:</p>
-<div class="codehilite"><pre><span></span><span class="kn">import</span><span class="p">(</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="p">(</span>
     <span class="nx">sp</span> <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
 <span class="p">)</span>
 </pre></div>
@@ -542,8 +542,7 @@ simply with:</p>
 <p>... since the operation is symmetric.</p>
 <p>There is also an alternative syntax using the <code>scipipe.Connect()</code> method, which
 takes two port-objects and connects them:</p>
-<div class="codehilite"><pre><span></span>```go
-scipipe.Connect(myOtherProcess.In[&quot;infile&quot;], myProcess.Out[&quot;outfile&quot;])
+<div class="codehilite"><pre><span></span><span class="nx">scipipe</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">myOtherProcess</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">],</span> <span class="nx">myProcess</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;outfile&quot;</span><span class="p">])</span>
 </pre></div>
 
 
