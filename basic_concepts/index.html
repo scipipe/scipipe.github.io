@@ -239,49 +239,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#defining-workflows" title="Defining workflows" class="md-nav__link">
-    Defining workflows
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#minimal-boilerplate-code" title="Minimal boilerplate code" class="md-nav__link">
-    Minimal boilerplate code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#aliasing-scipipe-for-less-typing" title="Aliasing scipipe for less typing" class="md-nav__link">
-    Aliasing scipipe for less typing
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#defining-processes" title="Defining processes" class="md-nav__link">
-    Defining processes
+  <a href="#processes" title="Processes" class="md-nav__link">
+    Processes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#defining-dependencies" title="Defining dependencies" class="md-nav__link">
-    Defining dependencies
+  <a href="#tasks" title="Tasks" class="md-nav__link">
+    Tasks
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-workflows" title="Running workflows" class="md-nav__link">
-    Running workflows
+  <a href="#ports" title="Ports" class="md-nav__link">
+    Ports
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channels" title="Channels" class="md-nav__link">
+    Channels
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-runner" title="Pipeline runner" class="md-nav__link">
+    Pipeline runner
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shell-command-pattern" title="Shell command pattern" class="md-nav__link">
+    Shell command pattern
   </a>
   
 </li>
@@ -376,49 +370,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#defining-workflows" title="Defining workflows" class="md-nav__link">
-    Defining workflows
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#minimal-boilerplate-code" title="Minimal boilerplate code" class="md-nav__link">
-    Minimal boilerplate code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#aliasing-scipipe-for-less-typing" title="Aliasing scipipe for less typing" class="md-nav__link">
-    Aliasing scipipe for less typing
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#defining-processes" title="Defining processes" class="md-nav__link">
-    Defining processes
+  <a href="#processes" title="Processes" class="md-nav__link">
+    Processes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#defining-dependencies" title="Defining dependencies" class="md-nav__link">
-    Defining dependencies
+  <a href="#tasks" title="Tasks" class="md-nav__link">
+    Tasks
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-workflows" title="Running workflows" class="md-nav__link">
-    Running workflows
+  <a href="#ports" title="Ports" class="md-nav__link">
+    Ports
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channels" title="Channels" class="md-nav__link">
+    Channels
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-runner" title="Pipeline runner" class="md-nav__link">
+    Pipeline runner
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shell-command-pattern" title="Shell command pattern" class="md-nav__link">
+    Shell command pattern
   </a>
   
 </li>
@@ -439,109 +427,74 @@
                 
                 
                 <h1 id="basic-concepts">Basic concepts</h1>
-<h2 id="defining-workflows">Defining workflows</h2>
-<p>Defining workflows in general (not unique to SciPipe) typically means:</p>
-<ol>
-<li>Defining the processes (or "tasks" or "components") of the workflow.</li>
-<li>Defining dependencies between the processes.</li>
-<li>Running the workflow.</li>
-</ol>
-<h3 id="minimal-boilerplate-code">Minimal boilerplate code</h3>
-<p>In Scipipe, everything is normal Go code, so SciPipe workflows are also
-full, normal Go programs. These always need to do three things:</p>
-<ol>
-<li>Define the <code>main</code> package (always te case for executable files)</li>
-<li>Import the SciPipe library</li>
-<li>Have a <code>main()</code> function, which contains the workflow code.</li>
-</ol>
-<p>Thus, the minimal "boilerplate" code for any SciPipe workflow is a file
-named with the <code>.go</code> extension, and with this content:</p>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// All workflow code goes here</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>Then, this file will be runnable with the <code>go run</code> command, like:</p>
-<div class="codehilite"><pre><span></span>go run myworkflow.go
-</pre></div>
-
-
-<h3 id="aliasing-scipipe-for-less-typing">Aliasing scipipe for less typing</h3>
-<p>If you find it tedious to type <code>scipipe</code> over and over in your code you can alias
-it to something shorter, like <code>sp</code>, by doing the import like this:</p>
-<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="p">(</span>
-    <span class="nx">sp</span> <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
-<span class="p">)</span>
-</pre></div>
-
-
-<h2 id="defining-processes">Defining processes</h2>
-<p>In SciPipe, processes are defined using the <code>NewFromShell()</code> command, by
-providing a process name and a shell pattern, where file names are replaced
-with place-holders with a port-name. Just like so:</p>
-<div class="codehilite"><pre><span></span><span class="nx">myProcess</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;myprocess&quot;</span><span class="p">,</span> <span class="s">&quot;echo hi &gt; {o:outfile}&quot;</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Based on this shell command pattern, a process is created, with in- and
-out-ports and where the shell command to be executed, will be calculated from
-the provided pattern.</p>
-<h2 id="defining-dependencies">Defining dependencies</h2>
-<p>The dependency definitions in SciPipe are done by "physically" connecting ports
-(in-ports and out-ports) to each other via buffered channels, on which data
-objects will travel between processes. The connection is done in practice with
-a <code>Connect()</code> method, available on each port object, which takes another port
-object as input, in order to connect the two ports.</p>
-<p>Ports created when using the shell pattern, are stored in the fields <code>In</code> and
-<code>Out</code> on each process, under their own name, since the fields are maps.  So, an
-out-port named "outfile" will be accessed from <code>myProcess</code> with:
-<code>myProcess.Out["outfile"]</code>, and and in-port named "inport" will be accessed from
-<code>myOhterProcess</code> with: <code>myOtherProcess.In["infile"]</code>.</p>
-<p>Connecting <code>myOtherProcess.In["infile"]</code> with <code>myProcess.Out["outfile"]</code> is done
-simply with:</p>
-<div class="codehilite"><pre><span></span><span class="nx">myOtherProcess</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">myProcess</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;outfile&quot;</span><span class="p">])</span>
-</pre></div>
-
-
-<p>... or</p>
-<div class="codehilite"><pre><span></span><span class="nx">myProcess</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;outfile&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">myOtherProcess</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">])</span>
-</pre></div>
-
-
-<p>... since the operation is symmetric.</p>
-<p>There is also an alternative syntax using the <code>scipipe.Connect()</code> method, which
-takes two port-objects and connects them:</p>
-<div class="codehilite"><pre><span></span><span class="nx">scipipe</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">myOtherProcess</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">],</span> <span class="nx">myProcess</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;outfile&quot;</span><span class="p">])</span>
-</pre></div>
-
-
-<p>... or</p>
-<div class="codehilite"><pre><span></span><span class="nx">scipipe</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">myProcess</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;outfile&quot;</span><span class="p">],</span> <span class="nx">myOtherProcess</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">])</span>
-</pre></div>
-
-
-<h2 id="running-workflows">Running workflows</h2>
-<p>In order to run SciPipe workflows, you have to add all processes to a pipeline runner,
-and then execute the <code>Run()</code> method on the pipeline runner, like so:</p>
-<div class="codehilite"><pre><span></span><span class="nx">runner</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
-<span class="nx">runner</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">myProcess</span><span class="p">,</span> <span class="nx">myOtherProcess</span><span class="p">)</span>
-<span class="nx">runner</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
-</pre></div>
-
-
-<p><em>Important:</em> Note that the order processes are added to the pipeline runner is
-important!  The last process has to be added last, in order for the pipeline to
-function properly.</p>
-<h1 id="next-steps">Next steps</h1>
-<p>Please see the <a href="../tutorials/helloworld/">Hello World tutorial</a>, for a concrete
-example of using the concepts above.</p>
+<p>In SciLuigi, we are discussing a few concepts all the time, so to make sure we
+are on the same page, we will below go through the basic ones briefly.</p>
+<h2 id="processes">Processes</h2>
+<p>The probably most basic concept in SciPipe is the process.  A process is an
+asynchronously running component that is typically defined as a static,
+"long-running" part of the workflow, and the number of processes thus is
+typically fixed for a workflow during its execution.</p>
+<p>One can create customized types of processes, but for most basic workflows, the
+<code>scipipe.SciProcess</code> will be used, which is specialized for executing
+commandline applications. New <code>SciProcess</code>-es are typically created using
+the <code>scipipe.NewFromShell(procName, shellPattern)</code> command.</p>
+<h2 id="tasks">Tasks</h2>
+<p>The "long-running" processes mentioned above, will receive input files on its
+in-ports, and for each complete set of input files it receives, it will create
+a new <strong>task</strong>. Specifically, <code>scipipe.SciProcess</code> will create
+<code>`scipipe.SciTask</code> objects, and populate it with all data needed for one
+particular shell command execution.  <code>SciTask</code> objects are executed via their
+<code>Execute()</code> method, or <code>CustomExecute()</code>, if custom Go code is supposed to be
+executed instead of a shell command.</p>
+<p>The distinction between processes and tasks is important to understand, for
+example when doing more advanced configuration of file naming strategies, since
+the custom anonymous functions used to format paths are taking a <code>SciTask</code> as
+input, even though these functions are saved on the process object.</p>
+<p>To understand the difference between processes and tasks, it is helpful to
+remember that processes are long-running, and typically fixed during the course
+of a workflow, while tasks are transient objects, created temporarily as a
+container for all data and code needed for each execution of a concrete shell
+command.</p>
+<h2 id="ports">Ports</h2>
+<p>Central to the way data dependencies are defined in SciPipe, is ports. Ports
+are fields on processes, which are connected to other ports via channels (see
+separate section on this page).</p>
+<p>In SciPipe, each port must have a unique name within its process (there can't
+be an in-port and out-port named the same), and this name will be used in shell
+command patterns, when connecting dependencies / dataflow networks, and when
+configuring file naming strategies.</p>
+<p>In <code>SciProcess</code> objects, in-ports are stored in a string-&gt;Port map field named
+<code>In</code> (so they are accessed with: <code>myProcess.In["myport"]</code>), and out-ports
+similarly in a string-&gt;Port map field named <code>Out</code>.</p>
+<p>Some pre-made components might have ports bound to custom field names though,
+such as <code>myFastaReader.InFastaFile</code>, or <code>myZipComponent.OutZipFile</code>.</p>
+<p>Port objects have some methods bound to them, most importantly the <code>Connect()</code>
+method, which takes another port, and connects to it, by stitching a channel
+between the ports.</p>
+<p>On <code>SciProcess</code> objects, there is also a third port type, <code>ParamPorts</code>, which
+is used when it is needed to send a stream of parameter values (in string
+format) to be supplied to as arguments to shell commands.</p>
+<h2 id="channels">Channels</h2>
+<p>Ports in SciPipe are connected via channels. Channels are <a href="https://tour.golang.org/concurrency/2">plain Go channels</a>
+and nothing more. Most of the time, one will not need to deal with the channels
+directly though, since the port objects (see separate section for ports) have
+all the logic to connect to other ports via channels, but it can be good to
+know that they are there, in case you need to do something more advanced.</p>
+<h2 id="pipeline-runner">Pipeline runner</h2>
+<p>The <code>PipelineRunner</code> is a special object in SciPipe, that just takes care
+of running a pipeline of components. </p>
+<p>There is not much to say about the pipeline runner other than that it is
+created with <code>scipipe.NewPipelineRunner()</code>, that all processes need to be added
+to it in the right order (the last process last) with
+<code>runner.AddProcesses(processes...)</code> and that it should be run with
+<code>runner.Run()</code>. But this is already covered in the other examples and
+tutorials.</p>
+<h2 id="shell-command-pattern">Shell command pattern</h2>
+<p>The <code>SciProcess</code> has the speciality that it can be configured using a special
+shell command pattern. It is already explained in the section "writing
+workflows", but in brief, it is a normal shell command, with placeholders for
+in-ports, out-ports and parameter ports, on the form <code>{i:inportname}</code>,
+<code>{o:outportname}</code>, and <code>{p:paramportname}</code>, respectively.</p>
                 
                   
                 
