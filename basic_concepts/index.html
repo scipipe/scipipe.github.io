@@ -435,16 +435,21 @@ asynchronously running component that is typically defined as a static,
 "long-running" part of the workflow, and the number of processes thus is
 typically fixed for a workflow during its execution.</p>
 <p>One can create customized types of processes, but for most basic workflows, the
-<code>scipipe.SciProcess</code> will be used, which is specialized for executing
-commandline applications. New <code>SciProcess</code>-es are typically created using
-the <code>scipipe.NewFromShell(procName, shellPattern)</code> command.</p>
+<a href="https://godoc.org/github.com/scipipe/scipipe#SciProcess"><code>scipipe.SciProcess</code></a>
+will be used, which is specialized for executing commandline applications. New
+<code>SciProcess</code>-es are typically created using the <code>scipipe.NewFromShell(procName,
+shellPattern)</code> command.</p>
+<ul>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#SciProcess">GoDoc for SciProcess</a></li>
+</ul>
 <h2 id="tasks">Tasks</h2>
 <p>The "long-running" processes mentioned above, will receive input files on its
 in-ports, and for each complete set of input files it receives, it will create
 a new <strong>task</strong>. Specifically, <code>scipipe.SciProcess</code> will create
-<code>`scipipe.SciTask</code> objects, and populate it with all data needed for one
+<a href="https://godoc.org/github.com/scipipe/scipipe#SciTask"><code>scipipe.SciTask</code></a> objects, and populate it with all data needed for one
 particular shell command execution.  <code>SciTask</code> objects are executed via their
-<code>Execute()</code> method, or <code>CustomExecute()</code>, if custom Go code is supposed to be
+<a href="https://godoc.org/github.com/scipipe/scipipe#SciTask.Execute"><code>Execute()</code></a>
+method, or <code>CustomExecute()</code>, if custom Go code is supposed to be
 executed instead of a shell command.</p>
 <p>The distinction between processes and tasks is important to understand, for
 example when doing more advanced configuration of file naming strategies, since
@@ -455,6 +460,9 @@ remember that processes are long-running, and typically fixed during the course
 of a workflow, while tasks are transient objects, created temporarily as a
 container for all data and code needed for each execution of a concrete shell
 command.</p>
+<ul>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#SciTask">GoDoc for SciTask</a></li>
+</ul>
 <h2 id="ports">Ports</h2>
 <p>Central to the way data dependencies are defined in SciPipe, is ports. Ports
 are fields on processes, which are connected to other ports via channels (see
@@ -465,7 +473,7 @@ command patterns, when connecting dependencies / dataflow networks, and when
 configuring file naming strategies.</p>
 <p>In <code>SciProcess</code> objects, in-ports are stored in a string-&gt;Port map field named
 <code>In</code> (so they are accessed with: <code>myProcess.In["myport"]</code>), and out-ports
-similarly in a string-&gt;Port map field named <code>Out</code>.</p>
+similarly in a string-&gt;Port map field named <code>Out</code>. Both are of type <a href="https://godoc.org/github.com/scipipe/scipipe#FilePort"><code>FilePort</code></a>.</p>
 <p>Some pre-made components might have ports bound to custom field names though,
 such as <code>myFastaReader.InFastaFile</code>, or <code>myZipComponent.OutZipFile</code>.</p>
 <p>Port objects have some methods bound to them, most importantly the <code>Connect()</code>
@@ -474,6 +482,11 @@ between the ports.</p>
 <p>On <code>SciProcess</code> objects, there is also a third port type, <code>ParamPorts</code>, which
 is used when it is needed to send a stream of parameter values (in string
 format) to be supplied to as arguments to shell commands.</p>
+<ul>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#Port">GoDoc for the Port interface</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#FilePort">GoDoc for the FilePort struct type</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#ParamPort">GoDoc for the ParamPort struct type</a></li>
+</ul>
 <h2 id="channels">Channels</h2>
 <p>Ports in SciPipe are connected via channels. Channels are <a href="https://tour.golang.org/concurrency/2">plain Go channels</a>
 and nothing more. Most of the time, one will not need to deal with the channels
@@ -481,20 +494,28 @@ directly though, since the port objects (see separate section for ports) have
 all the logic to connect to other ports via channels, but it can be good to
 know that they are there, in case you need to do something more advanced.</p>
 <h2 id="pipeline-runner">Pipeline runner</h2>
-<p>The <code>PipelineRunner</code> is a special object in SciPipe, that just takes care
-of running a pipeline of components. </p>
+<p>The <a href="https://godoc.org/github.com/scipipe/scipipe#PipelineRunner"><code>PipelineRunner</code></a>
+is a special object in SciPipe, that just takes care of running a pipeline of
+components. </p>
 <p>There is not much to say about the pipeline runner other than that it is
 created with <code>scipipe.NewPipelineRunner()</code>, that all processes need to be added
 to it in the right order (the last process last) with
 <code>runner.AddProcesses(processes...)</code> and that it should be run with
 <code>runner.Run()</code>. But this is already covered in the other examples and
 tutorials.</p>
+<ul>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#PipelineRunner">GoDoc for PipelineRunner</a></li>
+</ul>
 <h2 id="shell-command-pattern">Shell command pattern</h2>
 <p>The <code>SciProcess</code> has the speciality that it can be configured using a special
-shell command pattern. It is already explained in the section "writing
-workflows", but in brief, it is a normal shell command, with placeholders for
-in-ports, out-ports and parameter ports, on the form <code>{i:inportname}</code>,
-<code>{o:outportname}</code>, and <code>{p:paramportname}</code>, respectively.</p>
+shell command pattern, supplied to the <a href="https://godoc.org/github.com/scipipe/scipipe#NewFromShell"><code>NewFromShell()</code></a>
+factory function. It is already explained in the section "writing workflows",
+but in brief, it is a normal shell command, with placeholders for in-ports,
+out-ports and parameter ports, on the form <code>{i:inportname}</code>, <code>{o:outportname}</code>,
+and <code>{p:paramportname}</code>, respectively.</p>
+<ul>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#NewFromShell">GoDoc for NewFromShell()</a></li>
+</ul>
                 
                   
                 
