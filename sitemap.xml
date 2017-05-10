@@ -19,18 +19,20 @@
 
     
     <url>
-     <loc>/concepts/</loc>
+     <loc>/basics/</loc>
      <lastmod>2017-05-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
+        
     <url>
-     <loc>/writing_workflows/</loc>
+     <loc>/tutorials/helloworld/</loc>
      <lastmod>2017-05-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
+        
     
 
     
