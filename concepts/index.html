@@ -15,7 +15,7 @@
     
     
       
-        <title>Other resources - SciPipe Docs</title>
+        <title>Basic Concepts - SciPipe Docs</title>
       
     
     
@@ -79,7 +79,7 @@
             
               
             
-            Other resources
+            Basic Concepts
           
         </span>
       </div>
@@ -210,11 +210,95 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../concepts/" title="Basic Concepts" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Basic Concepts
+      </label>
+    
+    <a href="./" title="Basic Concepts" class="md-nav__link md-nav__link--active">
       Basic Concepts
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#defining-workflows" title="Defining workflows" class="md-nav__link">
+    Defining workflows
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#process-overview" title="Process overview" class="md-nav__link">
+    Process overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimal-boilerplate-code" title="Minimal boilerplate code" class="md-nav__link">
+    Minimal boilerplate code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aliasing-scipipe-for-less-typing" title="Aliasing scipipe for less typing" class="md-nav__link">
+    Aliasing scipipe for less typing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-processes" title="Defining processes" class="md-nav__link">
+    Defining processes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-dependencies" title="Defining dependencies" class="md-nav__link">
+    Defining dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-workflows" title="Running workflows" class="md-nav__link">
+    Running workflows
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -246,43 +330,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Other resources
-      </label>
-    
-    <a href="./" title="Other resources" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../other_resources/" title="Other resources" class="md-nav__link">
       Other resources
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#publications-mentioning-scipipe" title="Publications mentioning SciPipe" class="md-nav__link">
-    Publications mentioning SciPipe
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -324,14 +376,64 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#publications-mentioning-scipipe" title="Publications mentioning SciPipe" class="md-nav__link">
-    Publications mentioning SciPipe
+  <a href="#defining-workflows" title="Defining workflows" class="md-nav__link">
+    Defining workflows
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#process-overview" title="Process overview" class="md-nav__link">
+    Process overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimal-boilerplate-code" title="Minimal boilerplate code" class="md-nav__link">
+    Minimal boilerplate code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aliasing-scipipe-for-less-typing" title="Aliasing scipipe for less typing" class="md-nav__link">
+    Aliasing scipipe for less typing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-processes" title="Defining processes" class="md-nav__link">
+    Defining processes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-dependencies" title="Defining dependencies" class="md-nav__link">
+    Defining dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-workflows" title="Running workflows" class="md-nav__link">
+    Running workflows
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -350,19 +452,112 @@
               
                 
                 
-                  <h1>Other resources</h1>
-                
-                <h2 id="publications-mentioning-scipipe">Publications mentioning SciPipe</h2>
-<ul>
-<li>See <a href="http://dx.doi.org/10.13140/RG.2.2.34414.61760">a poster on SciPipe</a>, presented at the <a href="../essenceofescience.se/event/swedish-e-science-academy-2016-2/">e-Science Academy in Lund, on Oct 12-13 2016</a>.</li>
-<li>See <a href="http://www.slideshare.net/SamuelLampa/scipipe-a-lightweight-workflow-library-inspired-by-flowbased-programming">slides from a recent presentation of SciPipe for use in a Bioinformatics setting</a>.</li>
-<li>The architecture of SciPipe is based on an <a href="https://en.wikipedia.org/wiki/Flow-based_programming">flow-based
-  programming</a> like
-  pattern in pure Go presented in
-  <a href="http://blog.gopheracademy.com/composable-pipelines-pattern">this</a> and
-  <a href="https://blog.gopheracademy.com/advent-2015/composable-pipelines-improvements/">this</a>
-  blog posts on Gopher Academy.</li>
-</ul>
+                <h1 id="basic-concepts">Basic concepts</h1>
+<h2 id="defining-workflows">Defining workflows</h2>
+<h3 id="process-overview">Process overview</h3>
+<p>Defining workflows in general (not unique to SciPipe) typically means:</p>
+<ol>
+<li>Defining the processes (or "tasks" or "components") of the workflow.</li>
+<li>Defining dependencies between the processes.</li>
+<li>Running the workflow.</li>
+</ol>
+<h3 id="minimal-boilerplate-code">Minimal boilerplate code</h3>
+<p>In Scipipe, everything is normal Go code, so SciPipe workflows are also
+full, normal Go programs. These always need to do three things:</p>
+<ol>
+<li>Define the <code>main</code> package (always te case for executable files)</li>
+<li>Import the SciPipe library</li>
+<li>Have a <code>main()</code> method, which contains the workflow code.</li>
+</ol>
+<p>Thus, the minimal "boilerplate" code for any SciPipe workflow is a file
+named with the <code>.go</code> extension, and with this content:</p>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span><span class="p">(</span>
+    <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// All workflow code goes here</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Then, this file will be runnable with the <code>go run</code> command, like:</p>
+<div class="codehilite"><pre><span></span>go run myworkflow.go
+</pre></div>
+
+
+<h3 id="aliasing-scipipe-for-less-typing">Aliasing scipipe for less typing</h3>
+<p>If you find it tedious to type <code>scipipe</code> over and over in your code you can alias
+it to something shorter, like <code>sp</code>, by doing the import like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span><span class="p">(</span>
+    <span class="nx">sp</span> <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<h3 id="defining-processes">Defining processes</h3>
+<p>In SciPipe, processes are defined using the <code>NewFromShell()</code> command, by
+providing a process name and a shell pattern, where file names are replaced
+with place-holders with a port-name. Just like so:</p>
+<div class="codehilite"><pre><span></span><span class="nx">myProcess</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;myprocess&quot;</span><span class="p">,</span> <span class="s">&quot;echo hi &gt; {o:outfile}&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Based on this shell command pattern, a process is created, with in- and
+out-ports and where the shell command to be executed, will be calculated from
+the provided pattern.</p>
+<h3 id="defining-dependencies">Defining dependencies</h3>
+<p>The dependency definitions in SciPipe are done by "physically" connecting ports
+(in-ports and out-ports) to each other via buffered channels, on which data
+objects will travel between processes. The connection is done in practice with
+a <code>Connect()</code> method, available on each port object, which takes another port
+object as input, in order to connect the two ports.</p>
+<p>Ports created when using the shell pattern, are stored in the fields <code>In</code> and
+<code>Out</code> on each process, under their own name, since the fields are maps.  So, an
+out-port named "outfile" will be accessed from <code>myProcess</code> with:
+<code>myProcess.Out["outfile"]</code>, and and in-port named "inport" will be accessed from
+<code>myOhterProcess</code> with: <code>myOtherProcess.In["infile"]</code>.</p>
+<p>Connecting <code>myOtherProcess.In["infile"]</code> with <code>myProcess.Out["outfile"]</code> is done
+simply with:</p>
+<div class="codehilite"><pre><span></span><span class="nx">myOtherProcess</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">myProcess</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;outfile&quot;</span><span class="p">])</span>
+</pre></div>
+
+
+<p>... or</p>
+<div class="codehilite"><pre><span></span><span class="nx">myProcess</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;outfile&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">myOtherProcess</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">])</span>
+</pre></div>
+
+
+<p>... since the operation is symmetric.</p>
+<p>There is also an alternative syntax using the <code>scipipe.Connect()</code> method, which
+takes two port-objects and connects them:</p>
+<div class="codehilite"><pre><span></span>```go
+scipipe.Connect(myOtherProcess.In[&quot;infile&quot;], myProcess.Out[&quot;outfile&quot;])
+</pre></div>
+
+
+<p>... or</p>
+<div class="codehilite"><pre><span></span><span class="nx">scipipe</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">myProcess</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;outfile&quot;</span><span class="p">],</span> <span class="nx">myOtherProcess</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">])</span>
+</pre></div>
+
+
+<h3 id="running-workflows">Running workflows</h3>
+<p>In order to run SciPipe workflows, you have to add all processes to a pipeline runner,
+and then execute the <code>Run()</code> method on the pipeline runner, like so:</p>
+<div class="codehilite"><pre><span></span><span class="nx">runner</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
+<span class="nx">runner</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">myProcess</span><span class="p">,</span> <span class="nx">myOtherProcess</span><span class="p">)</span>
+<span class="nx">runner</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+</pre></div>
+
+
+<p><em>Important:</em> Note that the order processes are added to the pipeline runner is
+important!  The last process has to be added last, in order for the pipeline to
+function properly.</p>
+<h1 id="next-steps">Next steps</h1>
+<p>Please see the next section, <a href="../writing_workflows">Writing Workflows</a>, for a
+concrete example of using the concepts above.</p>
                 
                   
                 
@@ -381,7 +576,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../examples/" title="Examples" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../install/" title="Installing" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -390,19 +585,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Examples
+                Installing
               </span>
             </div>
           </a>
         
         
-          <a href="../acknowledgements/" title="Acknowledgements" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../writing_workflows/" title="Writing Workflows" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Acknowledgements
+                Writing Workflows
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
