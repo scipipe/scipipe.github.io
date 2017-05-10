@@ -32,7 +32,7 @@
         }, 
         {
             "location": "/install/", 
-            "text": "Installing SciPipe\n\n\nInstalling SciPipe means first installing the Go programming langauge, and then\nusing Go's \ngo get\n command to install the SciPipe library. After this, you will\nbe able to use Go's \ngo run\n command to run SciPipe workflows.\n\n\nInstall Go\n\n\nInstall Go by following the instructions \non this page\n,\nfor your operating system.\n\n\nInstall SciPipe\n\n\nThen install SciPipe by running the following shell command:\n\n\ngo get github.com/scipipe/scipipe/...\n\n\n\n\n\nN.B:\n Don't miss the \n...\n, as otherwise the \nscipipe\n helper tool will not be installed.\n\n\nInitialize a new workflow file\n\n\nNow, you should be able to write code like in the example below, in files ending with \n.go\n.\n\n\nThe easiest way to get started is to let the scipipe tool generate a starting point for you:\n\n\nscipipe new myfirstworkflow.go\n\n\n\n\n\n... which you can then edit to your liking.\n\n\nRun your workflow\n\n\nTo run a \n.go\n file, use \ngo run\n:\n\n\ngo run myfirstworkflow.go", 
+            "text": "Installing SciPipe\n\n\nInstalling SciPipe means first installing the Go programming langauge, and then\nusing Go's \ngo get\n command to install the SciPipe library. After this, you will\nbe able to use Go's \ngo run\n command to run SciPipe workflows.\n\n\nInstall Go\n\n\nInstall Go by following the instructions \non this page\n,\nfor your operating system.\n\n\nInstall SciPipe\n\n\nThen install SciPipe by running the following shell command:\n\n\ngo get github.com/scipipe/scipipe/...\n\n\n\n\n\nN.B:\n Don't miss the \n...\n, as otherwise the \nscipipe\n helper tool will not be installed.\n\n\nInitialize a new workflow file\n\n\nNow, you should be able to write code like in the example below, in files ending with \n.go\n.\n\n\nThe easiest way to get started is to let the scipipe tool generate a starting point for you:\n\n\nscipipe new myfirstworkflow.go\n\n\n\n\n\n... which you can then edit to your liking.\n\n\nRun your workflow\n\n\nTo run a \n.go\n file, use \ngo run\n:\n\n\ngo run myfirstworkflow.go\n\n\n\n\n\nSome tips about editors\n\n\nIn order to be productive with SciPipe, you will also need a Go editor or IDE\nwith support for auto-completion, sometimes also called \"intellisense\".\n\n\nWe can warmly recommend to use one of these editors, sorted by our level of endorsement:\n\n\n\n\nVisual Studio Code\n with the \nGo plugin\n - If you want a very powerful, awesome, almost IDE-like editor\n\n\nFatih's awesome \nvim-go\n plugin - if you are a vim power-user\n\n\nLiteIDE\n - if you want a really simple, standalone Go-editor\n\n\n\n\nThere are also popular Go-plugins for \nSublime text\n,\n\nAtom\n and \nIntelliJ IDEA\n,\nand an upcoming Go IDE from JetBrains, called\n\nGogland\n, that might be worth checking out,\ndepending on your preferences.", 
             "title": "Installing"
         }, 
         {
@@ -59,6 +59,11 @@
             "location": "/install/#run-your-workflow", 
             "text": "To run a  .go  file, use  go run :  go run myfirstworkflow.go", 
             "title": "Run your workflow"
+        }, 
+        {
+            "location": "/install/#some-tips-about-editors", 
+            "text": "In order to be productive with SciPipe, you will also need a Go editor or IDE\nwith support for auto-completion, sometimes also called \"intellisense\".  We can warmly recommend to use one of these editors, sorted by our level of endorsement:   Visual Studio Code  with the  Go plugin  - If you want a very powerful, awesome, almost IDE-like editor  Fatih's awesome  vim-go  plugin - if you are a vim power-user  LiteIDE  - if you want a really simple, standalone Go-editor   There are also popular Go-plugins for  Sublime text , Atom  and  IntelliJ IDEA ,\nand an upcoming Go IDE from JetBrains, called Gogland , that might be worth checking out,\ndepending on your preferences.", 
+            "title": "Some tips about editors"
         }, 
         {
             "location": "/concepts/", 
