@@ -247,13 +247,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#process-overview" title="Process overview" class="md-nav__link">
-    Process overview
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#minimal-boilerplate-code" title="Minimal boilerplate code" class="md-nav__link">
     Minimal boilerplate code
   </a>
@@ -267,29 +260,29 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#defining-processes" title="Defining processes" class="md-nav__link">
     Defining processes
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#defining-dependencies" title="Defining dependencies" class="md-nav__link">
     Defining dependencies
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#running-workflows" title="Running workflows" class="md-nav__link">
     Running workflows
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -391,13 +384,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#process-overview" title="Process overview" class="md-nav__link">
-    Process overview
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#minimal-boilerplate-code" title="Minimal boilerplate code" class="md-nav__link">
     Minimal boilerplate code
   </a>
@@ -411,29 +397,29 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#defining-processes" title="Defining processes" class="md-nav__link">
     Defining processes
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#defining-dependencies" title="Defining dependencies" class="md-nav__link">
     Defining dependencies
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#running-workflows" title="Running workflows" class="md-nav__link">
     Running workflows
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -454,7 +440,6 @@
                 
                 <h1 id="basic-concepts">Basic concepts</h1>
 <h2 id="defining-workflows">Defining workflows</h2>
-<h3 id="process-overview">Process overview</h3>
 <p>Defining workflows in general (not unique to SciPipe) typically means:</p>
 <ol>
 <li>Defining the processes (or "tasks" or "components") of the workflow.</li>
@@ -497,7 +482,7 @@ it to something shorter, like <code>sp</code>, by doing the import like this:</p
 </pre></div>
 
 
-<h3 id="defining-processes">Defining processes</h3>
+<h2 id="defining-processes">Defining processes</h2>
 <p>In SciPipe, processes are defined using the <code>NewFromShell()</code> command, by
 providing a process name and a shell pattern, where file names are replaced
 with place-holders with a port-name. Just like so:</p>
@@ -508,7 +493,7 @@ with place-holders with a port-name. Just like so:</p>
 <p>Based on this shell command pattern, a process is created, with in- and
 out-ports and where the shell command to be executed, will be calculated from
 the provided pattern.</p>
-<h3 id="defining-dependencies">Defining dependencies</h3>
+<h2 id="defining-dependencies">Defining dependencies</h2>
 <p>The dependency definitions in SciPipe are done by "physically" connecting ports
 (in-ports and out-ports) to each other via buffered channels, on which data
 objects will travel between processes. The connection is done in practice with
@@ -543,7 +528,7 @@ scipipe.Connect(myOtherProcess.In[&quot;infile&quot;], myProcess.Out[&quot;outfi
 </pre></div>
 
 
-<h3 id="running-workflows">Running workflows</h3>
+<h2 id="running-workflows">Running workflows</h2>
 <p>In order to run SciPipe workflows, you have to add all processes to a pipeline runner,
 and then execute the <code>Run()</code> method on the pipeline runner, like so:</p>
 <div class="codehilite"><pre><span></span><span class="nx">runner</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
