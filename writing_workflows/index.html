@@ -188,8 +188,8 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="SciPipe Introduction" class="md-nav__link">
-      SciPipe Introduction
+    <a href=".." title="Introduction" class="md-nav__link">
+      Introduction
     </a>
   </li>
 
@@ -250,12 +250,25 @@
     Initializing processes
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#connecting-processes-into-a-network" title="Connecting processes into a network" class="md-nav__link">
-    Connecting processes into a network
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-shell-command-pattern" title="The shell command pattern" class="md-nav__link">
+    The shell command pattern
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-sink" title="The sink" class="md-nav__link">
+    The sink
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -267,8 +280,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#formatting-output-file-paths-a-nicer-way" title="Formatting output file paths: A nicer way" class="md-nav__link">
-    Formatting output file paths: A nicer way
+  <a href="#even-more-control-over-file-formatting" title="Even more control over file formatting" class="md-nav__link">
+    Even more control over file formatting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-processes-into-a-network" title="Connecting processes into a network" class="md-nav__link">
+    Connecting processes into a network
   </a>
   
 </li>
@@ -376,12 +396,25 @@
     Initializing processes
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#connecting-processes-into-a-network" title="Connecting processes into a network" class="md-nav__link">
-    Connecting processes into a network
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-shell-command-pattern" title="The shell command pattern" class="md-nav__link">
+    The shell command pattern
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-sink" title="The sink" class="md-nav__link">
+    The sink
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -393,8 +426,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#formatting-output-file-paths-a-nicer-way" title="Formatting output file paths: A nicer way" class="md-nav__link">
-    Formatting output file paths: A nicer way
+  <a href="#even-more-control-over-file-formatting" title="Even more control over file formatting" class="md-nav__link">
+    Even more control over file formatting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-processes-into-a-network" title="Connecting processes into a network" class="md-nav__link">
+    Connecting processes into a network
   </a>
   
 </li>
@@ -436,93 +476,131 @@ discuss the SciPipe syntax further below:</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
+    <span class="c1">// Import SciPipe, aliased to &#39;sp&#39; for brevity</span>
     <span class="nx">sp</span> <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
 <span class="p">)</span>
 
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// Initialize processes</span>
-    <span class="nx">fooWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foowriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;foo&#39; &gt; {o:foo}&quot;</span><span class="p">)</span>
-    <span class="nx">fooToBar</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foo2bar&quot;</span><span class="p">,</span> <span class="s">&quot;sed &#39;s/foo/bar/g&#39; {i:foo} &gt; {o:bar}&quot;</span><span class="p">)</span>
-    <span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span> <span class="c1">// Will just receive file targets, doing nothing</span>
+    <span class="c1">// Initialize processes from shell command patterns</span>
+    <span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
+    <span class="nx">worldAppender</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;worldAppender&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
+    <span class="c1">// Create a sink, that will just receive the final outputs</span>
+    <span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span>
 
-    <span class="c1">// Add output file path formatters for the components created above</span>
-    <span class="nx">fooWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
-    <span class="nx">fooToBar</span><span class="p">.</span><span class="nx">SetPathExtend</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;.bar&quot;</span><span class="p">)</span>
+    <span class="c1">// Configure output file path formatters for the processes created above</span>
+    <span class="nx">helloWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;hellofile&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
+    <span class="nx">worldAppender</span><span class="p">.</span><span class="nx">SetPathReplace</span><span class="p">(</span><span class="s">&quot;infile&quot;</span><span class="p">,</span> <span class="s">&quot;worldfile&quot;</span><span class="p">,</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">)</span>
 
     <span class="c1">// Connect network</span>
-    <span class="nx">fooToBar</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">fooWriter</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">])</span>
-    <span class="nx">sink</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">fooToBar</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">])</span>
+    <span class="nx">worldAppender</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;hellofile&quot;</span><span class="p">])</span>
+    <span class="nx">sink</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">worldAppender</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;worldfile&quot;</span><span class="p">])</span>
 
-    <span class="c1">// Add to a pipeline runner and run</span>
+    <span class="c1">// Create a pipeline runner, add processes, and run</span>
     <span class="nx">pipeline</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
-    <span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">fooWriter</span><span class="p">,</span> <span class="nx">fooToBar</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
+    <span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">,</span> <span class="nx">worldAppender</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
     <span class="nx">pipeline</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 <span class="p">}</span>
 </pre></div>
 
 
-<p>Let us now go through the code example step by step, and describe in more
-detail what we are doing.</p>
+<p>Let's go through the code example step by step, and look in more
+detail at what we are doing.</p>
 <h2 id="initializing-processes">Initializing processes</h2>
-<div class="codehilite"><pre><span></span><span class="nx">fooWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foowriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;foo&#39; &gt; {o:out}&quot;</span><span class="p">)</span>
-<span class="nx">fooToBar</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;foo2bar&quot;</span><span class="p">,</span> <span class="s">&quot;sed &#39;s/foo/bar/g&#39; {i:foo} &gt; {o:bar}&quot;</span><span class="p">)</span>
-<span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span> <span class="c1">// Will just receive file targets, doing nothing</span>
+<div class="codehilite"><pre><span></span><span class="c1">// Initialize processes from shell command patterns</span>
+<span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
+<span class="nx">worldAppender</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;worldAppender&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
+<span class="c1">// Create a sink, that will just receive the final outputs</span>
+<span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span>
 </pre></div>
 
 
-<p>For these inports and outports, channels for sending and receiving FileTargets are automatically
-created and put in a hashmap added as a struct field of the process, named <code>In</code> and <code>Out</code> repectively,
-Eash channel is added to the hashmap with its inport/outport name as key in the hashmap,
-so that the channel can be retrieved from the hashmap using the in/outport name.</p>
-<h2 id="connecting-processes-into-a-network">Connecting processes into a network</h2>
-<p>Connecting outports of one process to the inport of another process is then
-done with the <code>Connect</code> method available on each port object. Sink objects have
-a <code>Connect</code> method too:</p>
-<div class="codehilite"><pre><span></span><span class="nx">fooToBar</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">fooWriter</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">])</span>
-<span class="nx">sink</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">fooToBar</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">])</span>
-</pre></div>
-
-
-<p>(Note that the sink has just one inport, as a static struct field).</p>
+<p>Here we are initializing three new processes, two of them based on a shell
+command, and one "sink", which will just receive inputs adn nothing more.</p>
+<p>The two first processes are created using the <code>scipipe.NewFromShell()</code>
+function, which takes a processname, and a shell command pattern as input.</p>
+<h3 id="the-shell-command-pattern">The shell command pattern</h3>
+<p>The shell command patterns, in this case <code>echo 'Hello ' &gt; {o:hellofile}</code> and
+<code>echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}</code>, are basically normal bash
+shell commands, with the addition of "placeholders" for input and output
+filenames.</p>
+<p>Input filename placeholders are on the form <code>{i:INPORT-NAME}</code> and the output
+filename placeholders are similarly of the form <code>{o:OUTPORT-NAME}</code>.  These
+placeholders will be replaced with actual filenames when the command is
+executed later. The reason that it a port-name is used to name them, is that
+files will be queued on the channel connecting to the port, and for each set of
+files on in-ports, a command will be created and executed whereafter new files
+will be pulled in on the out-ports, and so on.</p>
+<h3 id="the-sink">The sink</h3>
+<p>The sink is needed in cases where the workflow ends with a process that is not
+an explicit endpoint without out-ports, such as a "printer" processes or
+similar, but instead has out-ports that need to be connected. Then the sink can
+be used to receive from these out-ports so that the data packets on the
+out-ports don't get stuck and clog the workflow.</p>
+<p>For these inports and outports, channels for sending and receiving FileTargets
+are automatically created and put in a hashmap added as a struct field of the
+process, named <code>In</code> and <code>Out</code> repectively, Eash channel is added to the hashmap
+with its inport/outport name as key in the hashmap, so that the channel can be
+retrieved from the hashmap using the in/outport name.</p>
 <h2 id="formatting-output-file-paths">Formatting output file paths</h2>
-<p>The only thing remaining after this, is to provide some way for the program to figure out a
-suitable file name for each of the files propagating through this little "network" of processes.
-This is done by adding a closure (function) to another special hashmap, again keyed by
-the names of the outports of the processes. So, to define the output filenames of the two processes
-above, we would add:</p>
-<div class="codehilite"><pre><span></span><span class="nx">fooWriter</span><span class="p">.</span><span class="nx">PathFormatters</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-    <span class="c1">// Just statically create a file named foo.txt</span>
-    <span class="k">return</span> <span class="s">&quot;foo.txt&quot;</span>
+<p>Now we need to provide some way for scipipe to figure out a suitable file name
+for each of the files propagating through the "network" of processes.  This can
+be done using special convenience methods on the processes, starting with
+<code>SetPath...</code>. There are a few variants, of which two of them are shown here.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// Configure output file path formatters for the processes created above</span>
+<span class="nx">helloWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;hellofile&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
+<span class="nx">worldAppender</span><span class="p">.</span><span class="nx">SetPathReplace</span><span class="p">(</span><span class="s">&quot;infile&quot;</span><span class="p">,</span> <span class="s">&quot;worldfile&quot;</span><span class="p">,</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><code>SetPathStatic</code> just takes an out-port name and a static file name to use, and
+is suitable for processes which produce only one single output for a whole
+workflow run.</p>
+<p><code>SetPathReplace</code> is slightly more advanced: It takes an in-port name, and
+out-port name, and then a search-pattern in the input-filename, and a
+replace-pattern for the output filename.  With the example above, our input
+file named <code>hello.txt</code> will be converted into <code>hello_world.txt</code> by this path
+pattern.</p>
+<h2 id="even-more-control-over-file-formatting">Even more control over file formatting</h2>
+<p>We can actually get even more control over how file names are produced than
+this, by manually supplying each process with an anonymous function that
+returns file paths given a <code>scipipe.SciTask</code> object, which will be produced for
+each command execution.</p>
+<p>In order to implement the same path patterns as above, using this method, we
+would write like this: </p>
+<div class="codehilite"><pre><span></span><span class="c1">// Configure output file path formatters for the processes created above</span>
+<span class="nx">helloWriter</span><span class="p">.</span><span class="nx">PathFormatters</span><span class="p">[</span><span class="s">&quot;hellofile&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="k">return</span> <span class="s">&quot;hello.txt&quot;</span>
 <span class="p">}</span>
-<span class="nx">fooToBar</span><span class="p">.</span><span class="nx">PathFormatters</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-    <span class="c1">// Here, we instead re-use the file name of the process we depend</span>
-    <span class="c1">// on (which we get on the &#39;foo&#39; inport), and just</span>
-    <span class="c1">// pad &#39;.bar&#39; at the end:</span>
-    <span class="k">return</span> <span class="nx">fooToBar</span><span class="p">.</span><span class="nx">GetInPath</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.bar&quot;</span>
+<span class="nx">worldAppender</span><span class="p">.</span><span class="nx">PathFormatters</span><span class="p">[</span><span class="s">&quot;worldfile&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">InTargets</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">].</span><span class="nx">GetPath</span><span class="p">(),</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 
 
-<h2 id="formatting-output-file-paths-a-nicer-way">Formatting output file paths: A nicer way</h2>
-<p>Now, the above way of defining path formats is a bit verbose, isn't it?
-Luckily, there's a shorter way, by using convenience methods for doing the same
-thing. So, the above two path formats can also be defined like so, with the exact same result:</p>
-<div class="codehilite"><pre><span></span><span class="c1">// Create a static file name for the out-port &#39;foo&#39;:</span>
-<span class="nx">fooWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
-
-<span class="c1">// For out-port &#39;bar&#39;, extend the file names of files on in-port &#39;foo&#39;, with</span>
-<span class="c1">// the suffix &#39;.bar&#39;:</span>
-<span class="nx">fooToBar</span><span class="p">.</span><span class="nx">SetPathExtend</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;.bar&quot;</span><span class="p">)</span>
+<p>As you can see, this is a much more complicated way to format paths, but it can
+be useful for example when needing to incorporate parameter values into file
+names.</p>
+<h2 id="connecting-processes-into-a-network">Connecting processes into a network</h2>
+<p>Finally we need to define the data dependencies between our processes.  We do
+this by connecting the outports of one process to the inport of another
+process, using the <code>Connect</code> method available on each port object. Sink objects
+have a <code>Connect</code> method too, which take an out-port of an upstream process:</p>
+<div class="codehilite"><pre><span></span><span class="c1">// Connect network</span>
+<span class="nx">worldAppender</span><span class="p">.</span><span class="nx">In</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">].</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;hellofile&quot;</span><span class="p">])</span>
+<span class="nx">sink</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">worldAppender</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;worldfile&quot;</span><span class="p">])</span>
 </pre></div>
 
 
+<p>(Note that the sink has the <code>Connect</code> method bound directly to itself, without
+any port).</p>
 <h2 id="running-the-pipeline">Running the pipeline</h2>
 <p>So, the final part probably explains itself, but the pipeline runner component
 is a very simple one that will start each component except the last one in a
 separate go-routine, while the last process will be run in the main go-routine,
 so as to block until the pipeline has finished.</p>
-<div class="codehilite"><pre><span></span><span class="nx">pipeline</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
-<span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">fooWriter</span><span class="p">,</span> <span class="nx">fooToBar</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="c1">// Create a pipeline runner, add processes, and run</span>
+<span class="nx">pipeline</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
+<span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">,</span> <span class="nx">worldAppender</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
 <span class="nx">pipeline</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 </pre></div>
 
@@ -531,8 +609,10 @@ so as to block until the pipeline has finished.</p>
 <p>So with this, we have done everything needed to set up a file-based batch workflow system.</p>
 <p>In summary, what we did, was to:</p>
 <ul>
-<li>Specify process dependencies by wiring outputs of the upstream processes to inports in downstream processes.</li>
-<li>For each outport, provide a function that will compute a suitable file name for the new file.</li>
+<li>Specify process dependencies by wiring outputs of the upstream processes to
+  inports in downstream processes.</li>
+<li>For each outport, provide a function that will compute a suitable file name
+  for the new file.</li>
 </ul>
 <p>For more examples, see the <a href="https://github.com/scipipe/scipipe/tree/master/examples">examples folder</a>.</p>
                 
