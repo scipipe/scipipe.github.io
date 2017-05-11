@@ -267,9 +267,88 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Using parameters in commands and file names
+      </label>
+    
     <a href="./" title="Using parameters in commands and file names" class="md-nav__link md-nav__link--active">
       Using parameters in commands and file names
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#static-parameters" title="Static parameters" class="md-nav__link">
+    Static parameters
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#see-also" title="See also" class="md-nav__link">
+    See also
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receive-parameters-dynamically" title="Receive parameters dynamically" class="md-nav__link">
+    Receive parameters dynamically
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#see-also_1" title="See also" class="md-nav__link">
+    See also
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handle-boolean-flags" title="Handle boolean flags" class="md-nav__link">
+    Handle boolean flags
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handling-parameters-in-re-usable-components" title="Handling parameters in re-usable components" class="md-nav__link">
+    Handling parameters in re-usable components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relevant-examples" title="Relevant examples" class="md-nav__link">
+    Relevant examples
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -462,6 +541,74 @@
   
   
   
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#static-parameters" title="Static parameters" class="md-nav__link">
+    Static parameters
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#see-also" title="See also" class="md-nav__link">
+    See also
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receive-parameters-dynamically" title="Receive parameters dynamically" class="md-nav__link">
+    Receive parameters dynamically
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#see-also_1" title="See also" class="md-nav__link">
+    See also
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handle-boolean-flags" title="Handle boolean flags" class="md-nav__link">
+    Handle boolean flags
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handling-parameters-in-re-usable-components" title="Handling parameters in re-usable components" class="md-nav__link">
+    Handling parameters in re-usable components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relevant-examples" title="Relevant examples" class="md-nav__link">
+    Relevant examples
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -475,7 +622,80 @@
                 
                   <h1>Using parameters in commands and file names</h1>
                 
-                <p>TBC ...</p>
+                <p>Parameters are arguments sent to commands as flags, or unnamed values, or
+sometimes just the occurance of flags.</p>
+<p>SciPipe does not provide one unified way to handle parameters, but instead
+suggest a few different strategies, dependent on the usage pattern. This is
+because it turns out that there is a very large variety in how parameters can
+be used with shell commands.</p>
+<p>To keep SciPipe a small and flexible tool, we instead mostly leave the choice
+up to the workflow author to create a solution for each case, using a few helper
+tools provided with SciPipe, but also all the programming facilities built in to
+the Go programming language.</p>
+<p>Below we will discuss how to handle the most common uses for for parameters in
+SciPipe. For any more complicated use cases not covered here, please refer to
+the <a href="https://groups.google.com/forum/#!forum/scipipe">mailing list</a> or the
+<a href="https://gitter.im/scipipe/scipipe">chat</a>, to ask your question.</p>
+<h2 id="static-parameters">Static parameters</h2>
+<p>If parameters in your shell command is always, the same, you can just add them
+"manually" to the shell command pattern used to create your process.</p>
+<p>For example, if you always want to write the string "hello" to output files,
+you could create your processes with this string added manually:</p>
+<div class="codehilite"><pre><span></span><span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo hello &gt; {o:outfile}&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>If you have a lot of various parameters, and want a little more flexible way
+to add their values to a command, you can use the <a href="https://godoc.org/github.com/scipipe/scipipe#ExpandParams">ExpandParams</a>
+helper function, to add the parameter values:</p>
+<div class="codehilite"><pre><span></span><span class="c1">// Create a shell command pattern</span>
+<span class="nx">cmd</span> <span class="o">:=</span> <span class="s">&quot;echo {p:p1} {p:p2} {p:p3} &gt; {o:outfile}&quot;</span>
+
+<span class="c1">// Create a map from parameter names (p1, p2, p3) to parameter values</span>
+<span class="c1">// (one, two, three)</span>
+<span class="nx">paramVals</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;p1&quot;</span><span class="p">:</span> <span class="s">&quot;one&quot;</span><span class="p">,</span> <span class="s">&quot;p2&quot;</span><span class="p">:</span> <span class="s">&quot;two&quot;</span><span class="p">,</span> <span class="s">&quot;p3&quot;</span><span class="p">:</span> <span class="s">&quot;three&quot;</span><span class="p">}</span>
+
+<span class="c1">// Expand the parameters into the shell command pattern</span>
+<span class="nx">cmd</span> <span class="p">=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">ExpandParams</span><span class="p">(</span><span class="nx">cmd</span><span class="p">,</span> <span class="nx">paramVals</span><span class="p">)</span>
+
+<span class="c1">// Create a new process with the resulting command</span>
+<span class="nx">write123</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;write123&quot;</span><span class="p">,</span> <span class="nx">cmd</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="see-also">See also</h3>
+<ul>
+<li><a href="https://github.com/scipipe/scipipe/blob/master/examples/static_params/staticparams.go">Static parameters example</a></li>
+</ul>
+<h2 id="receive-parameters-dynamically">Receive parameters dynamically</h2>
+<p>Receiving parameters dynamically is a much more technically demandning solution
+than using static parameters.</p>
+<p>The idea is that by using placeholders for parameter values in a command, each
+parameter for a particular process, will automatically get a channel of type
+string, on which it can receive values. When the process is ready to execute
+another shell command, it receives one item on each parameter ports, in
+addition to receiving one file on each (file-)in-port, and merges the values
+into the shell command, before executing it.</p>
+<p>An example of this would be a little too complicated to cover briefly on this
+page, so please instead see the <a href="https://github.com/scipipe/scipipe/blob/master/examples/param_channels/params.go">dynamic parameters example</a>.
+In the <a href="https://github.com/scipipe/scipipe/blob/master/examples/param_channels/params.go#L58-L70">Run method of the Combinatorics task</a>
+you will find the code used to send values (all combinations of values in three
+arrays of lenght 3, in this case).</p>
+<h3 id="see-also_1">See also</h3>
+<ul>
+<li><a href="https://github.com/scipipe/scipipe/blob/master/examples/param_channels/params.go">Dynamic parameters example</a></li>
+</ul>
+<h2 id="handle-boolean-flags">Handle boolean flags</h2>
+<p><em>Topic coming soon. Please add it as a support request in the <a href="https://github.com/scipipe/scipipe/issues">issue tracker</a>
+if you need this information fast, and we can prioritize writing it asap.</em></p>
+<h2 id="handling-parameters-in-re-usable-components">Handling parameters in re-usable components</h2>
+<p><em>Topic coming soon. Please add it as a support request in the <a href="https://github.com/scipipe/scipipe/issues">issue tracker</a>
+if you need this information fast, and we can prioritize writing it asap.</em></p>
+<h2 id="relevant-examples">Relevant examples</h2>
+<ul>
+<li><a href="https://github.com/scipipe/scipipe/blob/master/examples/static_params/staticparams.go">Static parameters</a></li>
+<li><a href="https://github.com/scipipe/scipipe/blob/master/examples/param_channels/params.go">Receive parameters dynamically</a></li>
+</ul>
                 
                   
                 

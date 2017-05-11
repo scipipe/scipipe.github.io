@@ -156,9 +156,44 @@
             "title": "Summary"
         }, 
         {
-            "location": "/howtos/using_parameters/", 
-            "text": "TBC ...", 
+            "location": "/howtos/parameters/", 
+            "text": "Parameters are arguments sent to commands as flags, or unnamed values, or\nsometimes just the occurance of flags.\n\n\nSciPipe does not provide one unified way to handle parameters, but instead\nsuggest a few different strategies, dependent on the usage pattern. This is\nbecause it turns out that there is a very large variety in how parameters can\nbe used with shell commands.\n\n\nTo keep SciPipe a small and flexible tool, we instead mostly leave the choice\nup to the workflow author to create a solution for each case, using a few helper\ntools provided with SciPipe, but also all the programming facilities built in to\nthe Go programming language.\n\n\nBelow we will discuss how to handle the most common uses for for parameters in\nSciPipe. For any more complicated use cases not covered here, please refer to\nthe \nmailing list\n or the\n\nchat\n, to ask your question.\n\n\nStatic parameters\n\n\nIf parameters in your shell command is always, the same, you can just add them\n\"manually\" to the shell command pattern used to create your process.\n\n\nFor example, if you always want to write the string \"hello\" to output files,\nyou could create your processes with this string added manually:\n\n\nhelloWriter\n \n:=\n \nscipipe\n.\nNewFromShell\n(\nhelloWriter\n,\n \necho hello \n {o:outfile}\n)\n\n\n\n\n\n\nIf you have a lot of various parameters, and want a little more flexible way\nto add their values to a command, you can use the \nExpandParams\n\nhelper function, to add the parameter values:\n\n\n// Create a shell command pattern\n\n\ncmd\n \n:=\n \necho {p:p1} {p:p2} {p:p3} \n {o:outfile}\n\n\n\n// Create a map from parameter names (p1, p2, p3) to parameter values\n\n\n// (one, two, three)\n\n\nparamVals\n \n:=\n \nmap\n[\nstring\n]\nstring\n{\np1\n:\n \none\n,\n \np2\n:\n \ntwo\n,\n \np3\n:\n \nthree\n}\n\n\n\n// Expand the parameters into the shell command pattern\n\n\ncmd\n \n=\n \nscipipe\n.\nExpandParams\n(\ncmd\n,\n \nparamVals\n)\n\n\n\n// Create a new process with the resulting command\n\n\nwrite123\n \n:=\n \nscipipe\n.\nNewFromShell\n(\nwrite123\n,\n \ncmd\n)\n\n\n\n\n\n\nSee also\n\n\n\n\nStatic parameters example\n\n\n\n\nReceive parameters dynamically\n\n\nReceiving parameters dynamically is a much more technically demandning solution\nthan using static parameters.\n\n\nThe idea is that by using placeholders for parameter values in a command, each\nparameter for a particular process, will automatically get a channel of type\nstring, on which it can receive values. When the process is ready to execute\nanother shell command, it receives one item on each parameter ports, in\naddition to receiving one file on each (file-)in-port, and merges the values\ninto the shell command, before executing it.\n\n\nAn example of this would be a little too complicated to cover briefly on this\npage, so please instead see the \ndynamic parameters example\n.\nIn the \nRun method of the Combinatorics task\n\nyou will find the code used to send values (all combinations of values in three\narrays of lenght 3, in this case).\n\n\nSee also\n\n\n\n\nDynamic parameters example\n\n\n\n\nHandle boolean flags\n\n\nTopic coming soon. Please add it as a support request in the \nissue tracker\n\nif you need this information fast, and we can prioritize writing it asap.\n\n\nHandling parameters in re-usable components\n\n\nTopic coming soon. Please add it as a support request in the \nissue tracker\n\nif you need this information fast, and we can prioritize writing it asap.\n\n\nRelevant examples\n\n\n\n\nStatic parameters\n\n\nReceive parameters dynamically", 
             "title": "Using parameters in commands and file names"
+        }, 
+        {
+            "location": "/howtos/parameters/#static-parameters", 
+            "text": "If parameters in your shell command is always, the same, you can just add them\n\"manually\" to the shell command pattern used to create your process.  For example, if you always want to write the string \"hello\" to output files,\nyou could create your processes with this string added manually:  helloWriter   :=   scipipe . NewFromShell ( helloWriter ,   echo hello   {o:outfile} )   If you have a lot of various parameters, and want a little more flexible way\nto add their values to a command, you can use the  ExpandParams \nhelper function, to add the parameter values:  // Create a shell command pattern  cmd   :=   echo {p:p1} {p:p2} {p:p3}   {o:outfile}  // Create a map from parameter names (p1, p2, p3) to parameter values  // (one, two, three)  paramVals   :=   map [ string ] string { p1 :   one ,   p2 :   two ,   p3 :   three }  // Expand the parameters into the shell command pattern  cmd   =   scipipe . ExpandParams ( cmd ,   paramVals )  // Create a new process with the resulting command  write123   :=   scipipe . NewFromShell ( write123 ,   cmd )", 
+            "title": "Static parameters"
+        }, 
+        {
+            "location": "/howtos/parameters/#see-also", 
+            "text": "Static parameters example", 
+            "title": "See also"
+        }, 
+        {
+            "location": "/howtos/parameters/#receive-parameters-dynamically", 
+            "text": "Receiving parameters dynamically is a much more technically demandning solution\nthan using static parameters.  The idea is that by using placeholders for parameter values in a command, each\nparameter for a particular process, will automatically get a channel of type\nstring, on which it can receive values. When the process is ready to execute\nanother shell command, it receives one item on each parameter ports, in\naddition to receiving one file on each (file-)in-port, and merges the values\ninto the shell command, before executing it.  An example of this would be a little too complicated to cover briefly on this\npage, so please instead see the  dynamic parameters example .\nIn the  Run method of the Combinatorics task \nyou will find the code used to send values (all combinations of values in three\narrays of lenght 3, in this case).", 
+            "title": "Receive parameters dynamically"
+        }, 
+        {
+            "location": "/howtos/parameters/#see-also_1", 
+            "text": "Dynamic parameters example", 
+            "title": "See also"
+        }, 
+        {
+            "location": "/howtos/parameters/#handle-boolean-flags", 
+            "text": "Topic coming soon. Please add it as a support request in the  issue tracker \nif you need this information fast, and we can prioritize writing it asap.", 
+            "title": "Handle boolean flags"
+        }, 
+        {
+            "location": "/howtos/parameters/#handling-parameters-in-re-usable-components", 
+            "text": "Topic coming soon. Please add it as a support request in the  issue tracker \nif you need this information fast, and we can prioritize writing it asap.", 
+            "title": "Handling parameters in re-usable components"
+        }, 
+        {
+            "location": "/howtos/parameters/#relevant-examples", 
+            "text": "Static parameters  Receive parameters dynamically", 
+            "title": "Relevant examples"
         }, 
         {
             "location": "/howtos/golang_components/", 
