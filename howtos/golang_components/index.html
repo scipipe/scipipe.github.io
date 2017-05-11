@@ -475,8 +475,34 @@
                 
                   <h1>Creating components in Go</h1>
                 
-                <p><em>Topic coming soon. Please add a support request in the <a href="https://github.com/scipipe/scipipe/issues">issue tracker</a>
-if you need this information fast, and we can prioritize writing it asap.</em></p>
+                <p><em>Beware: Technical topic, best suited for power-users!</em></p>
+<p>If you want to write a component with Go code, but would like to have it work
+seamlessly with other workflow processes in SciPipe, without reimplementing the
+whole <a href="https://godoc.org/github.com/scipipe/scipipe#SciProcess">SciProcess</a>
+functionality yourself, there is a way to do it: By using the <code>CustomExecute</code>
+field of SciProcess.</p>
+<p>In short, it can be done like this:</p>
+<div class="codehilite"><pre><span></span><span class="c1">// Initiate task from a &quot;shell like&quot; pattern, though here we</span>
+<span class="c1">// just specify the out-port, and nothing else. We have to</span>
+<span class="c1">// specify the out-port (and any other ports we plan to use later),</span>
+<span class="c1">// so that they are correctly initialized.</span>
+<span class="nx">fooWriter</span> <span class="o">:=</span> <span class="nx">sci</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;fooer&quot;</span><span class="p">,</span> <span class="s">&quot;{o:foo}&quot;</span><span class="p">)</span>
+
+<span class="c1">// Set the output formatter to a static string</span>
+<span class="nx">fooWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
+
+<span class="c1">// Create the custom execute function, with pure Go code and</span>
+<span class="c1">// add it to the CustomExecute field of the fooWriter process</span>
+<span class="nx">fooWriter</span><span class="p">.</span><span class="nx">CustomExecute</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">task</span> <span class="o">*</span><span class="nx">sci</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">task</span><span class="p">.</span><span class="nx">OutTargets</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">].</span><span class="nx">WriteTempFile</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;foo\n&quot;</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>For a more detailed example, see <a href="https://github.com/scipipe/scipipe/blob/master/examples/custom_execution_function/funchook.go">this example</a>
+(Have a look at the <a href="https://github.com/scipipe/scipipe/blob/master/examples/custom_execution_function/funchook.go#L34-L50">NewFooer()</a>
+and <a href="https://github.com/scipipe/scipipe/blob/master/examples/custom_execution_function/funchook.go#L72-L89">NewFoo2Barer()</a>
+factory functions in particular!)</p>
                 
                   
                 

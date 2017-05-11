@@ -197,7 +197,7 @@
         }, 
         {
             "location": "/howtos/golang_components/", 
-            "text": "Topic coming soon. Please add a support request in the \nissue tracker\n\nif you need this information fast, and we can prioritize writing it asap.", 
+            "text": "Beware: Technical topic, best suited for power-users!\n\n\nIf you want to write a component with Go code, but would like to have it work\nseamlessly with other workflow processes in SciPipe, without reimplementing the\nwhole \nSciProcess\n\nfunctionality yourself, there is a way to do it: By using the \nCustomExecute\n\nfield of SciProcess.\n\n\nIn short, it can be done like this:\n\n\n// Initiate task from a \nshell like\n pattern, though here we\n\n\n// just specify the out-port, and nothing else. We have to\n\n\n// specify the out-port (and any other ports we plan to use later),\n\n\n// so that they are correctly initialized.\n\n\nfooWriter\n \n:=\n \nsci\n.\nNewFromShell\n(\nfooer\n,\n \n{o:foo}\n)\n\n\n\n// Set the output formatter to a static string\n\n\nfooWriter\n.\nSetPathStatic\n(\nfoo\n,\n \nfoo.txt\n)\n\n\n\n// Create the custom execute function, with pure Go code and\n\n\n// add it to the CustomExecute field of the fooWriter process\n\n\nfooWriter\n.\nCustomExecute\n \n=\n \nfunc\n(\ntask\n \n*\nsci\n.\nSciTask\n)\n \n{\n\n    \ntask\n.\nOutTargets\n[\nfoo\n].\nWriteTempFile\n([]\nbyte\n(\nfoo\\n\n))\n\n\n}\n\n\n\n\n\n\nFor a more detailed example, see \nthis example\n\n(Have a look at the \nNewFooer()\n\nand \nNewFoo2Barer()\n\nfactory functions in particular!)", 
             "title": "Creating components in Go"
         }, 
         {
