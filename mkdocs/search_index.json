@@ -237,8 +237,13 @@
         }, 
         {
             "location": "/howtos/streaming/", 
-            "text": "SciPipe can stream the output via UNIX \nnamed pipes (or \"FIFO files\")\n.\n\n\nStreaming can be turned on, on out-ports when creating SciProcess processes\nwith \nNewFromShell()\n, by using \n{os:outport_name}\n as placeholder, instead of\nthe normal \n{o:outport_name}\n (note the addisional \"s\")\n\n\nYou can see how this is used in \nthis example on GitHub\n.\n\n\nNote that when streaming, you will not get an output file for the output in\nquestion.\n\n\nNote also that you still have to provide a path formatting strategy (via some\nof the \nSciProcess.SetPath...()\n functions, or by manually adding one to\n\nSciProcess.PathFormatters\n. This is because a uniqe file name is needed in\norder to create any audit files, as well as to give a unique name for the named\npipe.", 
+            "text": "SciPipe can stream the output via UNIX \nnamed pipes (or \"FIFO files\")\n.\n\n\nStreaming can be turned on, on out-ports when creating SciProcess processes\nwith \nNewFromShell()\n, by using \n{os:outport_name}\n as placeholder, instead of\nthe normal \n{o:outport_name}\n (note the addisional \"s\")\n\n\nYou can see how this is used in \nthis example on GitHub\n.\n\n\nNote that when streaming, you will not get an output file for the output in\nquestion.\n\n\nNote also that you still have to provide a path formatting strategy (via some\nof the \nSciProcess.SetPath...()\n functions, or by manually adding one to\n\nSciProcess.PathFormatters\n. This is because a uniqe file name is needed in\norder to create any audit files, as well as to give a unique name for the named\npipe.\n\n\nSee also\n\n\n\n\nStreaming example on GitHub\n.", 
             "title": "Enable streaming between components"
+        }, 
+        {
+            "location": "/howtos/streaming/#see-also", 
+            "text": "Streaming example on GitHub .", 
+            "title": "See also"
         }, 
         {
             "location": "/howtos/subworkflows/", 
