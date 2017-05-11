@@ -34,6 +34,76 @@
     
 
     
+        
+    <url>
+     <loc>/howtos/using_parameters/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/howtos/golang_components/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/howtos/reusable_components/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/howtos/globbing/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/howtos/splitting/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/howtos/joining/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/howtos/streaming/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/howtos/subworkflows/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/howtos/scatter_gather/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/howtos/hpc/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/howtos/local/</loc>
+     <lastmod>2017-05-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
     <url>
      <loc>/examples/</loc>
      <lastmod>2017-05-11</lastmod>

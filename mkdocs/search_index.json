@@ -156,6 +156,61 @@
             "title": "Summary"
         }, 
         {
+            "location": "/howtos/using_parameters/", 
+            "text": "TBC ...", 
+            "title": "Using parameters in commands and file names"
+        }, 
+        {
+            "location": "/howtos/golang_components/", 
+            "text": "TBC ...", 
+            "title": "Creating components in Go"
+        }, 
+        {
+            "location": "/howtos/reusable_components/", 
+            "text": "TBC ...", 
+            "title": "Creating re-usable components"
+        }, 
+        {
+            "location": "/howtos/globbing/", 
+            "text": "TBC ...", 
+            "title": "Globbing files"
+        }, 
+        {
+            "location": "/howtos/splitting/", 
+            "text": "TBC ...", 
+            "title": "Splitting files"
+        }, 
+        {
+            "location": "/howtos/joining/", 
+            "text": "TBC ...", 
+            "title": "Joining multiple files"
+        }, 
+        {
+            "location": "/howtos/streaming/", 
+            "text": "TBC ...", 
+            "title": "Enable streaming between components"
+        }, 
+        {
+            "location": "/howtos/subworkflows/", 
+            "text": "TBC ...", 
+            "title": "Creating sub-workflows"
+        }, 
+        {
+            "location": "/howtos/scatter_gather/", 
+            "text": "TBC ...", 
+            "title": "Implement scatter/gather workflows"
+        }, 
+        {
+            "location": "/howtos/hpc/", 
+            "text": "TBC ...", 
+            "title": "Interacting with a resource manager"
+        }, 
+        {
+            "location": "/howtos/local/", 
+            "text": "TBC ...", 
+            "title": "Configure max processes on a local computer"
+        }, 
+        {
             "location": "/examples/", 
             "text": "Examples\n\n\nWe plan to go through a few examples in more depth here soon, but in the\nmeanwhile, see the \nexamples folder\n\nin the main scipipe repository, for a bunch of examples spanning much of the\nfunctionality in SciPipe.", 
             "title": "Examples"
