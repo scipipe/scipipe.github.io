@@ -291,9 +291,48 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Creating re-usable components
+      </label>
+    
     <a href="./" title="Creating re-usable components" class="md-nav__link md-nav__link--active">
       Creating re-usable components
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-re-usable-components" title="What are re-usable components" class="md-nav__link">
+    What are re-usable components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-create-re-usable-components-in-scipipe" title="How to create re-usable components in SciPipe" class="md-nav__link">
+    How to create re-usable components in SciPipe
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" title="See also" class="md-nav__link">
+    See also
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -462,6 +501,34 @@
   
   
   
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-re-usable-components" title="What are re-usable components" class="md-nav__link">
+    What are re-usable components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-create-re-usable-components-in-scipipe" title="How to create re-usable components in SciPipe" class="md-nav__link">
+    How to create re-usable components in SciPipe
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" title="See also" class="md-nav__link">
+    See also
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -475,8 +542,68 @@
                 
                   <h1>Creating re-usable components</h1>
                 
-                <p><em>Topic coming soon. Please add a support request in the <a href="https://github.com/scipipe/scipipe/issues">issue tracker</a>
-if you need this information fast, and we can prioritize writing it asap.</em></p>
+                <p><em>Beware: Somewhat technical topic, probably best suited for power-users</em></p>
+<h2 id="what-are-re-usable-components">What are re-usable components</h2>
+<p>With re-usable components, we mean components that can be stored in a Go
+package, and imported and used later.</p>
+<p>In order for components in such a library to be easy to use, the ports need to
+be static fields on the process, rather than just stored by a string ID in a
+generic port map, like the <code>In</code> and <code>Out</code> fields on <code>SciProcess</code> processes.
+This is so that the fields can show up in the auto-completion / intellisense
+function in code editors, so that one does not need to look up the name of the
+ports manually in the library code all the time.</p>
+<h2 id="how-to-create-re-usable-components-in-scipipe">How to create re-usable components in SciPipe</h2>
+<p>SciProcess processes created with the <code>scipipe.NewFromShell()</code> command, can be
+turned into such "re-usable" component by using a wrapping strategy, that is
+demonstrated in an <a href="https://github.com/scipipe/scipipe/blob/master/examples/wrapper_tasks/wrap.go">example on GitHub</a>.</p>
+<p>The idea is to create a new struct type for the re-usable component, and then,
+in the factory method for the process, create an "inner" process of type
+SciProcess, using <code>NewFromShell()</code> as in the normal case, and then making sure
+that the ports of the inner process are added to the port-fields also of the
+outer, "wrapping" process.</p>
+<p>There is only a little caveat, or trick, needed to get this to work properly:
+In the Run() method, which is executed after the outer process has been
+connected to other processes in a network, we need to set the ports of the
+inner process to be the same as the ports of the outer process. This is because
+the port object might have been changed when the workflow was connected. I.e,
+the process port fields might have got assigned a port object from another
+process in the workflow.</p>
+<p>The full implementation of a process that just writes "hi" to a file, can look
+like this:</p>
+<div class="codehilite"><pre><span></span><span class="kd">type</span> <span class="nx">HiWriter</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">InnerProc</span> <span class="o">*</span><span class="nx">sci</span><span class="p">.</span><span class="nx">SciProcess</span>
+    <span class="nx">OutHi</span>  <span class="o">*</span><span class="nx">sci</span><span class="p">.</span><span class="nx">FilePort</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">NewHiWriter</span><span class="p">()</span> <span class="o">*</span><span class="nx">HiWriter</span> <span class="p">{</span>
+    <span class="c1">// Initialize a normal &quot;SciProcess&quot; to use as an &quot;inner&quot; process</span>
+    <span class="nx">innerHiWriter</span> <span class="o">:=</span> <span class="nx">sci</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;hiwriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo hi &gt; {o:hifile}&quot;</span><span class="p">)</span>
+    <span class="nx">innerHiWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;hifile&quot;</span><span class="p">,</span> <span class="s">&quot;hi.txt&quot;</span><span class="p">)</span>
+
+    <span class="c1">// Create a new HiWriter process (the outer one) with the inner process</span>
+    <span class="c1">// added to the InnerProcess field</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">HiWriter</span><span class="p">{</span>
+        <span class="nx">InnerProc</span><span class="p">:</span> <span class="nx">innerHiWriter</span><span class="p">,</span>
+        <span class="nx">OutHi</span><span class="p">:</span>  <span class="nx">sci</span><span class="p">.</span><span class="nx">NewFilePort</span><span class="p">(),</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">HiWriter</span><span class="p">)</span> <span class="nx">Run</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Make sure the inner process&#39; port object is the same as the outer one&#39;s</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">InnerProc</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;hifile&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">OutHi</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">InnerProc</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">HiWriter</span><span class="p">)</span> <span class="nx">IsConnected</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nx">OutHi</span><span class="p">.</span><span class="nx">IsConnected</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="https://github.com/scipipe/scipipe/blob/master/examples/wrapper_tasks/wrap.go">A full, working, workflow example using this trategy</a></li>
+</ul>
                 
                   
                 
