@@ -247,7 +247,7 @@
         }, 
         {
             "location": "/howtos/subworkflows/", 
-            "text": "Topic coming soon. Please add a support request in the \nissue tracker\n\nif you need this information fast, and we can prioritize writing it asap.", 
+            "text": "It is possible in SciPipe to wrap a whole workflow in a process, so that it can be used\nas any other process, in larger workflows.\n\n\nThis is demonstrated in \nthis example on GitHub\n.", 
             "title": "Creating sub-workflows"
         }, 
         {
