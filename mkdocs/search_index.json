@@ -222,12 +222,12 @@
         }, 
         {
             "location": "/howtos/globbing/", 
-            "text": "Topic coming soon. Please add a support request in the \nissue tracker\n\nif you need this information fast, and we can prioritize writing it asap.", 
+            "text": "This is a feature that is \nbeing worked on currently\n.\nPlease see \nthe issue\n to follow the status of it.", 
             "title": "Globbing files"
         }, 
         {
             "location": "/howtos/splitting/", 
-            "text": "Topic coming soon. Please add a support request in the \nissue tracker\n\nif you need this information fast, and we can prioritize writing it asap.", 
+            "text": "At the time of writing this, the recommended way to split files is to use the\n\nFileSplitter\n component\n\nin the \ncomponent library\n shipped with SciPipe.\n\n\nThere is also \nan example which uses it\n available.", 
             "title": "Splitting files"
         }, 
         {
