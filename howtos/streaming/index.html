@@ -475,8 +475,18 @@
                 
                   <h1>Enable streaming between components</h1>
                 
-                <p><em>Topic coming soon. Please add a support request in the <a href="https://github.com/scipipe/scipipe/issues">issue tracker</a>
-if you need this information fast, and we can prioritize writing it asap.</em></p>
+                <p>SciPipe can stream the output via UNIX <a href="https://en.wikipedia.org/wiki/Named_pipe">named pipes (or "FIFO files")</a>.</p>
+<p>Streaming can be turned on, on out-ports when creating SciProcess processes
+with <code>NewFromShell()</code>, by using <code>{os:outport_name}</code> as placeholder, instead of
+the normal <code>{o:outport_name}</code> (note the addisional "s")</p>
+<p>You can see how this is used in <a href="https://github.com/scipipe/scipipe/blob/master/examples/fifo/fifo.go#L14">this example on GitHub</a>.</p>
+<p>Note that when streaming, you will not get an output file for the output in
+question.</p>
+<p>Note also that you still have to provide a path formatting strategy (via some
+of the <code>SciProcess.SetPath...()</code> functions, or by manually adding one to
+<code>SciProcess.PathFormatters</code>. This is because a uniqe file name is needed in
+order to create any audit files, as well as to give a unique name for the named
+pipe.</p>
                 
                   
                 
