@@ -627,9 +627,10 @@ separate section on this page).</p>
 be an in-port and out-port named the same), and this name will be used in shell
 command patterns, when connecting dependencies / dataflow networks, and when
 configuring file naming strategies.</p>
-<p>In <code>SciProcess</code> objects, in-ports are stored in a string-&gt;Port map field named
-<code>In</code> (so they are accessed with: <code>myProcess.In["myport"]</code>), and out-ports
-similarly in a string-&gt;Port map field named <code>Out</code>. Both are of type <a href="https://godoc.org/github.com/scipipe/scipipe#FilePort"><code>FilePort</code></a>.</p>
+<p>In <code>SciProcess</code> objects, in-ports are are accessed with
+<code>myProcess.In("my_port")</code>, and out-ports are similarly accessed with
+<code>myProcess.Out("my_other_port")</code>. Both are of type
+<a href="https://godoc.org/github.com/scipipe/scipipe#FilePort"><code>FilePort</code></a>.</p>
 <p>Some pre-made components might have ports bound to custom field names though,
 such as <code>myFastaReader.InFastaFile</code>, or <code>myZipComponent.OutZipFile</code>.</p>
 <p>Port objects have some methods bound to them, most importantly the <code>Connect()</code>

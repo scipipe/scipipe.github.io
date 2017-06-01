@@ -590,7 +590,7 @@ like this:</p>
 
 <span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">HiWriter</span><span class="p">)</span> <span class="nx">Run</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Make sure the inner process&#39; port object is the same as the outer one&#39;s</span>
-    <span class="nx">p</span><span class="p">.</span><span class="nx">InnerProc</span><span class="p">.</span><span class="nx">Out</span><span class="p">[</span><span class="s">&quot;hifile&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">OutHi</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">InnerProc</span><span class="p">.</span><span class="nx">SetOutPort</span><span class="p">(</span><span class="s">&quot;hifile&quot;</span><span class="p">,</span> <span class="nx">p</span><span class="p">.</span><span class="nx">OutHi</span><span class="p">)</span>
     <span class="nx">p</span><span class="p">.</span><span class="nx">InnerProc</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 <span class="p">}</span>
 
