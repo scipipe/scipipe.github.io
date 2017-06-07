@@ -593,7 +593,7 @@ typically fixed for a workflow during its execution.</p>
 <p>One can create customized types of processes, but for most basic workflows, the
 <a href="https://godoc.org/github.com/scipipe/scipipe#SciProcess"><code>scipipe.SciProcess</code></a>
 will be used, which is specialized for executing commandline applications. New
-<code>SciProcess</code>-es are typically created using the <code>scipipe.NewFromShell(procName,
+<code>SciProcess</code>-es are typically created using the <code>scipipe.NewProc(procName,
 shellPattern)</code> command.</p>
 <ul>
 <li>See <a href="https://godoc.org/github.com/scipipe/scipipe#SciProcess">GoDoc for SciProcess</a></li>
@@ -664,13 +664,13 @@ tutorials.</p>
 </ul>
 <h2 id="shell-command-pattern">Shell command pattern</h2>
 <p>The <code>SciProcess</code> has the speciality that it can be configured using a special
-shell command pattern, supplied to the <a href="https://godoc.org/github.com/scipipe/scipipe#NewFromShell"><code>NewFromShell()</code></a>
+shell command pattern, supplied to the <a href="https://godoc.org/github.com/scipipe/scipipe#NewProc"><code>NewProc()</code></a>
 factory function. It is already explained in the section "writing workflows",
 but in brief, it is a normal shell command, with placeholders for in-ports,
 out-ports and parameter ports, on the form <code>{i:inportname}</code>, <code>{o:outportname}</code>,
 and <code>{p:paramportname}</code>, respectively.</p>
 <ul>
-<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#NewFromShell">GoDoc for NewFromShell()</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#NewProc">GoDoc for NewProc()</a></li>
 </ul>
                 
                   

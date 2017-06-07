@@ -552,12 +552,12 @@ string ID in a generic port map, like the <code>In()</code> and <code>Out()</cod
 auto-completion / intellisense function in code editors removing the need to
 look up the name of the ports manually in the library code all the time.</p>
 <h2 id="how-to-create-re-usable-components-in-scipipe">How to create re-usable components in SciPipe</h2>
-<p>SciProcess processes created with the <code>scipipe.NewFromShell()</code> command, can be
+<p>SciProcess processes created with the <code>scipipe.NewProc()</code> command, can be
 turned into such "re-usable" component by using a wrapping strategy, that is
 demonstrated in an <a href="https://github.com/scipipe/scipipe/blob/master/examples/wrapper_procs/wrap.go">example on GitHub</a>.</p>
 <p>The idea is to create a new struct type for the re-usable component, and then,
 in the factory method for the process, create an "inner" process of type
-SciProcess, using <code>NewFromShell()</code> as in the normal case, embedding that in the
+SciProcess, using <code>NewProc()</code> as in the normal case, embedding that in the
 outer struct and then adding statically defined accessor methods for each of
 the ports in the inner process, with a similar name.  So, if the inner process
 has an outport named "foo", you would define an accessor method named
@@ -571,7 +571,7 @@ writes "hi" to a file:</p>
 
 <span class="kd">func</span> <span class="nx">NewHiWriter</span><span class="p">()</span> <span class="o">*</span><span class="nx">HiWriter</span> <span class="p">{</span>
     <span class="c1">// Initialize a normal &quot;SciProcess&quot; to use as an &quot;inner&quot; process</span>
-    <span class="nx">innerHiWriter</span> <span class="o">:=</span> <span class="nx">sci</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;hiwriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo hi &gt; {o:hifile}&quot;</span><span class="p">)</span>
+    <span class="nx">innerHiWriter</span> <span class="o">:=</span> <span class="nx">sci</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hiwriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo hi &gt; {o:hifile}&quot;</span><span class="p">)</span>
     <span class="nx">innerHiWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;hifile&quot;</span><span class="p">,</span> <span class="s">&quot;hi.txt&quot;</span><span class="p">)</span>
 
     <span class="c1">// Create a new HiWriter process with the inner process embedded into it</span>

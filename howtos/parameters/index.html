@@ -641,7 +641,7 @@ the <a href="https://groups.google.com/forum/#!forum/scipipe">mailing list</a> o
 "manually" to the shell command pattern used to create your process.</p>
 <p>For example, if you always want to write the string "hello" to output files,
 you could create your processes with this string added manually:</p>
-<div class="codehilite"><pre><span></span><span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo hello &gt; {o:outfile}&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo hello &gt; {o:outfile}&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -659,7 +659,7 @@ helper function, to add the parameter values:</p>
 <span class="nx">cmd</span> <span class="p">=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">ExpandParams</span><span class="p">(</span><span class="nx">cmd</span><span class="p">,</span> <span class="nx">paramVals</span><span class="p">)</span>
 
 <span class="c1">// Create a new process with the resulting command</span>
-<span class="nx">write123</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;write123&quot;</span><span class="p">,</span> <span class="nx">cmd</span><span class="p">)</span>
+<span class="nx">write123</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;write123&quot;</span><span class="p">,</span> <span class="nx">cmd</span><span class="p">)</span>
 </pre></div>
 
 

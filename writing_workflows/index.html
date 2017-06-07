@@ -634,8 +634,8 @@ at the example workflow used on the front page again:</p>
 
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Initialize processes from shell command patterns</span>
-    <span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
-    <span class="nx">worldAppender</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;worldAppender&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
+    <span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
+    <span class="nx">worldAppender</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;worldAppender&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
     <span class="c1">// Create a sink, that will just receive the final outputs</span>
     <span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">(</span><span class="s">&quot;sink&quot;</span><span class="p">)</span>
 
@@ -660,8 +660,8 @@ at the example workflow used on the front page again:</p>
 actually doing.</p>
 <h2 id="initializing-processes">Initializing processes</h2>
 <div class="codehilite"><pre><span></span><span class="c1">// Initialize processes from shell command patterns</span>
-<span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
-<span class="nx">worldAppender</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;worldAppender&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
+<span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
+<span class="nx">worldAppender</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;worldAppender&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
 <span class="c1">// Create a sink, that will just receive the final outputs</span>
 <span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">(</span><span class="s">&quot;sink&quot;</span><span class="p">)</span>
 </pre></div>
@@ -669,7 +669,7 @@ actually doing.</p>
 
 <p>Here we are initializing three new processes, two of them based on a shell
 command, and one "sink", which will just receive inputs adn nothing more.</p>
-<p>The two first processes are created using the <code>scipipe.NewFromShell()</code>
+<p>The two first processes are created using the <code>scipipe.NewProc()</code>
 function, which takes a processname, and a shell command pattern as input.</p>
 <h3 id="the-shell-command-pattern">The shell command pattern</h3>
 <p>The shell command patterns, in this case <code>echo 'Hello ' &gt; {o:hellofile}</code> and

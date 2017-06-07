@@ -486,7 +486,7 @@ field of SciProcess.</p>
 <span class="c1">// just specify the out-port, and nothing else. We have to</span>
 <span class="c1">// specify the out-port (and any other ports we plan to use later),</span>
 <span class="c1">// so that they are correctly initialized.</span>
-<span class="nx">fooWriter</span> <span class="o">:=</span> <span class="nx">sci</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;fooer&quot;</span><span class="p">,</span> <span class="s">&quot;{o:foo}&quot;</span><span class="p">)</span>
+<span class="nx">fooWriter</span> <span class="o">:=</span> <span class="nx">sci</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;fooer&quot;</span><span class="p">,</span> <span class="s">&quot;{o:foo}&quot;</span><span class="p">)</span>
 
 <span class="c1">// Set the output formatter to a static string</span>
 <span class="nx">fooWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
