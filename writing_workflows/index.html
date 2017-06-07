@@ -624,15 +624,15 @@ at the example workflow used on the front page again:</p>
     <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;hello_world&quot;</span><span class="p">)</span>
 
     <span class="c1">// Initialize processes and set output file paths</span>
-    <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
-    <span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;hellofile&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
+    <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out}&quot;</span><span class="p">)</span>
+    <span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
 
-    <span class="nx">world</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
-    <span class="nx">world</span><span class="p">.</span><span class="nx">SetPathReplace</span><span class="p">(</span><span class="s">&quot;infile&quot;</span><span class="p">,</span> <span class="s">&quot;worldfile&quot;</span><span class="p">,</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">)</span>
+    <span class="nx">world</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt;&gt; {o:out}&quot;</span><span class="p">)</span>
+    <span class="nx">world</span><span class="p">.</span><span class="nx">SetPathReplace</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">)</span>
 
     <span class="c1">// Connect network</span>
-    <span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;infile&quot;</span><span class="p">).</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">hello</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;hellofile&quot;</span><span class="p">))</span>
-    <span class="nx">wf</span><span class="p">.</span><span class="nx">ConnectLast</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;worldfile&quot;</span><span class="p">))</span>
+    <span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">).</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">hello</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
+    <span class="nx">wf</span><span class="p">.</span><span class="nx">ConnectLast</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
 
     <span class="c1">// Run workflow</span>
     <span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
@@ -644,8 +644,8 @@ at the example workflow used on the front page again:</p>
 actually doing.</p>
 <h2 id="initializing-processes">Initializing processes</h2>
 <div class="codehilite"><pre><span></span><span class="c1">// Initialize processes from shell command patterns</span>
-<span class="nx">hello</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
-<span class="nx">world</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
+<span class="nx">hello</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out}&quot;</span><span class="p">)</span>
+<span class="nx">world</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt;&gt; {o:out}&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -653,8 +653,8 @@ actually doing.</p>
 command, using the <code>scipipe.NewProc()</code> function, which takes a processname, and
 a shell command pattern as input.</p>
 <h3 id="the-shell-command-pattern">The shell command pattern</h3>
-<p>The shell command patterns, in this case <code>echo 'Hello ' &gt; {o:hellofile}</code> and
-<code>echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}</code>, are basically normal bash
+<p>The shell command patterns, in this case <code>echo 'Hello ' &gt; {o:out}</code> and
+<code>echo $(cat {i:in}) World &gt;&gt; {o:out}</code>, are basically normal bash
 shell commands, with the addition of "placeholders" for input and output
 filenames.</p>
 <p>Input filename placeholders are on the form <code>{i:INPORT-NAME}</code> and the output
@@ -670,8 +670,8 @@ for each of the files propagating through the "network" of processes.  This can
 be done using special convenience methods on the processes, starting with
 <code>SetPath...</code>. There are a few variants, of which two of them are shown here.</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Configure output file path formatters for the processes created above</span>
-<span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;hellofile&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
-<span class="nx">world</span><span class="p">.</span><span class="nx">SetPathReplace</span><span class="p">(</span><span class="s">&quot;infile&quot;</span><span class="p">,</span> <span class="s">&quot;worldfile&quot;</span><span class="p">,</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">)</span>
+<span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
+<span class="nx">world</span><span class="p">.</span><span class="nx">SetPathReplace</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -691,11 +691,11 @@ each command execution.</p>
 <p>In order to implement the same path patterns as above, using this method, we
 would write like this:</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Configure output file path formatters for the processes created above</span>
-<span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;hellofile&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
 <span class="k">return</span> <span class="s">&quot;hello.txt&quot;</span>
 <span class="p">})</span>
-<span class="nx">world</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;worldfile&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-<span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">InTargets</span><span class="p">[</span><span class="s">&quot;infile&quot;</span><span class="p">].</span><span class="nx">GetPath</span><span class="p">(),</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">world</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">InTargets</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">].</span><span class="nx">GetPath</span><span class="p">(),</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">})</span>
 </pre></div>
 
@@ -711,8 +711,8 @@ to connect the final out-port of the pipeline to the workflow, so that the
 workflow can pull on this port (technically pulling on a Go channel), in order
 to drive the workflow.</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Connect network</span>
-<span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;infile&quot;</span><span class="p">).</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;hellofile&quot;</span><span class="p">))</span>
-<span class="nx">wf</span><span class="p">.</span><span class="nx">ConnectLast</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;worldfile&quot;</span><span class="p">))</span>
+<span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">).</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
+<span class="nx">wf</span><span class="p">.</span><span class="nx">ConnectLast</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
 </pre></div>
 
 
