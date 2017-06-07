@@ -267,8 +267,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pipeline-runner" title="Pipeline runner" class="md-nav__link">
-    Pipeline runner
+  <a href="#workflow" title="Workflow" class="md-nav__link">
+    Workflow
   </a>
   
 </li>
@@ -554,8 +554,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pipeline-runner" title="Pipeline runner" class="md-nav__link">
-    Pipeline runner
+  <a href="#workflow" title="Workflow" class="md-nav__link">
+    Workflow
   </a>
   
 </li>
@@ -650,18 +650,17 @@ and nothing more. Most of the time, one will not need to deal with the channels
 directly though, since the port objects (see separate section for ports) have
 all the logic to connect to other ports via channels, but it can be good to
 know that they are there, in case you need to do something more advanced.</p>
-<h2 id="pipeline-runner">Pipeline runner</h2>
-<p>The <a href="https://godoc.org/github.com/scipipe/scipipe#PipelineRunner"><code>PipelineRunner</code></a>
-is a special object in SciPipe, that just takes care of running a pipeline of
-components. </p>
-<p>There is not much to say about the pipeline runner other than that it is
-created with <code>scipipe.NewPipelineRunner()</code>, that all processes need to be added
-to it in the right order (the last process last) with
-<code>runner.AddProcesses(processes...)</code> and that it should be run with
-<code>runner.Run()</code>. But this is already covered in the other examples and
+<h2 id="workflow">Workflow</h2>
+<p>The <a href="https://godoc.org/github.com/scipipe/scipipe#Workflow"><code>Workflow</code></a>
+is a special object in SciPipe, that just takes care of running a set of
+components making up a workflow.</p>
+<p>There is not much to say about the workflow component, other than that it is
+created with <code>scipipe.NewWorkflow(workflowName)</code>, that all processes need to be added
+to it with <code>wf.Add(proc)</code> while the "last", or "driving" process needs to be specified with <code>wf.SetDriver(driverProcess)</code>, and that it should be run with
+<code>wf.Run()</code>. But this is already covered in the other examples and
 tutorials.</p>
 <ul>
-<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#PipelineRunner">GoDoc for PipelineRunner</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#Workflow">GoDoc for Workflow</a></li>
 </ul>
 <h2 id="shell-command-pattern">Shell command pattern</h2>
 <p>The <code>SciProcess</code> has the speciality that it can be configured using a special

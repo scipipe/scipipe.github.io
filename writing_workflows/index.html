@@ -637,7 +637,7 @@ at the example workflow used on the front page again:</p>
     <span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
     <span class="nx">worldAppender</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;worldAppender&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
     <span class="c1">// Create a sink, that will just receive the final outputs</span>
-    <span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span>
+    <span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">(</span><span class="s">&quot;sink&quot;</span><span class="p">)</span>
 
     <span class="c1">// Configure output file path formatters for the processes created above</span>
     <span class="nx">helloWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;hellofile&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
@@ -648,9 +648,10 @@ at the example workflow used on the front page again:</p>
     <span class="nx">sink</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">worldAppender</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;worldfile&quot;</span><span class="p">))</span>
 
     <span class="c1">// Create a pipeline runner, add processes, and run</span>
-    <span class="nx">pipeline</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
-    <span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">,</span> <span class="nx">worldAppender</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
-    <span class="nx">pipeline</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+    <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;example_workflow&quot;</span><span class="p">)</span>
+    <span class="nx">wf</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">,</span> <span class="nx">worldAppender</span><span class="p">)</span>
+    <span class="nx">wf</span><span class="p">.</span><span class="nx">SetDriver</span><span class="p">(</span><span class="nx">sink</span><span class="p">)</span>
+    <span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -662,7 +663,7 @@ actually doing.</p>
 <span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:hellofile}&quot;</span><span class="p">)</span>
 <span class="nx">worldAppender</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewFromShell</span><span class="p">(</span><span class="s">&quot;worldAppender&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:infile}) World &gt;&gt; {o:worldfile}&quot;</span><span class="p">)</span>
 <span class="c1">// Create a sink, that will just receive the final outputs</span>
-<span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">()</span>
+<span class="nx">sink</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewSink</span><span class="p">(</span><span class="s">&quot;sink&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -746,14 +747,16 @@ have a <code>Connect</code> method too, which take an out-port of an upstream pr
 <p>(Note that the sink has the <code>Connect</code> method bound directly to itself, without
 any port).</p>
 <h2 id="running-the-pipeline">Running the pipeline</h2>
-<p>So, the final part probably explains itself, but the pipeline runner component
-is a very simple one that will start each component except the last one in a
-separate go-routine, while the last process will be run in the main go-routine,
-so as to block until the pipeline has finished.</p>
+<p>So, the final part probably explains itself, but the workflow component is a
+relatively simple one that will start each component except the last one in a
+separate go-routine, except for the one set as "driver" (often a simple "sink"
+process), which will be run in the main go-routine, so as to block until the
+pipeline has finished.</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Create a pipeline runner, add processes, and run</span>
-<span class="nx">pipeline</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewPipelineRunner</span><span class="p">()</span>
-<span class="nx">pipeline</span><span class="p">.</span><span class="nx">AddProcesses</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">,</span> <span class="nx">worldAppender</span><span class="p">,</span> <span class="nx">sink</span><span class="p">)</span>
-<span class="nx">pipeline</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="nx">wf</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewWorkflow</span><span class="p">()</span>
+<span class="nx">wf</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">,</span> <span class="nx">worldAppender</span><span class="p">)</span>
+<span class="nx">wf</span><span class="p">.</span><span class="nx">SetDriver</span><span class="p">(</span><span class="nx">sink</span><span class="p">)</span>
+<span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 </pre></div>
 
 
