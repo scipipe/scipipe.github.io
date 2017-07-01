@@ -252,8 +252,8 @@
         },
         {
             "location": "/howtos/hpc/",
-            "text": "This is \nbeing worked on right now (issue #38)\n.\n\n\nWhat you can do right now, is to use the \nPrepend\n field in processes, to add a\n\nsalloc\n command string (in the case of\nSLURM), or any analogous blocking command to other resource managers.\n\n\nSo, something like this (See on the third line how the salloc-line is added to the process):\n\n\nwf\n \n:=\n \nscipipe\n.\nNewWorkflow\n(\n\"Hello_World_Workflow\"\n)\n\n\nmyProc\n \n:=\n \nwf\n.\nNewProc\n(\n\"hello_world\"\n,\n \n\"echo Hello World; sleep 10;\"\n)\n\n\nmyProc\n.\nPrepend\n \n=\n \n\"salloc -A projectABC123 -p core -t 1:00 -J HelloWorld\"\n\n\n\n\n\n\nYou can find the updated GoDoc for the process struct \nhere\n.",
-            "title": "Interacting with a resource manager"
+            "text": "This is \nbeing worked on right now (issue #38)\n.\n\n\nWhat you can do right now, is to use the \nPrepend\n field in processes, to add a\n\nsalloc\n command string (in the case of\nSLURM), or any analogous blocking command to other resource managers.\n\n\nSo, something like this (See on the third line how the salloc-line is added to the process):\n\n\nwf\n \n:=\n \nscipipe\n.\nNewWorkflow\n(\n\"Hello_World_Workflow\"\n)\n\n\nmyProc\n \n:=\n \nwf\n.\nNewProc\n(\n\"hello_world\"\n,\n \n\"echo Hello World; sleep 10;\"\n)\n\n\nmyProc\n.\nPrepend\n \n=\n \n\"salloc -A projectABC123 -p core -t 1:00 -J HelloWorld\"\n\n\n\n\n\n\n(Beware: This is not a full code example, and won't compile without some more boilerplate, which you can find in the introductory examples)\n\n\nYou can find the updated GoDoc for the process struct \nhere\n.",
+            "title": "Interacting with an HPC resource manager"
         },
         {
             "location": "/howtos/local/",
