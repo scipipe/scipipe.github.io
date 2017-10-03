@@ -657,7 +657,7 @@ is a special object in SciPipe, that just takes care of running a set of
 components making up a workflow.</p>
 <p>There is not much to say about the workflow component, other than that it is
 created with <code>scipipe.NewWorkflow(workflowName)</code>, that all processes need to be added
-to it with <code>wf.Add(proc)</code> while the "last", or "driving" process needs to be specified with <code>wf.SetDriver(driverProcess)</code>, and that it should be run with
+to it with <code>wf.AddProc(proc)</code> while the "last", or "driving" process needs to be specified with <code>wf.SetDriver(driverProcess)</code>, and that it should be run with
 <code>wf.Run()</code>. But this is already covered in the other examples and
 tutorials.</p>
 <ul>
