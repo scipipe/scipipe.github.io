@@ -632,8 +632,9 @@ SciPipe looks like:</p>
 <span class="p">)</span>
 
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// Init workflow</span>
-    <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;hello_world&quot;</span><span class="p">)</span>
+    <span class="c1">// Init workflow with a name, and max concurrent tasks so we don&#39;t overbook</span>
+    <span class="c1">// our CPU</span>
+    <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;hello_world&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
     <span class="c1">// Initialize processes and set output file paths</span>
     <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out}&quot;</span><span class="p">)</span>

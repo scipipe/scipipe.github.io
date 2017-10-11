@@ -481,7 +481,7 @@
 <a href="https://slurm.schedmd.com/salloc.html">salloc</a> command string (in the case of
 SLURM), or any analogous blocking command to other resource managers.</p>
 <p>So, something like this (See on the third line how the salloc-line is added to the process):</p>
-<div class="codehilite"><pre><span></span><span class="nx">wf</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;Hello_World_Workflow&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="nx">wf</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;Hello_World_Workflow&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="nx">myProc</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello_world&quot;</span><span class="p">,</span> <span class="s">&quot;echo Hello World; sleep 10;&quot;</span><span class="p">)</span>
 <span class="nx">myProc</span><span class="p">.</span><span class="nx">Prepend</span> <span class="p">=</span> <span class="s">&quot;salloc -A projectABC123 -p core -t 1:00 -J HelloWorld&quot;</span>
 </pre></div>
