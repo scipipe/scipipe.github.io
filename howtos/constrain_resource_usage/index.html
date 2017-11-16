@@ -10,37 +10,22 @@
       
       
       
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
-      
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
-      
-        <meta name="lang:search.languages" content="">
-      
-        <meta name="lang:search.result.none" content="No matching documents">
-      
-        <meta name="lang:search.result.one" content="1 matching document">
-      
-        <meta name="lang:search.result.other" content="# matching documents">
-      
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
-      
-      
         <link rel="shortcut icon" href="../../assets/images/favicon.png">
       
-      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.12.1">
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
     
     
       
-        <title>Configure max processes on a local computer - SciPipe Docs</title>
+        <title>Contrain resource usage - SciPipe Docs</title>
       
     
     
-      <script src="../../assets/javascripts/modernizr-e826f8942a.js"></script>
+      <script src="../../assets/javascripts/modernizr-1df76c4e58.js"></script>
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application-04ea671600.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application-769c285a91.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-23f75ab9c7.palette.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-02c2a4388f.palette.css">
       
     
     
@@ -80,13 +65,11 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.." title="SciPipe Docs" class="md-header-nav__button md-logo">
-          
-            
-              <img src="../../images/scipipe_logo_bluegrey.svg" width="24" height="24">
-            
-          
-        </a>
+        
+          <a href="../.." title="SciPipe Docs" class="md-logo md-header-nav__button">
+            <img src="../../images/scipipe_logo_bluegrey.svg" width="24" height="24">
+          </a>
+        
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
@@ -101,7 +84,7 @@
                 </span>
               
             
-            Configure max processes on a local computer
+            Contrain resource usage
           
         </span>
       </div>
@@ -109,18 +92,18 @@
         
           <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
           
-<div class="md-search" data-md-component="search" role="dialog">
+<div class="md-search" data-md-component="search">
   <label class="md-search__overlay" for="search"></label>
   <div class="md-search__inner">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
       <label class="md-icon md-search__icon" for="search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
-          <div class="md-search-result__meta">
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
             Type to start searching
           </div>
           <ol class="md-search-result__list"></ol>
@@ -163,7 +146,6 @@
     <div class="md-container">
       
       
-      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -173,13 +155,11 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="drawer">
-    <span class="md-nav__button md-logo">
-      
-        
-          <img src="../../images/scipipe_logo_bluegrey.svg">
-        
-      
-    </span>
+    
+      <i class="md-logo md-nav__button">
+        <img src="../../images/scipipe_logo_bluegrey.svg">
+      </i>
+    
     SciPipe Docs
   </label>
   
@@ -408,9 +388,34 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
     
-    <a href="./" title="Configure max processes on a local computer" class="md-nav__link md-nav__link--active">
-      Configure max processes on a local computer
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Contrain resource usage
+      </label>
+    
+    <a href="./" title="Contrain resource usage" class="md-nav__link md-nav__link--active">
+      Contrain resource usage
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example" title="Example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -483,6 +488,20 @@
   
   
   
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example" title="Example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -494,9 +513,29 @@
               
                 
                 
-                  <h1>Configure max processes on a local computer</h1>
+                  <h1>Contrain resource usage</h1>
                 
-                <p>This is <a href="https://github.com/scipipe/scipipe/issues/25">being worked on right now (issue #25)</a>.</p>
+                <p>It is important to carefully manage how much resources (CPU and memory) your
+workflows are using, so that you don't overbook you compute node(s).</p>
+<p>In SciPipe you can do that using two settings:</p>
+<ul>
+<li>Max concurrent tasks, which is set on the workflow level, when initiating a new workflow.</li>
+<li>Cores per tasks, that can be set on processes after they are initialized.</li>
+</ul>
+<p>Max concurrent tasks is a required setting when initializing workflows, while
+cores per task can be left to the default, which is 1 core per task.</p>
+<p>You might want to change this number if for example you have a software that
+uses more memory than the available memory on your computer divided by the max
+concurrent tasks number you have set.</p>
+<p>For example, if you have 8GB of free memory, and have set max concurrent tasks
+on your workflow to 4, but you have a process whose commandline application
+uses not 2GB of memory, but 4GB, then you might want to set cores per tasks for
+that process to 2, so that it gets the double amount of memory.</p>
+<p>In practice, you set cores per task by setting the field <code>CoresPerTask</code> on the process struct, after it is initiated. </p>
+<h2 id="example">Example</h2>
+<div class="codehilite"><pre><span></span><span class="nx">foo</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;echo foo &gt; {o:foofile}&quot;</span><span class="p">)</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">CoresPerTask</span> <span class="p">=</span> <span class="mi">2</span>
+</pre></div>
                 
                   
                 
@@ -578,10 +617,10 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application-946997f430.js"></script>
+      <script src="../../assets/javascripts/application-c35428f87f.js"></script>
       
       
-      <script>app.initialize({version:"0.16.3",url:{base:"../.."}})</script>
+      <script>app.initialize({url:{base:"../.."}})</script>
       
     
     
