@@ -268,7 +268,7 @@
         {
             "location": "/howtos/constrain_resource_usage/",
             "text": "It is important to carefully manage how much resources (CPU and memory) your\nworkflows are using, so that you don't overbook you compute node(s).\n\n\nIn SciPipe you can do that using two settings:\n\n\n\n\nMax concurrent tasks, which is set on the workflow level, when initiating a new workflow.\n\n\nCores per tasks, that can be set on processes after they are initialized.\n\n\n\n\nMax concurrent tasks is a required setting when initializing workflows, while\ncores per task can be left to the default, which is 1 core per task.\n\n\nYou might want to change this number if for example you have a software that\nuses more memory than the available memory on your computer divided by the max\nconcurrent tasks number you have set.\n\n\nFor example, if you have 8GB of free memory, and have set max concurrent tasks\non your workflow to 4, but you have a process whose commandline application\nuses not 2GB of memory, but 4GB, then you might want to set cores per tasks for\nthat process to 2, so that it gets the double amount of memory.\n\n\nIn practice, you set cores per task by setting the field \nCoresPerTask\n on the process struct, after it is initiated. \n\n\nExample\n\n\nfoo\n \n:=\n \nscipipe\n.\nNewProc\n(\n\"foo\"\n,\n \n\"echo foo > {o:foofile}\"\n)\n\n\nfoo\n.\nCoresPerTask\n \n=\n \n2",
-            "title": "Contrain resource usage"
+            "title": "Constrain resource usage"
         },
         {
             "location": "/howtos/constrain_resource_usage/#example",
