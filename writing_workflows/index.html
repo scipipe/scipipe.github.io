@@ -10,9 +10,24 @@
       
       
       
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.languages" content="">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      
         <link rel="shortcut icon" href="../assets/images/favicon.png">
       
-      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.12.1">
     
     
       
@@ -20,12 +35,12 @@
       
     
     
-      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+      <script src="../assets/javascripts/modernizr-e826f8942a.js"></script>
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application-04ea671600.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-02c2a4388f.palette.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-23f75ab9c7.palette.css">
       
     
     
@@ -65,11 +80,13 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        
-          <a href=".." title="SciPipe Docs" class="md-logo md-header-nav__button">
-            <img src="../images/scipipe_logo_bluegrey.svg" width="24" height="24">
-          </a>
-        
+        <a href=".." title="SciPipe Docs" class="md-header-nav__button md-logo">
+          
+            
+              <img src="../images/scipipe_logo_bluegrey.svg" width="24" height="24">
+            
+          
+        </a>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
@@ -88,18 +105,18 @@
         
           <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
           
-<div class="md-search" data-md-component="search">
+<div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="search"></label>
   <div class="md-search__inner">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
       <label class="md-icon md-search__icon" for="search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
-          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
             Type to start searching
           </div>
           <ol class="md-search-result__list"></ol>
@@ -142,6 +159,7 @@
     <div class="md-container">
       
       
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -151,11 +169,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="drawer">
-    
-      <i class="md-logo md-nav__button">
-        <img src="../images/scipipe_logo_bluegrey.svg">
-      </i>
-    
+    <span class="md-nav__button md-logo">
+      
+        
+          <img src="../images/scipipe_logo_bluegrey.svg">
+        
+      
+    </span>
     SciPipe Docs
   </label>
   
@@ -333,6 +353,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../howtos/partial_workflows/" title="Running parts of workflows" class="md-nav__link">
+      Running parts of workflows
+    </a>
+  </li>
+
         
           
           
@@ -635,7 +667,6 @@ at the example workflow used on the front page again:</p>
 
     <span class="c1">// Connect network</span>
     <span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">).</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">hello</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
-    <span class="nx">wf</span><span class="p">.</span><span class="nx">ConnectLast</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
 
     <span class="c1">// Run workflow</span>
     <span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
@@ -689,16 +720,16 @@ pattern.</p>
 <h2 id="even-more-control-over-file-formatting">Even more control over file formatting</h2>
 <p>We can actually get even more control over how file names are produced than
 this, by manually supplying each process with an anonymous function that
-returns file paths given a <code>scipipe.SciTask</code> object, which will be produced for
+returns file paths given a <code>scipipe.Task</code> object, which will be produced for
 each command execution.</p>
 <p>In order to implement the same path patterns as above, using this method, we
 would write like this:</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Configure output file path formatters for the processes created above</span>
-<span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
 <span class="k">return</span> <span class="s">&quot;hello.txt&quot;</span>
 <span class="p">})</span>
-<span class="nx">world</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">SciTask</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-<span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">InTargets</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">].</span><span class="nx">GetPath</span><span class="p">(),</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">world</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">InTargets</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">].</span><span class="nx">Path</span><span class="p">(),</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">})</span>
 </pre></div>
 
@@ -715,17 +746,6 @@ workflow can pull on this port (technically pulling on a Go channel), in order
 to drive the workflow.</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Connect network</span>
 <span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">).</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
-<span class="nx">wf</span><span class="p">.</span><span class="nx">ConnectLast</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
-</pre></div>
-
-
-<p>Note: If your "last" process does not have any outputs, you can instead set it
-as the driver process of the workflow, which will replace the default driver
-process which is of type <a href="https://godoc.org/github.com/scipipe/scipipe#Sink">Sink</a>.
-So, for example, given that our <code>world</code> process did not have an output, but
-maybe for example just wrote something to a web service, without producing any
-files, we could do:</p>
-<div class="codehilite"><pre><span></span><span class="nx">wf</span><span class="p">.</span><span class="nx">SetDriver</span><span class="p">(</span><span class="nx">world</span><span class="p">)</span>
 </pre></div>
 
 
@@ -733,12 +753,12 @@ files, we could do:</p>
 <p>So, the final part probably explains itself, but the workflow component is a
 relatively simple one that will start each component in a separate go-routine.</p>
 <p>For technical reasons, one final process has to be run in the main go-routine
-(that where the program's <code>main()</code> function runs), but as long as you have used
-the <code>wf.ConnectLast()</code> method to connect the final output in your workflow as
-mentioned above, you don't need to think about this, as the workflow will then
-use an in-built <a href="https://godoc.org/github.com/scipipe/scipipe#Sink">sink</a>
-process for this purpose. Only if you need to customize things heavily, you
-might want to change this.</p>
+(that where the program's <code>main()</code> function runs), but generally you don't
+need to think about this, as the workflow will then use an in-built
+<a href="https://godoc.org/github.com/scipipe/scipipe#Sink">sink</a> process for this
+purpose. If you for any reason need to customize which process to use as the
+"driver" process, instead of the in-built sink. see the <a href="https://godoc.org/github.com/scipipe/scipipe#Workflow.SetDriver"><code>SetDriver</code> section</a>
+in the docs.</p>
 <div class="codehilite"><pre><span></span><span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 </pre></div>
 
@@ -790,13 +810,13 @@ in the GitHub repository.</p>
           </a>
         
         
-          <a href="../howtos/parameters/" title="Using parameters in commands and file names" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../howtos/partial_workflows/" title="Running parts of workflows" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Using parameters in commands and file names
+                Running parts of workflows
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -838,10 +858,10 @@ in the GitHub repository.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      <script src="../assets/javascripts/application-946997f430.js"></script>
       
       
-      <script>app.initialize({url:{base:".."}})</script>
+      <script>app.initialize({version:"0.16.3",url:{base:".."}})</script>
       
     
     

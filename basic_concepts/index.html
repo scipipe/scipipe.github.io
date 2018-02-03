@@ -10,9 +10,24 @@
       
       
       
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.languages" content="">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      
         <link rel="shortcut icon" href="../assets/images/favicon.png">
       
-      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.12.1">
     
     
       
@@ -20,12 +35,12 @@
       
     
     
-      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+      <script src="../assets/javascripts/modernizr-e826f8942a.js"></script>
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application-04ea671600.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-02c2a4388f.palette.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-23f75ab9c7.palette.css">
       
     
     
@@ -65,11 +80,13 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        
-          <a href=".." title="SciPipe Docs" class="md-logo md-header-nav__button">
-            <img src="../images/scipipe_logo_bluegrey.svg" width="24" height="24">
-          </a>
-        
+        <a href=".." title="SciPipe Docs" class="md-header-nav__button md-logo">
+          
+            
+              <img src="../images/scipipe_logo_bluegrey.svg" width="24" height="24">
+            
+          
+        </a>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
@@ -88,18 +105,18 @@
         
           <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
           
-<div class="md-search" data-md-component="search">
+<div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="search"></label>
   <div class="md-search__inner">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
       <label class="md-icon md-search__icon" for="search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
-          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
             Type to start searching
           </div>
           <ol class="md-search-result__list"></ol>
@@ -142,6 +159,7 @@
     <div class="md-container">
       
       
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -151,11 +169,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="drawer">
-    
-      <i class="md-logo md-nav__button">
-        <img src="../images/scipipe_logo_bluegrey.svg">
-      </i>
-    
+    <span class="md-nav__button md-logo">
+      
+        
+          <img src="../images/scipipe_logo_bluegrey.svg">
+        
+      
+    </span>
     SciPipe Docs
   </label>
   
@@ -320,6 +340,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../howtos/partial_workflows/" title="Running parts of workflows" class="md-nav__link">
+      Running parts of workflows
+    </a>
+  </li>
+
         
           
           
@@ -592,25 +624,25 @@ asynchronously running component that is typically defined as a static,
 "long-running" part of the workflow, and the number of processes thus is
 typically fixed for a workflow during its execution.</p>
 <p>One can create customized types of processes, but for most basic workflows, the
-<a href="https://godoc.org/github.com/scipipe/scipipe#SciProcess"><code>scipipe.SciProcess</code></a>
+<a href="https://godoc.org/github.com/scipipe/scipipe#Process"><code>scipipe.Process</code></a>
 will be used, which is specialized for executing commandline applications. New
-<code>SciProcess</code>-es are typically created using the <code>scipipe.NewProc(procName,
+<code>Process</code>-es are typically created using the <code>scipipe.NewProc(procName,
 shellPattern)</code> command.</p>
 <ul>
-<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#SciProcess">GoDoc for SciProcess</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#Process">GoDoc for Process</a></li>
 </ul>
 <h2 id="tasks">Tasks</h2>
 <p>The "long-running" processes mentioned above, will receive input files on its
 in-ports, and for each complete set of input files it receives, it will create
-a new <strong>task</strong>. Specifically, <code>scipipe.SciProcess</code> will create
-<a href="https://godoc.org/github.com/scipipe/scipipe#SciTask"><code>scipipe.SciTask</code></a> objects, and populate it with all data needed for one
-particular shell command execution.  <code>SciTask</code> objects are executed via their
-<a href="https://godoc.org/github.com/scipipe/scipipe#SciTask.Execute"><code>Execute()</code></a>
+a new <strong>task</strong>. Specifically, <code>scipipe.Process</code> will create
+<a href="https://godoc.org/github.com/scipipe/scipipe#Task"><code>scipipe.Task</code></a> objects, and populate it with all data needed for one
+particular shell command execution.  <code>Task</code> objects are executed via their
+<a href="https://godoc.org/github.com/scipipe/scipipe#Task.Execute"><code>Execute()</code></a>
 method, or <code>CustomExecute()</code>, if custom Go code is supposed to be
 executed instead of a shell command.</p>
 <p>The distinction between processes and tasks is important to understand, for
 example when doing more advanced configuration of file naming strategies, since
-the custom anonymous functions used to format paths are taking a <code>SciTask</code> as
+the custom anonymous functions used to format paths are taking a <code>Task</code> as
 input, even though these functions are saved on the process object.</p>
 <p>To understand the difference between processes and tasks, it is helpful to
 remember that processes are long-running, and typically fixed during the course
@@ -618,7 +650,7 @@ of a workflow, while tasks are transient objects, created temporarily as a
 container for all data and code needed for each execution of a concrete shell
 command.</p>
 <ul>
-<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#SciTask">GoDoc for SciTask</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#Task">GoDoc for Task</a></li>
 </ul>
 <h2 id="ports">Ports</h2>
 <p>Central to the way data dependencies are defined in SciPipe, is ports. Ports
@@ -628,22 +660,25 @@ separate section on this page).</p>
 be an in-port and out-port named the same), and this name will be used in shell
 command patterns, when connecting dependencies / dataflow networks, and when
 configuring file naming strategies.</p>
-<p>In <code>SciProcess</code> objects, in-ports are are accessed with
+<p>In <code>Process</code> objects, in-ports are are accessed with
 <code>myProcess.In("my_port")</code>, and out-ports are similarly accessed with
-<code>myProcess.Out("my_other_port")</code>. Both are of type
-<a href="https://godoc.org/github.com/scipipe/scipipe#FilePort"><code>FilePort</code></a>.</p>
+<code>myProcess.Out("my_other_port")</code>. They are of type
+<a href="https://godoc.org/github.com/scipipe/scipipe#InPort"><code>InPort</code></a> and
+<a href="https://godoc.org/github.com/scipipe/scipipe#OutPort"><code>OutPort</code></a> respectively.</p>
 <p>Some pre-made components might have ports bound to custom field names though,
 such as <code>myFastaReader.InFastaFile</code>, or <code>myZipComponent.OutZipFile</code>.</p>
 <p>Port objects have some methods bound to them, most importantly the <code>Connect()</code>
 method, which takes another port, and connects to it, by stitching a channel
 between the ports.</p>
-<p>On <code>SciProcess</code> objects, there is also a third port type, <code>ParamPorts</code>, which
-is used when it is needed to send a stream of parameter values (in string
-format) to be supplied to as arguments to shell commands.</p>
+<p>On <code>Process</code> objects, there is also a third port type, <code>ParamInPort</code> (and the
+accompanying <code>ParamOutPort</code>), which is used when it is needed to send a
+stream of parameter values (in string format) to be supplied to as arguments
+to shell commands.</p>
 <ul>
-<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#Port">GoDoc for the Port interface</a></li>
-<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#FilePort">GoDoc for the FilePort struct type</a></li>
-<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#ParamPort">GoDoc for the ParamPort struct type</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#InPort">GoDoc for the InPort struct type</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#OutPort">GoDoc for the OutPort struct type</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#ParamInPort">GoDoc for the ParamInPort struct type</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#ParamOutPort">GoDoc for the ParamOutPort struct type</a></li>
 </ul>
 <h2 id="channels">Channels</h2>
 <p>Ports in SciPipe are connected via channels. Channels are <a href="https://tour.golang.org/concurrency/2">plain Go channels</a>
@@ -664,7 +699,7 @@ tutorials.</p>
 <li>See <a href="https://godoc.org/github.com/scipipe/scipipe#Workflow">GoDoc for Workflow</a></li>
 </ul>
 <h2 id="shell-command-pattern">Shell command pattern</h2>
-<p>The <code>SciProcess</code> has the speciality that it can be configured using a special
+<p>The <code>Process</code> has the speciality that it can be configured using a special
 shell command pattern, supplied to the <a href="https://godoc.org/github.com/scipipe/scipipe#NewProc"><code>NewProc()</code></a>
 factory function. It is already explained in the section "writing workflows",
 but in brief, it is a normal shell command, with placeholders for in-ports,
@@ -754,10 +789,10 @@ and <code>{p:paramportname}</code>, respectively.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      <script src="../assets/javascripts/application-946997f430.js"></script>
       
       
-      <script>app.initialize({url:{base:".."}})</script>
+      <script>app.initialize({version:"0.16.3",url:{base:".."}})</script>
       
     
     
