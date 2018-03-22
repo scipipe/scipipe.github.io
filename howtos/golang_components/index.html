@@ -527,7 +527,7 @@ field of Process.</p>
 <span class="c1">// Create the custom execute function, with pure Go code and</span>
 <span class="c1">// add it to the CustomExecute field of the fooWriter process</span>
 <span class="nx">fooWriter</span><span class="p">.</span><span class="nx">CustomExecute</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">task</span> <span class="o">*</span><span class="nx">sci</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">task</span><span class="p">.</span><span class="nx">OutTargets</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">].</span><span class="nx">WriteTempFile</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;foo\n&quot;</span><span class="p">))</span>
+    <span class="nx">task</span><span class="p">.</span><span class="nx">OutIP</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">).</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;foo\n&quot;</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
 
