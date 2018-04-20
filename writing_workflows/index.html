@@ -303,6 +303,19 @@
     Even more control over file formatting
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-caveat-about-using-variables-in-anonymous-functions" title="A caveat about using variables in anonymous functions" class="md-nav__link">
+    A caveat about using variables in anonymous functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -603,6 +616,19 @@
     Even more control over file formatting
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-caveat-about-using-variables-in-anonymous-functions" title="A caveat about using variables in anonymous functions" class="md-nav__link">
+    A caveat about using variables in anonymous functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -726,10 +752,10 @@ each command execution.</p>
 would write like this:</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Configure output file path formatters for the processes created above</span>
 <span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-<span class="k">return</span> <span class="s">&quot;hello.txt&quot;</span>
+    <span class="k">return</span> <span class="s">&quot;hello.txt&quot;</span>
 <span class="p">})</span>
 <span class="nx">world</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-<span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">InPath</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">),</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">InPath</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">),</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">})</span>
 </pre></div>
 
@@ -737,6 +763,50 @@ would write like this:</p>
 <p>As you can see, this is a much more complicated way to format paths, but it can
 be useful for example when needing to incorporate parameter values into file
 names.</p>
+<h3 id="a-caveat-about-using-variables-in-anonymous-functions">A caveat about using variables in anonymous functions</h3>
+<p>Note that when using anonymous functions, you have to be careful to not re-use
+the same variable (even with different values) in multiple functions, due to
+the <a href="https://golang.org/doc/faq#closures_and_goroutines">subtle ways in which closures work in Go</a>.</p>
+<p>For example, if you create multiple new processes with separate formatting
+functions in a loop, that uses a shared variable, like this:</p>
+<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
+    <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
+    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>... then, both functions will return "bar.txt", since both funcs were pointing to
+the same variable ("var"), which had the value "bar" at the end of the loop.</p>
+<p>To avoid this situation, you can do one of two things, of which the latter is recommended:</p>
+<ol>
+<li>Create a new copy of the variable, inside the anonymous function:</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
+    <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
+    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+        <span class="nx">val</span> <span class="o">:=</span> <span class="nx">val</span> <span class="c1">// &lt;- Here we create a new, local, copy of the variable</span>
+        <span class="k">return</span> <span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<ol>
+<li>... or, better, access the parameter value via the task which the path
+   function receives:</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
+    <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
+    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;val&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span> <span class="c1">// We here access the parameter via the task (`t`)</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <h2 id="connecting-processes-into-a-network">Connecting processes into a network</h2>
 <p>Finally we need to define the data dependencies between our processes.  We do
 this by connecting the outports of one process to the inport of another
