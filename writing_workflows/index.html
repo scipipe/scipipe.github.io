@@ -780,14 +780,15 @@ functions in a loop, that uses a shared variable, like this:</p>
 
 <p>... then, both functions will return "bar.txt", since both funcs were pointing to
 the same variable ("var"), which had the value "bar" at the end of the loop.</p>
-<p>To avoid this situation, you can do one of two things, of which the latter is recommended:</p>
+<p>To avoid this situation, you can do one of two things, of which the latter is
+generally recommended:</p>
 <ol>
 <li>Create a new copy of the variable, inside the anonymous function:</li>
 </ol>
 <div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
     <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
+    <span class="nx">val</span> <span class="o">:=</span> <span class="nx">val</span> <span class="c1">// &lt;- Here we create a new copy of the variable</span>
     <span class="nx">proc</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-        <span class="nx">val</span> <span class="o">:=</span> <span class="nx">val</span> <span class="c1">// &lt;- Here we create a new, local, copy of the variable</span>
         <span class="k">return</span> <span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span>
     <span class="p">})</span>
 <span class="p">}</span>
@@ -795,8 +796,7 @@ the same variable ("var"), which had the value "bar" at the end of the loop.</p>
 
 
 <ol>
-<li>... or, better, access the parameter value via the task which the path
-   function receives:</li>
+<li>... or, better, access the parameter value via the task which the path function receives:</li>
 </ol>
 <div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
     <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
