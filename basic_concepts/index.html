@@ -667,18 +667,19 @@ configuring file naming strategies.</p>
 <a href="https://godoc.org/github.com/scipipe/scipipe#OutPort"><code>OutPort</code></a> respectively.</p>
 <p>Some pre-made components might have ports bound to custom field names though,
 such as <code>myFastaReader.InFastaFile</code>, or <code>myZipComponent.OutZipFile</code>.</p>
-<p>Port objects have some methods bound to them, most importantly the <code>Connect()</code>
-method, which takes another port, and connects to it, by stitching a channel
-between the ports.</p>
-<p>On <code>Process</code> objects, there is also a third port type, <code>ParamInPort</code> (and the
-accompanying <code>ParamOutPort</code>), which is used when it is needed to send a
+<p>Port objects have some methods bound to them, most importantly the <code>From()</code>
+method (for in-ports. Out-ports have a corresponding <code>To()</code> method), which
+takes another port, and connects to it, by stitching a channel between the
+ports.</p>
+<p>On <code>Process</code> objects, there is also a third port type, <code>InParamPort</code> (and the
+accompanying <code>OutParamPort</code>), which is used when it is needed to send a
 stream of parameter values (in string format) to be supplied to as arguments
 to shell commands.</p>
 <ul>
 <li>See <a href="https://godoc.org/github.com/scipipe/scipipe#InPort">GoDoc for the InPort struct type</a></li>
 <li>See <a href="https://godoc.org/github.com/scipipe/scipipe#OutPort">GoDoc for the OutPort struct type</a></li>
-<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#ParamInPort">GoDoc for the ParamInPort struct type</a></li>
-<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#ParamOutPort">GoDoc for the ParamOutPort struct type</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#InParamPort">GoDoc for the InParamPort struct type</a></li>
+<li>See <a href="https://godoc.org/github.com/scipipe/scipipe#OutParamPort">GoDoc for the OutParamPort struct type</a></li>
 </ul>
 <h2 id="channels">Channels</h2>
 <p>Ports in SciPipe are connected via channels. Channels are <a href="https://tour.golang.org/concurrency/2">plain Go channels</a>
