@@ -605,7 +605,7 @@ writes "hi" to a file:</p>
 <span class="kd">func</span> <span class="nx">NewHiWriter</span><span class="p">()</span> <span class="o">*</span><span class="nx">HiWriter</span> <span class="p">{</span>
     <span class="c1">// Initialize a normal &quot;Process&quot; to use as an &quot;inner&quot; process</span>
     <span class="nx">innerHiWriter</span> <span class="o">:=</span> <span class="nx">sci</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hiwriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo hi &gt; {o:hifile}&quot;</span><span class="p">)</span>
-    <span class="nx">innerHiWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;hifile&quot;</span><span class="p">,</span> <span class="s">&quot;hi.txt&quot;</span><span class="p">)</span>
+    <span class="nx">innerHiWriter</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;hifile&quot;</span><span class="p">,</span> <span class="s">&quot;hi.txt&quot;</span><span class="p">)</span>
 
     <span class="c1">// Create a new HiWriter process with the inner process embedded into it</span>
     <span class="k">return</span> <span class="o">&amp;</span><span class="nx">HiWriter</span><span class="p">{</span><span class="nx">innerHiWriter</span><span class="p">}</span>

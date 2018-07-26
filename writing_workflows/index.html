@@ -686,10 +686,10 @@ at the example workflow used on the front page again:</p>
 
     <span class="c1">// Initialize processes and set output file paths</span>
     <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out}&quot;</span><span class="p">)</span>
-    <span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
+    <span class="nx">hello</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
 
     <span class="nx">world</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt;&gt; {o:out}&quot;</span><span class="p">)</span>
-    <span class="nx">world</span><span class="p">.</span><span class="nx">SetPathReplace</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">)</span>
+    <span class="nx">world</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;{i:in|%.txt}_world.txt&quot;</span><span class="p">)</span>
 
     <span class="c1">// Connect network</span>
     <span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">).</span><span class="nx">From</span><span class="p">(</span><span class="nx">hello</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
@@ -728,21 +728,26 @@ will be pulled in on the out-ports, and so on.</p>
 <p>Now we need to provide some way for scipipe to figure out a suitable file name
 for each of the files propagating through the "network" of processes.  This can
 be done using special convenience methods on the processes, starting with
-<code>SetPath...</code>. There are a few variants, of which two of them are shown here.</p>
+<code>SetOut...</code>. There are a few variants, of which two of them are shown here.</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Configure output file path formatters for the processes created above</span>
-<span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
-<span class="nx">world</span><span class="p">.</span><span class="nx">SetPathReplace</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">)</span>
+<span class="nx">hello</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
+<span class="nx">world</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;{i:in|%.txt}_world.txt&quot;</span><span class="p">)</span>
 </pre></div>
 
 
-<p><code>SetPathStatic</code> just takes an out-port name and a static file name to use, and
-is suitable for processes which produce only one single output for a whole
-workflow run.</p>
-<p><code>SetPathReplace</code> is slightly more advanced: It takes an in-port name, and
-out-port name, and then a search-pattern in the input-filename, and a
-replace-pattern for the output filename.  With the example above, our input
-file named <code>hello.txt</code> will be converted into <code>hello_world.txt</code> by this path
-pattern.</p>
+<p><code>SetOut</code> takes a pattern similar to the shell command pattern, with
+placeholders, used to define new (shell-based) processes. The available
+placeholders that can be used are: <code>{i:INPORTNAME}</code>, <code>{p:PARAMNAME}</code> and
+<code>{t:TAGNAME}</code>. An example of a full pattern might be:
+<code>{i:foo}.replace_with_{p:replacement}.txt</code>, but can also be used for
+simple, static paths, like in the example above.</p>
+<p>The placeholders can also take certain extra commands, separated from the
+placeholder name by pipe characters, and of which the one used above is
+probably the most important one: <code>%STRING</code>. It will remove the specified
+string from the <em>end</em> of the path, which is useful when we want to avoid
+getting too long paths when re-using previous processes' paths. With the
+example above, our input file named <code>hello.txt</code> will be converted into
+<code>hello_world.txt</code> by this path pattern.</p>
 <h2 id="even-more-control-over-file-formatting">Even more control over file formatting</h2>
 <p>We can actually get even more control over how file names are produced than
 this, by manually supplying each process with an anonymous function that
@@ -751,10 +756,10 @@ each command execution.</p>
 <p>In order to implement the same path patterns as above, using this method, we
 would write like this:</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Configure output file path formatters for the processes created above</span>
-<span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="nx">hello</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
     <span class="k">return</span> <span class="s">&quot;hello.txt&quot;</span>
 <span class="p">})</span>
-<span class="nx">world</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="nx">world</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">InPath</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">),</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">})</span>
 </pre></div>
@@ -771,7 +776,7 @@ the <a href="https://golang.org/doc/faq#closures_and_goroutines">subtle ways in 
 functions in a loop, that uses a shared variable, like this:</p>
 <div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
     <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
-    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetPathCustom</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span>
     <span class="p">})</span>
 <span class="p">}</span>
@@ -789,7 +794,7 @@ generally recommended:</p>
 for _, val := range []string{"foo", "bar"} {
     proc := scipipe.NewProc(val + "_proc", "cat {p:val} &gt; {o:out}")
     val := val // &lt;- Here we create a new copy of the variable
-    proc.SetPathCustom("out", func(t *sp.Task) string {
+    proc.SetOutFunc("out", func(t *sp.Task) string {
         return val + ".txt"
     })
 }</code></p>
@@ -799,7 +804,7 @@ for _, val := range []string{"foo", "bar"} {
 <p><code>go
 for _, val := range []string{"foo", "bar"} {
     proc := scipipe.NewProc(val + "_proc", "cat {p:val} &gt; {o:out}")
-    proc.SetPathCustom("out", func(t *sp.Task) string {
+    proc.SetOutFunc("out", func(t *sp.Task) string {
         return t.Param("val") + ".txt" // Access param via the task (`t`)
     })
 }</code></p>

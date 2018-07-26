@@ -277,6 +277,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#the-audit-logs" title="The audit logs" class="md-nav__link">
+    The audit logs
+  </a>
+  
+</li>
+      
       
       
     </ul>
@@ -600,6 +607,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#the-audit-logs" title="The audit logs" class="md-nav__link">
+    The audit logs
+  </a>
+  
+</li>
+      
       
       
     </ul>
@@ -673,7 +687,7 @@ to the latest API).</p>
   operating system.</li>
 <li><strong>Easy to debug:</strong> As everything in SciPipe is just Go code, you can use some
   of the available debugging tools, or just <code>println()</code> statements, to debug
-  your workflow. </li>
+  your workflow.</li>
 <li><strong>Supports streaming:</strong> Can stream outputs via UNIX FIFO files, to avoid temporary storage.</li>
 <li><strong>Efficient and Parallel:</strong> Workflows are compiled into statically compiled
   code that runs fast. SciPipe also leverages pipeline parallelism between
@@ -693,23 +707,19 @@ SciPipe looks like:</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-    <span class="c1">// Import the SciPipe package, aliased to &#39;sp&#39;</span>
+    <span class="c1">// Import SciPipe, aliased to sp</span>
     <span class="nx">sp</span> <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
 <span class="p">)</span>
 
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// Init workflow with a name, and max concurrent tasks so we don&#39;t overbook</span>
-    <span class="c1">// our CPU</span>
+    <span class="c1">// Init workflow and max concurrent tasks</span>
     <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;hello_world&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
-    <span class="c1">// Initialize processes and set output file paths</span>
-    <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out}&quot;</span><span class="p">)</span>
-    <span class="nx">hello</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
+    <span class="c1">// Initialize processes, and file extensions</span>
+    <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out.txt}&quot;</span><span class="p">)</span>
+    <span class="nx">world</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt; {o:out.txt}&quot;</span><span class="p">)</span>
 
-    <span class="nx">world</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt;&gt; {o:out}&quot;</span><span class="p">)</span>
-    <span class="nx">world</span><span class="p">.</span><span class="nx">SetPathReplace</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">)</span>
-
-    <span class="c1">// Connect network</span>
+    <span class="c1">// Define data flow</span>
     <span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">).</span><span class="nx">From</span><span class="p">(</span><span class="nx">hello</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
 
     <span class="c1">// Run workflow</span>
@@ -720,31 +730,116 @@ SciPipe looks like:</p>
 
 <h2 id="running-the-example">Running the example</h2>
 <p>Let's put the code in a file named <code>scipipe_helloworld.go</code> and run it:</p>
-<div class="codehilite"><pre><span></span>$ go run scipipe_helloworld.go 
-AUDIT   <span class="m">2017</span>/05/04 <span class="m">17</span>:05:15 Task:hello         Executing command: <span class="nb">echo</span> <span class="s1">&#39;Hello &#39;</span> &gt; hello.txt.tmp
-AUDIT   <span class="m">2017</span>/05/04 <span class="m">17</span>:05:15 Task:world         Executing command: <span class="nb">echo</span> <span class="k">$(</span>cat hello.txt<span class="k">)</span> World &gt;&gt; hello_world.txt.tmp
+<div class="codehilite"><pre><span></span>$ go run hello_world.go
+AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> workflow:hello_world             <span class="p">|</span> Starting workflow <span class="o">(</span>Writing log to log/scipipe-20180615-190422-hello_world.log<span class="o">)</span>
+AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> hello                            <span class="p">|</span> Executing: <span class="nb">echo</span> <span class="s1">&#39;Hello &#39;</span> &gt; hello.out.txt.tmp/hello.out.txt
+AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> hello                            <span class="p">|</span> Finished:  <span class="nb">echo</span> <span class="s1">&#39;Hello &#39;</span> &gt; hello.out.txt.tmp/hello.out.txt
+AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> world                            <span class="p">|</span> Executing: <span class="nb">echo</span> <span class="k">$(</span>cat hello.out.txt<span class="k">)</span> World &gt; hello.out.txt.world.out.txt.tmp/hello.out.txt.world.out.txt
+AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> world                            <span class="p">|</span> Finished:  <span class="nb">echo</span> <span class="k">$(</span>cat hello.out.txt<span class="k">)</span> World &gt; hello.out.txt.world.out.txt.tmp/hello.out.txt.world.out.txt
+AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> workflow:hello_world             <span class="p">|</span> Finished workflow <span class="o">(</span>Log written to log/scipipe-20180615-190422-hello_world.log<span class="o">)</span>
 </pre></div>
 
 
 <p>Let's check what file SciPipe has generated:</p>
-<div class="codehilite"><pre><span></span>$ ls -1tr hello*
-hello.txt.audit.json
-hello.txt
-hello_world.txt
-hello_world.txt.audit.json
+<div class="codehilite"><pre><span></span>$ ls -1 hello*
+hello.out.txt
+hello.out.txt.audit.json
+hello.out.txt.world.out.txt
+hello.out.txt.world.out.txt.audit.json
 </pre></div>
 
 
-<p>As you can see, it has created a file <code>hello.txt</code>, and <code>hello_world.txt</code>, and
+<p>As you can see, it has created a file <code>hello.out.txt</code>, and <code>hello.out.world.out.txt</code>, and
 an accompanying <code>.audit.json</code> for each of these files.</p>
 <p>Now, let's check the output of the final resulting file:</p>
-<div class="codehilite"><pre><span></span>$ cat hello_world.txt
+<div class="codehilite"><pre><span></span>$ cat hello.out.txt.world.out.txt
 Hello World
 </pre></div>
 
 
 <p>Now we can rejoice that it contains the text "Hello World", exactly as a proper
 Hello World example should :)</p>
+<p>Now, these were a little long and cumbersome filename, weren't they? SciPipe
+gives you very good control over how to name your files, if you don't want to
+rely on the automatic file naming. For example, we could set the first filename
+statically, and then use the first name as a basis for the file name for the
+second process, like so:</p>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="c1">// Import the SciPipe package, aliased to &#39;sp&#39;</span>
+    <span class="nx">sp</span> <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Init workflow with a name, and max concurrent tasks</span>
+    <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;hello_world&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="c1">// Initialize processes and set output file paths</span>
+    <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out}&quot;</span><span class="p">)</span>
+    <span class="nx">hello</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
+
+    <span class="nx">world</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt;&gt; {o:out}&quot;</span><span class="p">)</span>
+    <span class="nx">world</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;{i:in|%.txt}_world.txt&quot;</span><span class="p">)</span>
+
+    <span class="c1">// Connect network</span>
+    <span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">).</span><span class="nx">From</span><span class="p">(</span><span class="nx">hello</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
+
+    <span class="c1">// Run workflow</span>
+    <span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>In the <code>{i:in...</code> part, we are re-using the file path from the file received on
+the in-port named 'in', and then running a Bash-style trim-from-end command on
+it to remove the <code>.txt</code> extension.</p>
+<p>Now, if we run this, the file names get a little cleaner:</p>
+<div class="codehilite"><pre><span></span>$ ls -1 hello*
+hello.txt
+hello.txt.audit.json
+hello_world.go
+hello_world.txt
+hello_world.txt.audit.json
+</pre></div>
+
+
+<h2 id="the-audit-logs">The audit logs</h2>
+<p>Finally, we could have a look at one of those audit file created:</p>
+<div class="codehilite"><pre><span></span>$ cat hello_world.txt.audit.json
+<span class="o">{</span>
+    <span class="s2">&quot;ID&quot;</span>: <span class="s2">&quot;99i5vxhtd41pmaewc8pr&quot;</span>,
+    <span class="s2">&quot;ProcessName&quot;</span>: <span class="s2">&quot;world&quot;</span>,
+    <span class="s2">&quot;Command&quot;</span>: <span class="s2">&quot;echo </span><span class="k">$(</span>cat hello.txt<span class="k">)</span><span class="s2"> World \u003e\u003e hello_world.txt.tmp/hello_world.txt&quot;</span>,
+    <span class="s2">&quot;Params&quot;</span>: <span class="o">{}</span>,
+    <span class="s2">&quot;Tags&quot;</span>: <span class="o">{}</span>,
+    <span class="s2">&quot;StartTime&quot;</span>: <span class="s2">&quot;2018-06-15T19:10:37.955602979+02:00&quot;</span>,
+    <span class="s2">&quot;FinishTime&quot;</span>: <span class="s2">&quot;2018-06-15T19:10:37.959410102+02:00&quot;</span>,
+    <span class="s2">&quot;ExecTimeNS&quot;</span>: <span class="m">3000000</span>,
+    <span class="s2">&quot;Upstream&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;hello.txt&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;ID&quot;</span>: <span class="s2">&quot;w4oeiii9h5j7sckq7aqq&quot;</span>,
+            <span class="s2">&quot;ProcessName&quot;</span>: <span class="s2">&quot;hello&quot;</span>,
+            <span class="s2">&quot;Command&quot;</span>: <span class="s2">&quot;echo &#39;Hello &#39; \u003e hello.txt.tmp/hello.txt&quot;</span>,
+            <span class="s2">&quot;Params&quot;</span>: <span class="o">{}</span>,
+            <span class="s2">&quot;Tags&quot;</span>: <span class="o">{}</span>,
+            <span class="s2">&quot;StartTime&quot;</span>: <span class="s2">&quot;2018-06-15T19:10:37.950032676+02:00&quot;</span>,
+            <span class="s2">&quot;FinishTime&quot;</span>: <span class="s2">&quot;2018-06-15T19:10:37.95468214+02:00&quot;</span>,
+            <span class="s2">&quot;ExecTimeNS&quot;</span>: <span class="m">4000000</span>,
+            <span class="s2">&quot;Upstream&quot;</span>: <span class="o">{}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</pre></div>
+
+
+<p>Each such audit-file contains a hierarchic JSON-representation of the full
+workflow path that was executed in order to produce this file. On the first
+level is the command that directly produced the corresponding file, and then,
+indexed by their filenames, under "Upstream", there is a similar chunk
+describing how all of its input files were generated. This process will be
+repeated in a recursive way for large workflows, so that, for each file
+generated by the workflow, there is always a full, hierarchic, history of all
+the commands run - with their associated metadata - to produce that file.</p>
 <p>You can find many more examples in the <a href="https://github.com/scipipe/scipipe/tree/master/examples">examples folder</a> in the GitHub repo.</p>
 <p>For more information about how to write workflows using SciPipe, use the menu
 to the left, to browse the various topics!</p>

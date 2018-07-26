@@ -522,7 +522,7 @@ field of Process.</p>
 <span class="nx">fooWriter</span> <span class="o">:=</span> <span class="nx">sci</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;fooer&quot;</span><span class="p">,</span> <span class="s">&quot;{o:foo}&quot;</span><span class="p">)</span>
 
 <span class="c1">// Set the output formatter to a static string</span>
-<span class="nx">fooWriter</span><span class="p">.</span><span class="nx">SetPathStatic</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
+<span class="nx">fooWriter</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
 
 <span class="c1">// Create the custom execute function, with pure Go code and</span>
 <span class="c1">// add it to the CustomExecute field of the fooWriter process</span>
