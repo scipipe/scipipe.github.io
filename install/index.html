@@ -259,6 +259,26 @@
     Install SciPipe
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#easiest-using-go-get" title="Easiest: Using go get" class="md-nav__link">
+    Easiest: Using go get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-maximum-future-proofing-use-a-copy-of-scipipes-source-code-in-your-own-code" title="For maximum future proofing: Use a copy of SciPipe's source code in your own code" class="md-nav__link">
+    For maximum future proofing: Use a copy of SciPipe's source code in your own code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -563,6 +583,26 @@
     Install SciPipe
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#easiest-using-go-get" title="Easiest: Using go get" class="md-nav__link">
+    Easiest: Using go get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-maximum-future-proofing-use-a-copy-of-scipipes-source-code-in-your-own-code" title="For maximum future proofing: Use a copy of SciPipe's source code in your own code" class="md-nav__link">
+    For maximum future proofing: Use a copy of SciPipe's source code in your own code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -609,14 +649,43 @@ be able to use Go's <code>go run</code> command to run SciPipe workflows.</p>
 <p>Install Go by following the instructions <a href="https://golang.org/doc/install#install">on this page</a>,
 for your operating system.</p>
 <h2 id="install-scipipe">Install SciPipe</h2>
-<p>Then install SciPipe by running the following shell command:</p>
+<p>There are two main ways of installing SciPipe, one which is maximally easy, and one which
+is recommended if you want to make sure that your workflow will never break because of
+API changes in SciPipe, and that you always have a copy of the SciPipe source code available.</p>
+<h3 id="easiest-using-go-get">Easiest: Using go get</h3>
+<p>The easiest way to intsall SciPipe is by using the <code>go get</code> tool in the Go
+tool chain. To install scipipe with <code>go get</code>, run the following command in
+your terminal:</p>
 <div class="codehilite"><pre><span></span>go get github.com/scipipe/scipipe/...
 </pre></div>
 
 
 <p><strong>N.B:</strong> Don't miss the <code>...</code>, as otherwise the <code>scipipe</code> helper tool will not be installed.</p>
+<h3 id="for-maximum-future-proofing-use-a-copy-of-scipipes-source-code-in-your-own-code">For maximum future proofing: Use a copy of SciPipe's source code in your own code</h3>
+<p>In order to make sure that your workflow will never break because of API
+changes in SciPipe, and that you always have a copy of the SciPipe source
+code available, we recommend to always include a copy of the SciPipe source
+code in your workflow's source code repository. The SciPipe source code is
+only around 1500 lines of code, with no external dependencies except Go and
+Bash, so this should not increase the size of your repository too much.</p>
+<p>A simple way to do this, is to clone a copy of the SciPipe source code into a
+folder structure that looks like this, under your main workflow code folder
+(where you store your own <code>.go</code> files):</p>
+<div class="codehilite"><pre><span></span>vendor/src/github.com/scipipe/scipipe
+</pre></div>
+
+
+<p>To create and clone the scipipe repo to this folder, you can use these
+commands:</p>
+<div class="codehilite"><pre><span></span>mkdir -p vendor/src/github.com/scipipe
+<span class="nb">cd</span> vendor/src/github.com/scipipe
+git clone https://github.com/scipipe/scipipe.git
+</pre></div>
+
+
 <h2 id="initialize-a-new-workflow-file">Initialize a new workflow file</h2>
-<p>Now, you should be able to write code like in the example below, in files ending with <code>.go</code>.</p>
+<p>Now, you should be able to write code like in the example below, in files
+ending with <code>.go</code>.</p>
 <p>The easiest way to get started is to let the scipipe tool generate a starting point for you:</p>
 <div class="codehilite"><pre><span></span>scipipe new myfirstworkflow.go
 </pre></div>
@@ -635,14 +704,13 @@ with support for auto-completion, sometimes also called "intellisense".</p>
 <p>We can warmly recommend to use one of these editors, sorted by level of endorsement:</p>
 <ol>
 <li><a href="http://code.visualstudio.com">Visual Studio Code</a> with the <a href="https://github.com/Microsoft/vscode-go">Go plugin</a> - If you want a very powerful almost IDE-like editor</li>
-<li>Fatih's awesome <a href="https://github.com/fatih/vim-go">vim-go</a> plugin - if you are a Vim power-user</li>
-<li><a href="https://github.com/visualfc/liteide">LiteIDE</a> - if you want a really simple, standalone Go-editor</li>
+<li>The <a href="https://github.com/fatih/vim-go">vim-go</a> plugin by <a href="https://twitter.com/fatih">Fatih</a> - if you are a Vim power-user, or need a terminal-only complement to VSCode.</li>
+<li>JetBrain's <a href="https://www.jetbrains.com/go/">GoLand IDE</a>, if you are ready to pay for maximum code intelligence in a professional IDE.</li>
+<li><a href="https://github.com/visualfc/liteide">LiteIDE</a> - if you want a simple, robust and fast standalone Go-editor.</li>
 </ol>
 <p>There are also popular Go-plugins for <a href="https://www.sublimetext.com">Sublime text</a>,
 <a href="https://atom.io/">Atom</a> and <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a>,
-and an upcoming Go IDE from JetBrains, called
-<a href="https://www.jetbrains.com/go/">Gogland</a>, that might be worth checking out,
-depending on your preferences.</p>
+and an upcoming Go IDE from JetBrains, called</p>
                 
                   
                 
