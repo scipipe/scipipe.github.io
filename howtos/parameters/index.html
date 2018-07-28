@@ -512,7 +512,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../plot_workflow_graphs/" title="Plotting workflow graphs" class="md-nav__link">
+    <a href="../plot_workflow_graph/" title="Plotting workflow graphs" class="md-nav__link">
       Plotting workflow graphs
     </a>
   </li>
@@ -687,24 +687,6 @@ the <a href="https://groups.google.com/forum/#!forum/scipipe">mailing list</a> o
 <p>For example, if you always want to write the string "hello" to output files,
 you could create your processes with this string added manually:</p>
 <div class="codehilite"><pre><span></span><span class="nx">helloWriter</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;helloWriter&quot;</span><span class="p">,</span> <span class="s">&quot;echo hello &gt; {o:outfile}&quot;</span><span class="p">)</span>
-</pre></div>
-
-
-<p>If you have a lot of various parameters, and want a little more flexible way
-to add their values to a command, you can use the <a href="https://godoc.org/github.com/scipipe/scipipe#ExpandParams">ExpandParams</a>
-helper function, to add the parameter values:</p>
-<div class="codehilite"><pre><span></span><span class="c1">// Create a shell command pattern</span>
-<span class="nx">cmd</span> <span class="o">:=</span> <span class="s">&quot;echo {p:p1} {p:p2} {p:p3} &gt; {o:outfile}&quot;</span>
-
-<span class="c1">// Create a map from parameter names (p1, p2, p3) to parameter values</span>
-<span class="c1">// (one, two, three)</span>
-<span class="nx">paramVals</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;p1&quot;</span><span class="p">:</span> <span class="s">&quot;one&quot;</span><span class="p">,</span> <span class="s">&quot;p2&quot;</span><span class="p">:</span> <span class="s">&quot;two&quot;</span><span class="p">,</span> <span class="s">&quot;p3&quot;</span><span class="p">:</span> <span class="s">&quot;three&quot;</span><span class="p">}</span>
-
-<span class="c1">// Expand the parameters into the shell command pattern</span>
-<span class="nx">cmd</span> <span class="p">=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">ExpandParams</span><span class="p">(</span><span class="nx">cmd</span><span class="p">,</span> <span class="nx">paramVals</span><span class="p">)</span>
-
-<span class="c1">// Create a new process with the resulting command</span>
-<span class="nx">write123</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;write123&quot;</span><span class="p">,</span> <span class="nx">cmd</span><span class="p">)</span>
 </pre></div>
 
 

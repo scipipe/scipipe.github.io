@@ -31,7 +31,7 @@
     
     
       
-        <title>Creating components in Go - SciPipe Docs</title>
+        <title>Plotting workflow graphs - SciPipe Docs</title>
       
     
     
@@ -101,7 +101,7 @@
                 </span>
               
             
-            Creating components in Go
+            Plotting workflow graphs
           
         </span>
       </div>
@@ -304,18 +304,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-    <a href="./" title="Creating components in Go" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../golang_components/" title="Creating components in Go" class="md-nav__link">
       Creating components in Go
     </a>
-    
   </li>
 
         
@@ -431,11 +424,64 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../plot_workflow_graph/" title="Plotting workflow graphs" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Plotting workflow graphs
+      </label>
+    
+    <a href="./" title="Plotting workflow graphs" class="md-nav__link md-nav__link--active">
       Plotting workflow graphs
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-plot-graphs" title="How to plot graphs" class="md-nav__link">
+    How to plot graphs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-plot-graphs-conditionally-based-on-a-flag" title="How to plot graphs conditionally based on a flag" class="md-nav__link">
+    How to plot graphs conditionally based on a flag
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" title="Links" class="md-nav__link">
+    Links
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#footnotes" title="Footnotes" class="md-nav__link">
+    Footnotes
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -507,6 +553,41 @@
   
   
   
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-plot-graphs" title="How to plot graphs" class="md-nav__link">
+    How to plot graphs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-plot-graphs-conditionally-based-on-a-flag" title="How to plot graphs conditionally based on a flag" class="md-nav__link">
+    How to plot graphs conditionally based on a flag
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" title="Links" class="md-nav__link">
+    Links
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#footnotes" title="Footnotes" class="md-nav__link">
+    Footnotes
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -518,36 +599,83 @@
               
                 
                 
-                  <h1>Creating components in Go</h1>
+                  <h1>Plotting workflow graphs</h1>
                 
-                <p><em>Beware: Technical topic, best suited for power-users!</em></p>
-<p>If you want to write a component with Go code, but would like to have it work
-seamlessly with other workflow processes in SciPipe, without reimplementing the
-whole <a href="https://godoc.org/github.com/scipipe/scipipe#Process">Process</a>
-functionality yourself, there is a way to do it: By using the <code>CustomExecute</code>
-field of Process.</p>
-<p>In short, it can be done like this:</p>
-<div class="codehilite"><pre><span></span><span class="c1">// Initiate task from a &quot;shell like&quot; pattern, though here we</span>
-<span class="c1">// just specify the out-port, and nothing else. We have to</span>
-<span class="c1">// specify the out-port (and any other ports we plan to use later),</span>
-<span class="c1">// so that they are correctly initialized.</span>
-<span class="nx">fooWriter</span> <span class="o">:=</span> <span class="nx">sci</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;fooer&quot;</span><span class="p">,</span> <span class="s">&quot;{o:foo}&quot;</span><span class="p">)</span>
-
-<span class="c1">// Set the output formatter to a static string</span>
-<span class="nx">fooWriter</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;foo.txt&quot;</span><span class="p">)</span>
-
-<span class="c1">// Create the custom execute function, with pure Go code and</span>
-<span class="c1">// add it to the CustomExecute field of the fooWriter process</span>
-<span class="nx">fooWriter</span><span class="p">.</span><span class="nx">CustomExecute</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">task</span> <span class="o">*</span><span class="nx">sci</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">task</span><span class="p">.</span><span class="nx">OutIP</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">).</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;foo\n&quot;</span><span class="p">))</span>
+                <p>SciPipe 0.8.0 introduced a feature to plot a directed graph of workflows in
+SciPipe [1]. This can be done in two ways:</p>
+<ol>
+<li>Just producing a DOT text file, with the graph definition</li>
+<li>Also converting this DOT file to PDF.</li>
+</ol>
+<p>Number 1. above can be done without any external dependencies, while number 2
+requires that graphviz, with the <code>dot</code> command is installed on the system (On
+Ubuntu it can be installed with the command: <code>sudo apt-get install graphviz</code>).</p>
+<h2 id="how-to-plot-graphs">How to plot graphs</h2>
+<p>To write a .dot file in SciPipe, include a line like follows, in your workflow
+definition, provided that you have initiated the variable <code>wf</code> with a workflow
+struct:</p>
+<div class="codehilite"><pre><span></span><span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;my workflow&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="c1">// Workflow code here</span>
+    <span class="nx">wf</span><span class="p">.</span><span class="nx">PlotGraph</span><span class="p">(</span><span class="s">&quot;my_workflow_graph.dot&quot;</span><span class="p">)</span> <span class="c1">// &lt;-- SEE THIS LINE!</span>
+    <span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 <span class="p">}</span>
 </pre></div>
 
 
-<p>For a more detailed example, see <a href="https://github.com/scipipe/scipipe/blob/master/examples/custom_execution_function/funchook.go">this example</a>
-(Have a look at the <a href="https://github.com/scipipe/scipipe/blob/master/examples/custom_execution_function/funchook.go#L34-L50">NewFooer()</a>
-and <a href="https://github.com/scipipe/scipipe/blob/master/examples/custom_execution_function/funchook.go#L72-L89">NewFoo2Barer()</a>
-factory functions in particular!)</p>
+<p>If you want to also convert the dot file to PDF in one go, instead change the
+next last line to:</p>
+<div class="codehilite"><pre><span></span>    <span class="nx">wf</span><span class="p">.</span><span class="nx">PlotGraphPDF</span><span class="p">(</span><span class="s">&quot;my_workflow_graph.dot&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2 id="how-to-plot-graphs-conditionally-based-on-a-flag">How to plot graphs conditionally based on a flag</h2>
+<p>Now, you might not want to generate a new plot every time you run your workflow
+(although, perhaps you would? ... checking in a .dot version of your workflow
+could in fact be a great way to keep a more readable version of your workflow
+at hand ... but anyhow), you could make the plotting optional, based on a flag.
+This is something we've found ourselves doing quite often at pharmb.io. This
+could be done as follows (more complete code example):</p>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;flag&quot;</span>
+    <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">plotGraph</span> <span class="p">=</span> <span class="nx">flag</span><span class="p">.</span><span class="nx">Bool</span><span class="p">(</span><span class="s">&quot;plotgraph&quot;</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&quot;Plot a directed graph of the workflow to PDF&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">flag</span><span class="p">.</span><span class="nx">Parse</span><span class="p">()</span>
+
+    <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;testwf&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;echo foo &gt; {o:out}&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="o">*</span><span class="nx">plotGraph</span> <span class="p">{</span>
+        <span class="nx">wf</span><span class="p">.</span><span class="nx">PlotGraphPDF</span><span class="p">(</span><span class="s">&quot;wfgraph.dot&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Now, the graph will only plotted if you run your workflow with the
+<code>-plotgraph</code> flag, e.g:</p>
+<div class="codehilite"><pre><span></span>go run myworkflow.go -plotgraph
+</pre></div>
+
+
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="https://godoc.org/github.com/scipipe/scipipe#Workflow.PlotGraph">GoDoc for Workflow.PlotGraph()</a></li>
+<li><a href="https://godoc.org/github.com/scipipe/scipipe#Workflow.PlotGraphPDF">GoDoc for Workflow.PlotGraphPDF()</a></li>
+</ul>
+<h2 id="footnotes">Footnotes</h2>
+<p>[1] these are often called "DAG" for "Directed Acyclic Graph", but
+SciPipe does not have a guarantee or requirement on acyclicness of the graph,
+thus just "directed graph").</p>
                 
                   
                 
@@ -566,7 +694,7 @@ factory functions in particular!)</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../parameters/" title="Using parameters in commands and file names" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../constrain_resource_usage/" title="Constrain resource usage" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -575,19 +703,19 @@ factory functions in particular!)</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Using parameters in commands and file names
+                Constrain resource usage
               </span>
             </div>
           </a>
         
         
-          <a href="../reusable_components/" title="Creating re-usable components" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../examples/" title="Examples" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Creating re-usable components
+                Examples
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
