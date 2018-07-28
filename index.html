@@ -504,6 +504,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="howtos/convert_audit_logs/" title="Convert audit logs to other formats" class="md-nav__link">
+      Convert audit logs to other formats
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -728,8 +740,8 @@ SciPipe looks like:</p>
     <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;hello_world&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
     <span class="c1">// Initialize processes, and file extensions</span>
-    <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out.txt}&quot;</span><span class="p">)</span>
-    <span class="nx">world</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt; {o:out.txt}&quot;</span><span class="p">)</span>
+    <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out|.txt}&quot;</span><span class="p">)</span>
+    <span class="nx">world</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt; {o:out|.txt}&quot;</span><span class="p">)</span>
 
     <span class="c1">// Define data flow</span>
     <span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">).</span><span class="nx">From</span><span class="p">(</span><span class="nx">hello</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>

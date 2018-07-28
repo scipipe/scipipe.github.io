@@ -31,7 +31,7 @@
     
     
       
-        <title>Constrain resource usage - SciPipe Docs</title>
+        <title>Convert audit logs to other formats - SciPipe Docs</title>
       
     
     
@@ -101,7 +101,7 @@
                 </span>
               
             
-            Constrain resource usage
+            Convert audit logs to other formats
           
         </span>
       </div>
@@ -412,43 +412,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Constrain resource usage
-      </label>
-    
-    <a href="./" title="Constrain resource usage" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../constrain_resource_usage/" title="Constrain resource usage" class="md-nav__link">
       Constrain resource usage
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#example" title="Example" class="md-nav__link">
-    Example
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -468,11 +436,57 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../convert_audit_logs/" title="Convert audit logs to other formats" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Convert audit logs to other formats
+      </label>
+    
+    <a href="./" title="Convert audit logs to other formats" class="md-nav__link md-nav__link--active">
       Convert audit logs to other formats
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#convert-audit-log-to-html" title="Convert audit log to HTML" class="md-nav__link">
+    Convert audit log to HTML
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convert-audit-log-to-tex" title="Convert audit log to TeX" class="md-nav__link">
+    Convert audit log to TeX
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convert-audit-log-to-bash" title="Convert audit log to Bash" class="md-nav__link">
+    Convert audit log to Bash
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -548,8 +562,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#example" title="Example" class="md-nav__link">
-    Example
+  <a href="#convert-audit-log-to-html" title="Convert audit log to HTML" class="md-nav__link">
+    Convert audit log to HTML
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convert-audit-log-to-tex" title="Convert audit log to TeX" class="md-nav__link">
+    Convert audit log to TeX
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convert-audit-log-to-bash" title="Convert audit log to Bash" class="md-nav__link">
+    Convert audit log to Bash
   </a>
   
 </li>
@@ -569,29 +597,55 @@
               
                 
                 
-                  <h1>Constrain resource usage</h1>
+                  <h1>Convert audit logs to other formats</h1>
                 
-                <p>It is important to carefully manage how much resources (CPU and memory) your
-workflows are using, so that you don't overbook you compute node(s).</p>
-<p>In SciPipe you can do that using two settings:</p>
-<ul>
-<li>Max concurrent tasks, which is set on the workflow level, when initiating a new workflow.</li>
-<li>Cores per tasks, that can be set on processes after they are initialized.</li>
-</ul>
-<p>Max concurrent tasks is a required setting when initializing workflows, while
-cores per task can be left to the default, which is 1 core per task.</p>
-<p>You might want to change this number if for example you have a software that
-uses more memory than the available memory on your computer divided by the max
-concurrent tasks number you have set.</p>
-<p>For example, if you have 8GB of free memory, and have set max concurrent tasks
-on your workflow to 4, but you have a process whose commandline application
-uses not 2GB of memory, but 4GB, then you might want to set cores per tasks for
-that process to 2, so that it gets the double amount of memory.</p>
-<p>In practice, you set cores per task by setting the field <code>CoresPerTask</code> on the process struct, after it is initiated. </p>
-<h2 id="example">Example</h2>
-<div class="codehilite"><pre><span></span><span class="nx">foo</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;echo foo &gt; {o:foofile}&quot;</span><span class="p">)</span>
-<span class="nx">foo</span><span class="p">.</span><span class="nx">CoresPerTask</span> <span class="p">=</span> <span class="mi">2</span>
+                <p><a href="https://github.com/scipipe/scipipe/releases/tag/v0.8.0">SciPipe 0.8.0</a>
+introduced experimental support for converting audit logs (those
+<code>.audit.json</code> files produced to accompany all output files from SciPipe)
+into other formats, such as HTML, TeX (for further conversion to PDF) or
+even executable Bash-scripts. Here's how to do it.</p>
+<h2 id="convert-audit-log-to-html">Convert audit log to HTML</h2>
+<p>Given that you have an audit log file with the name <code>myfile.audit.json</code>,
+then execute:</p>
+<div class="codehilite"><pre><span></span>scipipe audit2html myfile.audit.json
 </pre></div>
+
+
+<p>This will produce an HTML file named <code>myfile.audit.html</code>, which you can
+view in a web browser.</p>
+<h2 id="convert-audit-log-to-tex">Convert audit log to TeX</h2>
+<p>Given that you have an audit log file with the name <code>myfile.audit.json</code>,
+then execute:</p>
+<div class="codehilite"><pre><span></span>scipipe audit2tex myfile.audit.json
+</pre></div>
+
+
+<p>This will produce an HTML file named <code>myfile.audit.tex</code>, which you can
+either edit manually, or convert directly to PDF using the <code>pdflatex</code>
+command like so:</p>
+<div class="codehilite"><pre><span></span>pdflatex myfile.audit.tex
+</pre></div>
+
+
+<p>Converting to PDF requires that you have a TeX installation on your system.
+On Ubuntu, you can install the base package or TeX live with <code>sudo apt-get
+install texlive-base</code>.</p>
+<h2 id="convert-audit-log-to-bash">Convert audit log to Bash</h2>
+<p>Given that you have an audit log file with the name <code>myfile.audit.json</code>,
+then execute:</p>
+<div class="codehilite"><pre><span></span>scipipe audit2bash myfile.audit.json
+</pre></div>
+
+
+<p>This will produce a Bash-file named <code>myfile.audit.sh</code>, which you can
+execute like so:</p>
+<div class="codehilite"><pre><span></span>sh myfile.audit.sh
+</pre></div>
+
+
+<p>... in order to reproduce the file again from scratch, if it is removed,
+given that you have all the dependent files and tools installed on your
+system.</p>
                 
                   
                 
@@ -610,7 +664,7 @@ that process to 2, so that it gets the double amount of memory.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../hpc/" title="Interacting with an HPC resource manager" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../plot_workflow_graph/" title="Plotting workflow graphs" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -619,19 +673,19 @@ that process to 2, so that it gets the double amount of memory.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Interacting with an HPC resource manager
+                Plotting workflow graphs
               </span>
             </div>
           </a>
         
         
-          <a href="../plot_workflow_graph/" title="Plotting workflow graphs" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../examples/" title="Examples" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Plotting workflow graphs
+                Examples
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
