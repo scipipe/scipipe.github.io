@@ -1,156 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-    
     <url>
-     <loc>/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/install/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/basic_concepts/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/writing_workflows/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
-        
     <url>
-     <loc>/howtos/partial_workflows/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/parameters/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/golang_components/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/reusable_components/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/globbing/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/splitting/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/joining/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/streaming/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/subworkflows/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/scatter_gather/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/hpc/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/constrain_resource_usage/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/plot_workflow_graph/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/howtos/convert_audit_logs/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    
-
-    
     <url>
-     <loc>/examples/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/other_resources/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/acknowledgements/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/related_tools/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
 </urlset>
