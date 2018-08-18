@@ -845,25 +845,25 @@ the same variable ("var"), which had the value "bar" at the end of the loop.</p>
 generally recommended:</p>
 <ol>
 <li>
-<p>Create a new copy of the variable, inside the anonymous function:</p>
-<p><code>go
-for _, val := range []string{"foo", "bar"} {
-    proc := scipipe.NewProc(val + "_proc", "cat {p:val} &gt; {o:out}")
-    val := val // &lt;- Here we create a new copy of the variable
-    proc.SetOutFunc("out", func(t *sp.Task) string {
-        return val + ".txt"
-    })
-}</code></p>
+<p>Create a new copy of the variable, inside the anonymous function:
+    <code>go
+    for _, val := range []string{"foo", "bar"} {
+        proc := scipipe.NewProc(val + "_proc", "cat {p:val} &gt; {o:out}")
+        val := val // &lt;- Here we create a new copy of the variable
+        proc.SetOutFunc("out", func(t *sp.Task) string {
+            return val + ".txt"
+        })
+    }</code></p>
 </li>
 <li>
-<p>... or, better, access the parameter value via the task which the path function receives:</p>
-<p><code>go
-for _, val := range []string{"foo", "bar"} {
-    proc := scipipe.NewProc(val + "_proc", "cat {p:val} &gt; {o:out}")
-    proc.SetOutFunc("out", func(t *sp.Task) string {
-        return t.Param("val") + ".txt" // Access param via the task (`t`)
-    })
-}</code></p>
+<p>... or, better, access the parameter value via the task which the path function receives:
+    <code>go
+    for _, val := range []string{"foo", "bar"} {
+        proc := scipipe.NewProc(val + "_proc", "cat {p:val} &gt; {o:out}")
+        proc.SetOutFunc("out", func(t *sp.Task) string {
+            return t.Param("val") + ".txt" // Access param via the task (`t`)
+        })
+    }</code></p>
 </li>
 </ol>
 <h2 id="connecting-processes-into-a-network">Connecting processes into a network</h2>
