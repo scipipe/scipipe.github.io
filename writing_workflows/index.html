@@ -843,27 +843,29 @@ functions in a loop, that uses a shared variable, like this:</p>
 the same variable ("var"), which had the value "bar" at the end of the loop.</p>
 <p>To avoid this situation, you can do one of two things, of which the latter is
 generally recommended:</p>
-<p><strong>1.</strong> Create a new copy of the variable, inside the anonymous function:</p>
-<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
-    <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
-    <span class="nx">val</span> <span class="o">:=</span> <span class="nx">val</span> <span class="c1">// &lt;- Here we create a new copy of the variable</span>
-    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span>
-    <span class="p">})</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p><strong>2.</strong> ... or, better, access the parameter value via the task which the path function receives:</p>
-<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
-    <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
-    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;val&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span> <span class="c1">// Access param via the task (`t`)</span>
-    <span class="p">})</span>
-<span class="p">}</span>
-</pre></div>
-
-
+<ol>
+<li>
+<p>Create a new copy of the variable, inside the anonymous function:</p>
+<p><code>go
+for _, val := range []string{"foo", "bar"} {
+    proc := scipipe.NewProc(val + "_proc", "cat {p:val} &gt; {o:out}")
+    val := val // &lt;- Here we create a new copy of the variable
+    proc.SetOutFunc("out", func(t *sp.Task) string {
+        return val + ".txt"
+    })
+}</code></p>
+</li>
+<li>
+<p>... or, better, access the parameter value via the task which the path function receives:</p>
+<p><code>go
+for _, val := range []string{"foo", "bar"} {
+    proc := scipipe.NewProc(val + "_proc", "cat {p:val} &gt; {o:out}")
+    proc.SetOutFunc("out", func(t *sp.Task) string {
+        return t.Param("val") + ".txt" // Access param via the task (`t`)
+    })
+}</code></p>
+</li>
+</ol>
 <h2 id="connecting-processes-into-a-network">Connecting processes into a network</h2>
 <p>Finally we need to define the data dependencies between our processes. We do
 this by connecting the outports of one process to the inport of another
