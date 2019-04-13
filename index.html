@@ -283,8 +283,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#project-updates" title="Project updates" class="md-nav__link">
-    Project updates
+  <a href="#scientific-workflow-library-written-in-go" title="Scientific Workflow Library written in Go" class="md-nav__link">
+    Scientific Workflow Library written in Go
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-scipipe" title="Why SciPipe?" class="md-nav__link">
+    Why SciPipe?
   </a>
   
 </li>
@@ -292,13 +299,6 @@
         <li class="md-nav__item">
   <a href="#introduction" title="Introduction" class="md-nav__link">
     Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#benefits" title="Benefits" class="md-nav__link">
-    Benefits
   </a>
   
 </li>
@@ -639,8 +639,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#project-updates" title="Project updates" class="md-nav__link">
-    Project updates
+  <a href="#scientific-workflow-library-written-in-go" title="Scientific Workflow Library written in Go" class="md-nav__link">
+    Scientific Workflow Library written in Go
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-scipipe" title="Why SciPipe?" class="md-nav__link">
+    Why SciPipe?
   </a>
   
 </li>
@@ -648,13 +655,6 @@
         <li class="md-nav__item">
   <a href="#introduction" title="Introduction" class="md-nav__link">
     Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#benefits" title="Benefits" class="md-nav__link">
-    Benefits
   </a>
   
 </li>
@@ -707,6 +707,25 @@
                 
                 
                 <h1 id="scipipe">SciPipe</h1>
+<p><img src="images/fbp_factory.png" style="width: 30%; float: right; margin: 0 .4em;"></p>
+<h2 id="scientific-workflow-library-written-in-go">Scientific Workflow Library written in Go</h2>
+<p><big>Run complex series of shell commands, or pipelines, in a flexible, robust &amp; reproducible manner</big></p>
+<h2 id="why-scipipe">Why SciPipe?</h2>
+<ul>
+<li><strong>Intuitive:</strong> SciPipe operates by flowing data (files) through a
+  network of channels and processes</li>
+<li><strong>Flexible:</strong> Wrapped command-line programs or scripts can be combined with
+  processes coded in Go</li>
+<li><strong>Convenient:</strong> Full control over how your files are named</li>
+<li><strong>Portable:</strong> Workflows can be distributed either as Go code to be run with
+  <code>go run</code>, or as stand-alone executable files</li>
+<li><strong>Easy to debug:</strong> Use available debugging tools or even just <code>println()</code></li>
+<li><strong>Supports streaming:</strong> Can stream outputs via UNIX named pipes</li>
+<li><strong>Efficient:</strong> Workflows consist of statically compiled code that runs fast</li>
+<li><strong>Parallel:</strong> Pipeline paralellism between processes as well as task
+  parallelism for multiple inputs, making efficient use of multiple CPU cores</li>
+</ul>
+<p><strong><small>Project links: <a href="http://github.com/scipipe/scipipe">GitHub repo</a> | <a href="https://github.com/scipipe/scipipe/issues">Issue Tracker</a> | <a href="https://gitter.im/scipipe/scipipe">Chat</a></small></strong></p>
 <p><a href="https://circleci.com/gh/scipipe/scipipe"><img alt="Build Status" src="https://img.shields.io/circleci/project/github/scipipe/scipipe.svg" /></a>
 <a href="https://codecov.io/gh/scipipe/scipipe"><img alt="Test Coverage" src="https://img.shields.io/codecov/c/github/scipipe/scipipe.svg" /></a>
 <a href="https://codebeat.co/projects/github-com-scipipe-scipipe-master"><img alt="Codebeat Grade" src="https://codebeat.co/badges/96e93624-2ac8-42c9-9e94-2d6e5325d8ff" /></a>
@@ -714,20 +733,16 @@
 <a href="https://godoc.org/github.com/scipipe/scipipe"><img alt="GoDoc" src="https://godoc.org/github.com/scipipe/scipipe?status.svg" /></a>
 <a href="https://gitter.im/scipipe/scipipe"><img alt="Gitter" src="https://badges.gitter.im/Join%20Chat.svg" /></a>
 <a href="https://doi.org/10.5281/zenodo.1157941"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.1157941.svg" /></a></p>
-<p><strong><small>Project links: <a href="http://github.com/scipipe/scipipe">GitHub repo</a> | <a href="https://github.com/scipipe/scipipe/issues">Issue Tracker</a> | <a href="https://gitter.im/scipipe/scipipe">Chat</a></small></strong></p>
-<h2 id="project-updates">Project updates</h2>
-<ul>
-<li><strong>NEW - Paper on scientific study using SciPipe:</strong> <a href="https://doi.org/10.3389/fphar.2018.01256">Predicting off-target binding profiles with confidence using Conformal Prediction</a></li>
-<li><strong>NEW - Slides:</strong> <a href="https://pharmb.io/blog/saml-gostockholm2018/">Presentation on SciPipe and more at Go Stockholm Conference</a></li>
-<li><strong>Preprint paper on SciPipe:</strong> <a href="https://www.biorxiv.org/content/early/2018/08/01/380808">SciPipe - A workflow library for agile development of complex and dynamic bioinformatics pipelines</a> - explaining the background, motivations and technical aspects in depth. Freely available via bioRxiv.</strong></li>
-<li><strong>Blog post:</strong> <a href="http://bionics.it/posts/provenance-reports-in-scientific-workflows">Provenance reports in Scientific Workflows</a> - going into details about how SciPipe is addressing provenance</li>
-<li><strong>Blog post:</strong> <a href="http://bionics.it/posts/first-production-workflow-run-with-scipipe">First production workflow run with SciPipe</a></li>
-</ul>
+<div style="width:37%; float: right; font-size: 0.8em; padding: 1em; margin: 0 0 1em 1em;">
+<h4>Project updates</h4>
+<strong>NEW: Scientific study using SciPipe:</strong><br><a href="https://doi.org/10.3389/fphar.2018.01256">Predicting off-target binding profiles with confidence using Conformal Prediction</a><br>
+<strong>NEW: Slides:</strong> <a href="https://pharmb.io/blog/saml-gostockholm2018/)">Presentation on SciPipe and more at Go Stockholm Conference</a><br>
+<strong>Preprint paper on SciPipe:</strong><br><a href="https://www.biorxiv.org/content/early/2018/08/01/380808) - explaining the background, motivations and technical aspects in depth. Freely available via bioRxiv.</strong>">SciPipe - A workflow library for agile development of complex and dynamic bioinformatics pipelines</a><br>
+<strong>Blog post:</strong> <a href="http://bionics.it/posts/provenance-reports-in-scientific-workflows) - going into details about how SciPipe is addressing provenance">Provenance reports in Scientific Workflows</a><br>
+<strong>Blog post:</strong> <a href="http://bionics.it/posts/first-production-workflow-run-with-scipipe">First production workflow run with SciPipe</a>
+</div>
+
 <h2 id="introduction">Introduction</h2>
-<p><img src="images/fbp_factory.png" style="float: right; margin: 0 .4em;">
-SciPipe is a library for writing <a href="https://en.wikipedia.org/wiki/Scientific_workflow_system">Scientific
-Workflows</a>, sometimes
-also called "pipelines", in the <a href="http://golang.org">Go programming language</a>.</p>
 <p>When you need to run many commandline programs that depend on each other in
 complex ways, SciPipe helps by making the process of running these programs
 flexible, robust and reproducible. SciPipe also lets you restart an interrupted
@@ -750,29 +765,6 @@ changes still happens as we try to streamline the process of writing workflows.
 Please follow the commit history closely for any API updates if you have code
 already written in SciPipe (Let us know if you need any help in migrating code
 to the latest API).</p>
-<h2 id="benefits">Benefits</h2>
-<p>Some key benefits of SciPipe, that are not always found in similar systems:</p>
-<ul>
-<li><strong>Intuitive behaviour:</strong> SciPipe operates by flowing data (files) through a
-  network of channels and processes, not unlike the conveyor belts and stations
-  in a factory.</li>
-<li><strong>Flexible:</strong> Processes that wrap command-line programs or scripts, can be
-  combined with processes coded directly in Golang.</li>
-<li><strong>Custom file naming:</strong> SciPipe gives you full control over how files are
-  named, making it easy to find your way among the output files of your
-  workflow.</li>
-<li><strong>Portable:</strong> Workflows can be distributed either as Go code to be run with
-  <code>go run</code>, or as stand-alone executable files that run on almost any UNIX-like
-  operating system.</li>
-<li><strong>Easy to debug:</strong> As everything in SciPipe is just Go code, you can use some
-  of the available debugging tools, or just <code>println()</code> statements, to debug
-  your workflow.</li>
-<li><strong>Supports streaming:</strong> Can stream outputs via UNIX FIFO files, to avoid temporary storage.</li>
-<li><strong>Efficient and Parallel:</strong> Workflows are compiled into statically compiled
-  code that runs fast. SciPipe also leverages pipeline parallelism between
-  processes as well as task parallelism when there are multiple inputs to a
-  process, making efficient use of multiple CPU cores.</li>
-</ul>
 <h2 id="known-limitations">Known limitations</h2>
 <ul>
 <li>There are still a number of missing good-to-have features for workflow
