@@ -633,9 +633,23 @@
                   <h1>Creating combinations of files</h1>
                 
                 <p>Sometimes you need to create all the possible combinations of a set of files
-that you have as file streams. This you can do with the
-<a href="https://godoc.org/github.com/scipipe/scipipe/components#FileCombinator">FileCombinator</a>
-component.</p>
+that you have as file streams. </p>
+<p>For example, say that you have two file streams:</p>
+<div class="codehilite"><pre><span></span><span class="k">[a.txt b.txt]</span>
+<span class="k">[1.txt 2.txt 3.txt]</span>
+</pre></div>
+
+
+<p>... and you want to process all of the combinations of these two sets of files.
+So in other words, what you want is:</p>
+<div class="codehilite"><pre><span></span><span class="k">[a.txt a.txt a.txt b.txt b.txt b.txt]</span>
+<span class="k">[1.txt 2.txt 3.txt 1.txt 2.txt 3.txt]</span>
+</pre></div>
+
+
+<p>This is something you can accomplish with the <a href="https://godoc.org/github.com/scipipe/scipipe/components#FileCombinator">FileCombinator</a>
+component, available in <a href="https://github.com/scipipe/scipipe/releases/tag/v0.9.1">SciPipe 0.9.1</a>
+and later.</p>
 <h2 id="example">Example</h2>
 <p>Given that you have a set of files:</p>
 <div class="codehilite"><pre><span></span>letterfile_a.txt
@@ -646,7 +660,7 @@ numberfile_3.txt
 </pre></div>
 
 
-<p>... and you want to create all combinations of the letter files and the number
+<p>... and you want to create all combinations of the <code>letter*</code> files and the <code>number*</code>
 files, you can do it as follows:</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
@@ -675,16 +689,27 @@ files, you can do it as follows:</p>
 </pre></div>
 
 
-<p>This will generate the following files (excluding the accompanying .audit.json files):</p>
-<div class="codehilite"><pre><span></span>letterfile_a.txt
-letterfile_a.numberfile_1.combined.txt
+<p>Note that when accessing an in-port on the FileCombinator with the <code>In(PORTNAME)</code> method, this port
+will be created automatically, together with a corresponding out-port which can be accessed with the
+same name, <code>Out(PORTNAME)</code>, as can be seen when we connect the fileCombinator to the catenator process
+further down in the code.</p>
+<p>The program above, if put in a <code>.go</code> file and run with <code>go run file.go</code>, will generate the following
+files (excluding the accompanying .audit.json files):</p>
+<div class="codehilite"><pre><span></span>letterfile_b.txt
+letterfile_a.txt
+numberfile_3.txt
+numberfile_2.txt
+numberfile_1.txt
 letterfile_a.numberfile_2.combined.txt
+letterfile_a.numberfile_1.combined.txt
 letterfile_a.numberfile_3.combined.txt
-letterfile_b.txt
-letterfile_b.numberfile_1.combined.txt
 letterfile_b.numberfile_2.combined.txt
+letterfile_b.numberfile_1.combined.txt
 letterfile_b.numberfile_3.combined.txt
 </pre></div>
+
+
+<p>As you can see, all the combinations of the </p>
                 
                   
                 
