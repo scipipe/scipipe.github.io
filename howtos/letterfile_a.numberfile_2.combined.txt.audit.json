@@ -1,0 +1,39 @@
+{
+    "ID": "gptudpjmq66v2h35mt0l",
+    "ProcessName": "catenator",
+    "Command": "cat ../letterfile_a.txt ../numberfile_2.txt \u003e letterfile_a.numberfile_2.combined.txt",
+    "Params": {},
+    "Tags": {},
+    "StartTime": "2019-05-21T16:29:09.26670825+02:00",
+    "FinishTime": "2019-05-21T16:29:09.274480781+02:00",
+    "ExecTimeNS": 7772622,
+    "OutFiles": {
+        "combined": "letterfile_a.numberfile_2.combined.txt"
+    },
+    "Upstream": {
+        "letterfile_a.txt": {
+            "ID": "corvizqa7trpeddf63h7",
+            "ProcessName": "",
+            "Command": "",
+            "Params": {},
+            "Tags": {},
+            "StartTime": "0001-01-01T00:00:00Z",
+            "FinishTime": "0001-01-01T00:00:00Z",
+            "ExecTimeNS": -1,
+            "OutFiles": {},
+            "Upstream": {}
+        },
+        "numberfile_2.txt": {
+            "ID": "ujc8me0o473st4owoq07",
+            "ProcessName": "",
+            "Command": "",
+            "Params": {},
+            "Tags": {},
+            "StartTime": "0001-01-01T00:00:00Z",
+            "FinishTime": "0001-01-01T00:00:00Z",
+            "ExecTimeNS": -1,
+            "OutFiles": {},
+            "Upstream": {}
+        }
+    }
+}
