@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.6.3">
     
     
       
@@ -40,12 +40,12 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.adb8469c.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -104,7 +104,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#example" tabindex="1" class="md-skip">
+      <a href="#example" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -113,9 +113,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.." title="SciPipe Docs" class="md-header-nav__button md-logo">
+        <a href="../.." title="SciPipe Docs" aria-label="SciPipe Docs" class="md-header-nav__button md-logo">
           
-            <img src="../../images/scipipe_logo_bluegrey.svg" width="24" height="24">
+            <img alt="logo" src="../../images/scipipe_logo_bluegrey.svg" width="24" height="24">
           
         </a>
       </div>
@@ -144,7 +144,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -207,7 +207,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <a href="../.." title="SciPipe Docs" class="md-nav__button md-logo">
       
-        <img src="../../images/scipipe_logo_bluegrey.svg" width="48" height="48">
+        <img alt="logo" src="../../images/scipipe_logo_bluegrey.svg" width="48" height="48">
       
     </a>
     SciPipe Docs
@@ -632,16 +632,16 @@
                 <p>Sometimes you need to create all the possible combinations of a set of files
 that you have as file streams. </p>
 <p>For example, say that you have two file streams:</p>
-<div class="codehilite"><pre><span></span><span class="k">[a.txt b.txt]</span>
+<div class="codehilite"><pre><span></span><code><span class="k">[a.txt b.txt]</span>
 <span class="k">[1.txt 2.txt 3.txt]</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>... and you want to process all of the combinations of these two sets of files.
 So in other words, what you want is:</p>
-<div class="codehilite"><pre><span></span><span class="k">[a.txt a.txt a.txt b.txt b.txt b.txt]</span>
+<div class="codehilite"><pre><span></span><code><span class="k">[a.txt a.txt a.txt b.txt b.txt b.txt]</span>
 <span class="k">[1.txt 2.txt 3.txt 1.txt 2.txt 3.txt]</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>This is something you can accomplish with the <a href="https://godoc.org/github.com/scipipe/scipipe/components#FileCombinator">FileCombinator</a>
@@ -649,17 +649,17 @@ component, available in <a href="https://github.com/scipipe/scipipe/releases/tag
 and later.</p>
 <h2 id="example">Example</h2>
 <p>Given that you have a set of files:</p>
-<div class="codehilite"><pre><span></span><span class="err">letterfile_a.txt</span>
+<div class="codehilite"><pre><span></span><code><span class="err">letterfile_a.txt</span>
 <span class="err">letterfile_b.txt</span>
 <span class="err">numberfile_1.txt</span>
 <span class="err">numberfile_2.txt</span>
 <span class="err">numberfile_3.txt</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>... and you want to create all combinations of the <code>letter*</code> files and the <code>number*</code>
 files, you can do it as follows:</p>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
@@ -683,7 +683,7 @@ files, you can do it as follows:</p>
 
     <span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Note that when accessing an in-port on the FileCombinator with the <code>In(PORTNAME)</code> method, this port
@@ -692,7 +692,7 @@ same name, <code>Out(PORTNAME)</code>, as can be seen when we connect the fileCo
 further down in the code.</p>
 <p>The program above, if put in a <code>.go</code> file and run with <code>go run file.go</code>, will generate the following
 files (excluding the accompanying .audit.json files):</p>
-<div class="codehilite"><pre><span></span><span class="err">letterfile_b.txt</span>
+<div class="codehilite"><pre><span></span><code><span class="err">letterfile_b.txt</span>
 <span class="err">letterfile_a.txt</span>
 <span class="err">numberfile_3.txt</span>
 <span class="err">numberfile_2.txt</span>
@@ -703,7 +703,7 @@ files (excluding the accompanying .audit.json files):</p>
 <span class="err">letterfile_b.numberfile_2.combined.txt</span>
 <span class="err">letterfile_b.numberfile_1.combined.txt</span>
 <span class="err">letterfile_b.numberfile_3.combined.txt</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>As you can see, all the combinations of the </p>
@@ -765,20 +765,20 @@ files (excluding the accompanying .audit.json files):</p>
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/scipipe" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/scipipe" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
-      <a href="https://twitter.com/scipipe" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/scipipe" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
     
-      <a href="https://www.linkedin.com/in/samuellampa/" class="md-footer-social__link fa fa-linkedin"></a>
+      <a href="https://www.linkedin.com/in/samuellampa/" target="_blank" rel="noopener" title="linkedin" class="md-footer-social__link fa fa-linkedin"></a>
     
   </div>
 
@@ -788,9 +788,9 @@ files (excluding the accompanying .audit.json files):</p>
       
     </div>
     
-      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../../assets/javascripts/application.c33a9706.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.1",url:{base:"../.."}})</script>
       
     
   </body>

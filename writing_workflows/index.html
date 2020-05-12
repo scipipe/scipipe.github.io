@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.6.3">
     
     
       
@@ -40,12 +40,12 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -104,7 +104,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#writing-workflows-an-overview" tabindex="1" class="md-skip">
+      <a href="#writing-workflows-an-overview" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -113,9 +113,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href=".." title="SciPipe Docs" class="md-header-nav__button md-logo">
+        <a href=".." title="SciPipe Docs" aria-label="SciPipe Docs" class="md-header-nav__button md-logo">
           
-            <img src="../images/scipipe_logo_bluegrey.svg" width="24" height="24">
+            <img alt="logo" src="../images/scipipe_logo_bluegrey.svg" width="24" height="24">
           
         </a>
       </div>
@@ -144,7 +144,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -207,7 +207,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <a href=".." title="SciPipe Docs" class="md-nav__button md-logo">
       
-        <img src="../images/scipipe_logo_bluegrey.svg" width="48" height="48">
+        <img alt="logo" src="../images/scipipe_logo_bluegrey.svg" width="48" height="48">
       
     </a>
     SciPipe Docs
@@ -756,7 +756,7 @@
                 <h1 id="writing-workflows-an-overview">Writing Workflows - An Overview</h1>
 <p>In order to give an overview of how to write workflows in SciPipe, let's look
 at the example workflow used on the front page again:</p>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="c1">// Import SciPipe into the main namespace (generally frowned upon but could</span>
@@ -783,16 +783,16 @@ at the example workflow used on the front page again:</p>
     <span class="c1">// Run workflow</span>
     <span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Now let's go through the code example in some detail, to see what we are
 actually doing.</p>
 <h2 id="initializing-processes">Initializing processes</h2>
-<div class="codehilite"><pre><span></span><span class="c1">// Initialize processes from shell command patterns</span>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Initialize processes from shell command patterns</span>
 <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out}&quot;</span><span class="p">)</span>
 <span class="nx">world</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt;&gt; {o:out}&quot;</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Here we are initializing two new processes, both of them based on a shell
@@ -815,10 +815,10 @@ will be pulled in on the out-ports, and so on.</p>
 for each of the files propagating through the "network" of processes.  This can
 be done using special convenience methods on the processes, starting with
 <code>SetOut...</code>. There are a few variants, of which two of them are shown here.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// Configure output file path formatters for the processes created above</span>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Configure output file path formatters for the processes created above</span>
 <span class="nx">hello</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">)</span>
 <span class="nx">world</span><span class="p">.</span><span class="nx">SetOut</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;{i:in|%.txt}_world.txt&quot;</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p><code>SetOut</code> takes a pattern similar to the shell command pattern, with
@@ -841,14 +841,14 @@ returns file paths given a <code>scipipe.Task</code> object, which will be produ
 each command execution.</p>
 <p>In order to implement the same path patterns as above, using this method, we
 would write like this:</p>
-<div class="codehilite"><pre><span></span><span class="c1">// Configure output file path formatters for the processes created above</span>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Configure output file path formatters for the processes created above</span>
 <span class="nx">hello</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
     <span class="k">return</span> <span class="s">&quot;hello.txt&quot;</span>
 <span class="p">})</span>
 <span class="nx">world</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">InPath</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">),</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">})</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>As you can see, this is a much more complicated way to format paths, but it can
@@ -860,13 +860,13 @@ the same variable (even with different values) in multiple functions, due to
 the <a href="https://golang.org/doc/faq#closures_and_goroutines">subtle ways in which closures work in Go</a>.</p>
 <p>For example, if you create multiple new processes with separate formatting
 functions in a loop, that uses a shared variable, like this:</p>
-<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
     <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
     <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span>
     <span class="p">})</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>... then, both functions will return "bar.txt", since both funcs were pointing to
@@ -874,24 +874,24 @@ the same variable ("var"), which had the value "bar" at the end of the loop.</p>
 <p>To avoid this situation, you can do one of two things, of which the latter is
 generally recommended:</p>
 <p><strong>1.</strong> Create a new copy of the variable, inside the anonymous function:</p>
-<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
     <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
     <span class="nx">val</span> <span class="o">:=</span> <span class="nx">val</span> <span class="c1">// &lt;- Here we create a new copy of the variable</span>
     <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span>
     <span class="p">})</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p><strong>2.</strong> ... or, better, access the parameter value via the task which the path function receives:</p>
-<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
     <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
     <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;val&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span> <span class="c1">// Access param via the task (`t`)</span>
     <span class="p">})</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="connecting-processes-into-a-network">Connecting processes into a network</h2>
@@ -901,9 +901,9 @@ process, using the <code>From</code> method available on each in-port object (Or
 <code>To</code> method on out-ports). We also need to connect the final out-port of the
 pipeline to the workflow, so that the workflow can pull on this port
 (technically pulling on a Go channel), in order to drive the workflow.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// Connect network</span>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Connect network</span>
 <span class="nx">world</span><span class="p">.</span><span class="nx">In</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">).</span><span class="nx">From</span><span class="p">(</span><span class="nx">helloWriter</span><span class="p">.</span><span class="nx">Out</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">))</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="running-the-pipeline">Running the pipeline</h2>
@@ -916,8 +916,8 @@ need to think about this, as the workflow will then use an in-built
 purpose. If you for any reason need to customize which process to use as the
 "driver" process, instead of the in-built sink. see the <a href="https://godoc.org/github.com/scipipe/scipipe#Workflow.SetDriver"><code>SetDriver</code> section</a>
 in the docs.</p>
-<div class="codehilite"><pre><span></span><span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">wf</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+</code></pre></div>
 
 
 <h2 id="summary">Summary</h2>
@@ -992,20 +992,20 @@ in the GitHub repository.</p>
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/scipipe" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/scipipe" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
-      <a href="https://twitter.com/scipipe" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/scipipe" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
     
-      <a href="https://www.linkedin.com/in/samuellampa/" class="md-footer-social__link fa fa-linkedin"></a>
+      <a href="https://www.linkedin.com/in/samuellampa/" target="_blank" rel="noopener" title="linkedin" class="md-footer-social__link fa fa-linkedin"></a>
     
   </div>
 
@@ -1015,9 +1015,9 @@ in the GitHub repository.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.1",url:{base:".."}})</script>
       
     
   </body>
