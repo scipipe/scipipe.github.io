@@ -759,16 +759,15 @@ at the example workflow used on the front page again:</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-    <span class="c1">// Import SciPipe into the main namespace (generally frowned upon but could</span>
-    <span class="c1">// be argued to be reasonable for short-lived workflow scripts like this)</span>
-    <span class="p">.</span> <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
+    <span class="c1">// Import SciPipe</span>
+    <span class="s">&quot;github.com/scipipe/scipipe&quot;</span>
 <span class="p">)</span>
 
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Init workflow with a name, and a number for max concurrent tasks, so we</span>
     <span class="c1">// don&#39;t overbook our CPU (it is recommended to set it to the number of CPU</span>
     <span class="c1">// cores of your computer)</span>
-    <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;hello_world&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="nx">wf</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewWorkflow</span><span class="p">(</span><span class="s">&quot;hello_world&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
     <span class="c1">// Initialize processes and set output file paths</span>
     <span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out}&quot;</span><span class="p">)</span>
@@ -790,13 +789,13 @@ at the example workflow used on the front page again:</p>
 actually doing.</p>
 <h2 id="initializing-processes">Initializing processes</h2>
 <div class="codehilite"><pre><span></span><code><span class="c1">// Initialize processes from shell command patterns</span>
-<span class="nx">hello</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out}&quot;</span><span class="p">)</span>
-<span class="nx">world</span> <span class="o">:=</span> <span class="nx">sp</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt;&gt; {o:out}&quot;</span><span class="p">)</span>
+<span class="nx">hello</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;echo &#39;Hello &#39; &gt; {o:out}&quot;</span><span class="p">)</span>
+<span class="nx">world</span> <span class="o">:=</span> <span class="nx">wf</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="s">&quot;echo $(cat {i:in}) World &gt;&gt; {o:out}&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 
 <p>Here we are initializing two new processes, both of them based on a shell
-command, using the <code>scipipe.NewProc()</code> function, which takes a processname, and
+command, using the <code>wf.NewProc()</code> function, which takes a processname, and
 a shell command pattern as input.</p>
 <h3 id="the-shell-command-pattern">The shell command pattern</h3>
 <p>The shell command patterns, in this case <code>echo 'Hello ' &gt; {o:out}</code> and
@@ -842,10 +841,10 @@ each command execution.</p>
 <p>In order to implement the same path patterns as above, using this method, we
 would write like this:</p>
 <div class="codehilite"><pre><span></span><code><span class="c1">// Configure output file path formatters for the processes created above</span>
-<span class="nx">hello</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="nx">hello</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">scipipe</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
     <span class="k">return</span> <span class="s">&quot;hello.txt&quot;</span>
 <span class="p">})</span>
-<span class="nx">world</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="nx">world</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">scipipe</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">InPath</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">),</span> <span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;_world.txt&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">})</span>
 </code></pre></div>
@@ -862,7 +861,7 @@ the <a href="https://golang.org/doc/faq#closures_and_goroutines">subtle ways in 
 functions in a loop, that uses a shared variable, like this:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
     <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
-    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">scipipe</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span>
     <span class="p">})</span>
 <span class="p">}</span>
@@ -877,7 +876,7 @@ generally recommended:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
     <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
     <span class="nx">val</span> <span class="o">:=</span> <span class="nx">val</span> <span class="c1">// &lt;- Here we create a new copy of the variable</span>
-    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">scipipe</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span>
     <span class="p">})</span>
 <span class="p">}</span>
@@ -887,7 +886,7 @@ generally recommended:</p>
 <p><strong>2.</strong> ... or, better, access the parameter value via the task which the path function receives:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">}</span> <span class="p">{</span>
     <span class="nx">proc</span> <span class="o">:=</span> <span class="nx">scipipe</span><span class="p">.</span><span class="nx">NewProc</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s">&quot;_proc&quot;</span><span class="p">,</span> <span class="s">&quot;cat {p:val} &gt; {o:out}&quot;</span><span class="p">)</span>
-    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">sp</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="nx">proc</span><span class="p">.</span><span class="nx">SetOutFunc</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">scipipe</span><span class="p">.</span><span class="nx">Task</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;val&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span> <span class="c1">// Access param via the task (`t`)</span>
     <span class="p">})</span>
 <span class="p">}</span>
