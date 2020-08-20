@@ -328,6 +328,19 @@
     Formatting output file paths
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-path-modifiers" class="md-nav__link">
+    Available path modifiers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -691,6 +704,19 @@
     Formatting output file paths
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-path-modifiers" class="md-nav__link">
+    Available path modifiers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -826,13 +852,23 @@ placeholders that can be used are: <code>{i:INPORTNAME}</code>, <code>{p:PARAMNA
 <code>{t:TAGNAME}</code>. An example of a full pattern might be:
 <code>{i:foo}.replace_with_{p:replacement}.txt</code>, but can also be used for
 simple, static paths, like in the example above.</p>
-<p>The placeholders can also take certain extra commands, separated from the
+<p>The placeholders can also take certain extra "modifiers", separated from the
 placeholder name by pipe characters, and of which the one used above is
 probably the most important one: <code>%STRING</code>. It will remove the specified
-string from the <em>end</em> of the path, which is useful when we want to avoid
+string from the <em>end</em> of the path. This is useful when we want to avoid
 getting too long paths when re-using previous processes' paths. With the
 example above, our input file named <code>hello.txt</code> will be converted into
 <code>hello_world.txt</code> by this path pattern.</p>
+<h3 id="available-path-modifiers">Available path modifiers</h3>
+<p>The currently available path modifiers are:</p>
+<ul>
+<li><code>basename</code> - Removes all folders from the path, leaving only the filename.</li>
+<li>Example: <code>{i:infile|basename}</code>, if <code>infile</code> has the path <code>data/file.txt</code>, will convert it to just <code>file.txt</code>.</li>
+<li><code>%.&lt;extension&gt;</code> - Removes</li>
+<li>Example: <code>{i:infile|%.txt}</code>, if <code>infile</code> has the path <code>file.txt</code>, will convert it to just <code>file</code>.</li>
+<li><code>s/&lt;search&gt;/&lt;replacement&gt;/</code> - Will do a simple search and replace, from <code>&lt;search&gt;</code> to <code>&lt;replacement&gt;</code>.</li>
+<li>Example: <code>{i:infile|s/file/my_file/}</code>, if <code>infile</code> has the path <code>file.txt</code>, will convert it to <code>my_file.txt</code>.</li>
+</ul>
 <h2 id="even-more-control-over-file-formatting">Even more control over file formatting</h2>
 <p>We can actually get even more control over how file names are produced than
 this, by manually supplying each process with an anonymous function that
