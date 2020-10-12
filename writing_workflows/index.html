@@ -864,6 +864,8 @@ example above, our input file named <code>hello.txt</code> will be converted int
 <ul>
 <li><code>basename</code> - Removes all folders from the path, leaving only the filename.</li>
 <li>Example: <code>{i:infile|basename}</code>, if <code>infile</code> has the path <code>data/file.txt</code>, will convert it to just <code>file.txt</code>.</li>
+<li><code>dirname</code> - Removes the ending file name part from the path, leaving only the folder path.</li>
+<li>Example: <code>{i:infile|dirname}/newfile.txt</code>, if <code>infile</code> has the path <code>data/file.txt</code>, will convert it to <code>data/newfile.txt</code>.</li>
 <li><code>%.&lt;extension&gt;</code> - Removes the file extension <code>&lt;extension&gt;</code>.</li>
 <li>Example: <code>{i:infile|%.txt}</code>, if <code>infile</code> has the path <code>file.txt</code>, will convert it to just <code>file</code>.</li>
 <li><code>s/&lt;search&gt;/&lt;replacement&gt;/</code> - Will do a simple search and replace, from <code>&lt;search&gt;</code> to <code>&lt;replacement&gt;</code>.</li>
