@@ -784,6 +784,10 @@
 </div>
 
 <h2 id="introduction">Introduction</h2>
+<p><img src="docs/images/fbp_factory.png" align="right"></p>
+<p>SciPipe is a library for writing <a href="https://en.wikipedia.org/wiki/Scientific_workflow_system">Scientific
+Workflows</a>, sometimes
+also called "pipelines", in the <a href="http://golang.org">Go programming language</a>.</p>
 <p>When you need to run many commandline programs that depend on each other in
 complex ways, SciPipe helps by making the process of running these programs
 flexible, robust and reproducible. SciPipe also lets you restart an interrupted
@@ -813,11 +817,15 @@ group as well.</p>
 <li>There is not (yet) support for the <a href="http://common-workflow-language.github.io">Common Workflow Language</a>.</li>
 </ul>
 <h2 id="installing">Installing</h2>
+<p>For full installation instructions, see the <a href="/install">intallation page</a>.
+For quick getting started steps, you can do:</p>
 <ol>
 <li><a href="https://golang.org/dl/">Download</a> and <a href="https://golang.org/doc/install">install</a> Go</li>
-<li>Run the following command, to install the scipipe Go library (don't miss the trailing dots!):</li>
+<li>Run the following command, to install the scipipe Go library (don't miss the
+   trailing dots!), and create a Go module for your script:</li>
 </ol>
-<div class="codehilite"><pre><span></span><code>go get github.com/scipipe/scipipe/...
+<div class="codehilite"><pre><span></span><code>go install github.com/scipipe/scipipe/...@latest
+go mod init myfirstworkflow-module
 </code></pre></div>
 
 
@@ -848,15 +856,27 @@ SciPipe looks like:</p>
 </code></pre></div>
 
 
+<p>To create a file with a similar simple example, you can run:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">scipipe new hello_world.go</span>
+</code></pre></div>
+
+
 <h2 id="running-the-example">Running the example</h2>
-<p>Let's put the code in a file named <code>hello_world.go</code> and run it:</p>
+<p>Let's put the code in a file named <code>hello_world.go</code> and run it.</p>
+<p>First you need to make sure that the dependencies (SciPipe in this case) is
+installed in your local Go module. This you can do with:</p>
+<div class="codehilite"><pre><span></span><code>go mod tidy
+</code></pre></div>
+
+
+<p>Then you can go ahead and run the workflow:</p>
 <div class="codehilite"><pre><span></span><code>$ go run hello_world.go
-AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> workflow:hello_world             <span class="p">|</span> Starting workflow <span class="o">(</span>Writing log to log/scipipe-20180615-190422-hello_world.log<span class="o">)</span>
-AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> hello                            <span class="p">|</span> Executing: <span class="nb">echo</span> <span class="s1">&#39;Hello &#39;</span> &gt; hello.out.txt.tmp/hello.out.txt
-AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> hello                            <span class="p">|</span> Finished:  <span class="nb">echo</span> <span class="s1">&#39;Hello &#39;</span> &gt; hello.out.txt.tmp/hello.out.txt
-AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> world                            <span class="p">|</span> Executing: <span class="nb">echo</span> <span class="k">$(</span>cat hello.out.txt<span class="k">)</span> World &gt; hello.out.txt.world.out.txt.tmp/hello.out.txt.world.out.txt
-AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> world                            <span class="p">|</span> Finished:  <span class="nb">echo</span> <span class="k">$(</span>cat hello.out.txt<span class="k">)</span> World &gt; hello.out.txt.world.out.txt.tmp/hello.out.txt.world.out.txt
-AUDIT   <span class="m">2018</span>/06/15 <span class="m">19</span>:04:22 <span class="p">|</span> workflow:hello_world             <span class="p">|</span> Finished workflow <span class="o">(</span>Log written to log/scipipe-20180615-190422-hello_world.log<span class="o">)</span>
+AUDIT   <span class="m">2018</span>/07/17 <span class="m">21</span>:42:26 <span class="p">|</span> workflow:hello_world             <span class="p">|</span> Starting workflow <span class="o">(</span>Writing log to log/scipipe-20180717-214226-hello_world.log<span class="o">)</span>
+AUDIT   <span class="m">2018</span>/07/17 <span class="m">21</span>:42:26 <span class="p">|</span> hello                            <span class="p">|</span> Executing: <span class="nb">echo</span> <span class="s1">&#39;Hello &#39;</span> &gt; hello.out.txt
+AUDIT   <span class="m">2018</span>/07/17 <span class="m">21</span>:42:26 <span class="p">|</span> hello                            <span class="p">|</span> Finished: <span class="nb">echo</span> <span class="s1">&#39;Hello &#39;</span> &gt; hello.out.txt
+AUDIT   <span class="m">2018</span>/07/17 <span class="m">21</span>:42:26 <span class="p">|</span> world                            <span class="p">|</span> Executing: <span class="nb">echo</span> <span class="k">$(</span>cat ../hello.out.txt<span class="k">)</span> World &gt; hello.out.txt.world.out.txt
+AUDIT   <span class="m">2018</span>/07/17 <span class="m">21</span>:42:26 <span class="p">|</span> world                            <span class="p">|</span> Finished: <span class="nb">echo</span> <span class="k">$(</span>cat ../hello.out.txt<span class="k">)</span> World &gt; hello.out.txt.world.out.txt
+AUDIT   <span class="m">2018</span>/07/17 <span class="m">21</span>:42:26 <span class="p">|</span> workflow:hello_world             <span class="p">|</span> Finished workflow <span class="o">(</span>Log written to log/scipipe-20180717-214226-hello_world.log<span class="o">)</span>
 </code></pre></div>
 
 
@@ -879,11 +899,11 @@ Hello World
 
 <p>Now we can rejoice that it contains the text "Hello World", exactly as a proper
 Hello World example should :)</p>
-<p>Now, these were a little long and cumbersome filename, weren't they? SciPipe
+<p>Now, these were a little long and cumbersome filenames, weren't they? SciPipe
 gives you very good control over how to name your files, if you don't want to
 rely on the automatic file naming. For example, we could set the first filename
-statically, and then use the first name as a basis for the file name for the
-second process, like so:</p>
+to a static one, and then use the first name as a basis for the file name for
+the second process, like so:</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
